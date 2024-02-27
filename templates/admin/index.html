@@ -1,0 +1,62 @@
+{% extends "admin/base_site.html" %}
+{% load i18n static %}
+
+{% block extrastyle %}{{ block.super }}<link rel="stylesheet" href="{% static "admin/css/dashboard.css" %}">{% endblock %}
+
+{% block coltype %}colMS{% endblock %}
+
+{% block bodyclass %}{{ block.super }} dashboard{% endblock %}
+
+{% block nav-breadcrumbs %}{% endblock %}
+
+{% block nav-sidebar %}{% endblock %}
+
+{% block content %}
+<div id="content-main">
+
+  {% if available_apps %}
+
+      {% for app in available_apps %}
+      <div class="app">
+  		<h2>{{app.name}}</h2>
+
+  		<div class="models app-{{ app.app_label }}">
+
+  			{% for model in app.models %}
+
+  				{% if model.admin_url %}
+  				<div class="model model-{{app.models|length}} transform">
+
+            {% if model.object_name == 'Order' and num_orders > 0 %}
+              <div class="" style="position:absolute; width: 24px; height:24px; top:10px; right:30%; background:#ff9100; color:#fff; border-radius:50%; text-align:center; font-weight:bold">
+                {{ num_orders }}
+              </div>
+            {% endif %}
+  					<a href="{{ model.admin_url }}"><img src="{% static 'admin/img/models/' %}{{model.object_name|lower}}.svg" alt="{{ model.name }}"></a>
+  					{% if model.add_url %}
+  						<a href="{{ model.add_url }}" class="add" title="{% trans 'Add' %} {{model.name}}">+ {{model.name}}</a>
+  					{% else %}
+  						<a href="{{ model.admin_url }}" class="add" title="{{model.name}}">{{model.name}}</a>
+  					{% endif %}
+  				</div>
+  				{% else %}
+  				<div class="model model-{{app.models|length}} disabled">
+  					<img class="" src="{% static 'admin/img/models/' %}{{model.object_name|lower}}.svg" alt="">
+  					<span class="add">{{model.name}}</span>
+  				</div>
+  				{% endif %}
+  			{% endfor %}
+
+  		</div>
+
+  	</div>
+      {% endfor %}
+
+
+  {% else %}
+      <p>{% trans "You don't have permission to edit anything." %}</p>
+  {% endif %}
+  </div>
+
+</div>
+{% endblock %}
