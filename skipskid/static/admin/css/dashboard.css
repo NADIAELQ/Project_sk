@@ -1,0 +1,129 @@
+
+.dashboard #content {
+	width: 100%;
+	margin: 20px auto 0;
+	padding: 0
+}
+.dashboard #content-main {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.app {
+	display: flex;
+  flex-basis: 50%;
+	flex-direction: column;
+}
+.disabled {
+	cursor: not-allowed
+}
+
+h2 {
+    font-weight: 300;
+    padding: 0;
+    margin: 1em 0 7px 5px;
+    font-size: 17px;
+}
+.models {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.model {
+	margin: 3px;
+	padding: 0;
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	height: 100px;
+	flex-basis: calc(50% - 6px);
+	border-radius: .1875rem;
+	box-shadow: 0 0 0 1px rgba(0,0,0,0.03);
+	will-change: transform;
+	transition: transform .2s ease-in;
+}
+.app:nth-of-type(6n+1) .model {background-color: #00849a}
+.app:nth-of-type(6n+2) .model {background-color: #ef4c35}
+.app:nth-of-type(6n+3) .model {background-color: #088}
+.app:nth-of-type(6n+4) .model {background-color: #9a00a2}
+
+.model img {
+	display: block;
+	width: 48px;
+	height: 48px;
+	margin: 15px auto 35px;
+}
+.model .add {
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	height: 28px;
+	line-height: 28px;
+	padding: 0 15px;
+	font-size: 12px;
+	color: #fff;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+
+@media (min-width: 768px){
+	.app {
+		flex-basis: 25%;
+	}
+	.transform::before {
+		box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+	}
+	.transform::after {
+		box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+		opacity: 0;
+	}
+	.transform::before, .transform::after {
+		content: "";
+		display: block;
+		position: absolute;
+		z-index: 0;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		border-radius: .1875rem;
+		will-change: opacity;
+		transition: opacity .2s ease-in;
+		z-index: -1
+	}
+	.transform:hover {
+		transform: translateY(-1px);
+	}
+	.transform:hover::before, .transform:focus::before {
+		opacity: 0;
+	}
+	.transform:hover::after, .transform:focus::after {
+		opacity: 1;
+	}
+}
+
+
+@media (min-width: 992px){
+	.dashboard #content {
+		max-width: 928px;
+	}
+	.model img {
+		width: 48px;
+		height: 48px;
+	}
+}
+
+@media (min-width: 1300px){
+	.dashboard #content {
+		max-width:1300px;
+	}
+	.app {
+		flex-basis: 20%;
+	}
+	.model img {
+		width: 52px;
+		height: 52px;
+	}
+}
