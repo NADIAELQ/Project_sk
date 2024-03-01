@@ -182,7 +182,7 @@
 .rymed-tabs .devsite-tabs-dropdown {
     display: block;
     font-size: 13px;
-    left: -168px;
+    left: -36px;
     min-width: calc(100% + 12px);
     outline: 0;
     overflow: hidden;
@@ -208,7 +208,7 @@
 }
 
 .rymed-tabs .devsite-tabs-dropdown-content {
-    background-color: var(--background-1);
+   background-color: #ecc1a3;
     display: flex;
     box-shadow: 0 1px 2px 0 var(--elevation-key-shadow-color), 0 2px 6px 2px var(--elevation-ambient-shadow-color), inset 0 4px 6px -4px var(--elevation-inset-shadow-color);
     overflow: auto;
@@ -244,6 +244,12 @@
 .rymed-tabs .tab[dropdown] .devsite-nav-item {
     line-height: 18px;
     margin: 0 0 18px;
+}
+.devsite-nav-title img {
+    width: 32px;
+    height: 32px;
+    padding: 2px;
+    margin-right: 8px
 }
 
 .user-tools{

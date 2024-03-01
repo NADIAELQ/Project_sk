@@ -1426,8 +1426,8 @@ ol,ul,menu {
     content: "manage_accounts"
 }
 
-.user-menu-item--notifications:before {
-    content: "notifications"
+.user-menu-item--password:before {
+    content: "Password"
 }
 
 .user-menu-item--signout:before {
