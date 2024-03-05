@@ -1,14 +1,27 @@
-/* LOGIN FORM */
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
 
 .login {
-    background: var(--darkened-bg);
-    height: auto;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
 }
 
 .login #header {
+    position: fixed;
+    top: 0;
     height: auto;
     padding: 15px 16px;
     justify-content: center;
+    width: 100%;
+    background: var(--darkened-bg);
 }
 
 .login #header h1 {
@@ -21,7 +34,11 @@
 }
 
 .login #content {
-    padding: 20px 20px 0;
+    padding: 145px 23px 0;
+    margin: auto;
+    width: 30em;
+    min-width: 300px;
+    height: auto;
 }
 
 .login #container {
@@ -29,10 +46,6 @@
     border: 1px solid var(--hairline-color);
     border-radius: 4px;
     overflow: hidden;
-    width: 28em;
-    min-width: 300px;
-    margin: 100px auto;
-    height: auto;
 }
 
 .login .form-row {
@@ -59,3 +72,68 @@
 .login .password-reset-link {
     text-align: center;
 }
+
+#content-main {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 50px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #fff;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-row {
+    margin-bottom: 20px;
+}
+
+.form-row label {
+    display: block;
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.form-row input[type="text"],
+.form-row input[type="password"] {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+.form-row input[type="text"]:focus,
+.form-row input[type="password"]:focus {
+    outline: none;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+}
+
+.submit-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+}
+
+.submit-row input[type="submit"] {
+    display: block;
+    padding: 10px 20px;
+    border-radius: 5px;
+    background-color: #ff6347;
+    color: #fff;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.submit-row input[type="submit"]:hover {
+    background-color: #e6513b;
+  }
+  
+  .password-reset-link {
+    margin-top: 20px;
+    text-align: center;
+  }
