@@ -1,26 +1,22 @@
 from django.contrib import admin
 from django.utils.translation import gettext_lazy as _
-
-from .models import Delivery, DeliveryAddress
-
+from .models import Delivery, DeliveryAddress, DeliveryPhoto
 
 # Register your models here.
 
+class DeliveryPhotoInline(admin.TabularInline):
+    model = DeliveryPhoto
 
 @admin.register(DeliveryAddress)
-class DeliveryAdmin(admin.ModelAdmin):
+class DeliveryAddressAdmin(admin.ModelAdmin):
     list_filter = ('name',)
-
     icon = "location_on"
-
 
 @admin.register(Delivery)
 class DeliveryAdmin(admin.ModelAdmin):
-
     search_fields = ('number',)
     list_filter = ('status', 'pick_up_address__shipper', 'hazmat', 'date_created', 'pick_up_address__postcode')
     list_display = ("get_shipper", "pick_up_address", "drop_off_address", "get_pick_up_date", "get_pick_up_time", "get_drop_off_date", "get_drop_off_time", "reference", "rate", "status")
-
     icon = "Package 2"
 
     @admin.display(description=_("Shipper"))
@@ -43,7 +39,6 @@ class DeliveryAdmin(admin.ModelAdmin):
     def get_pick_up_contact_person(self, instance, **kwargs):
         return instance.pick_up_address.contact_person
 
-
     @admin.display(description=_("D/OFF Date"))
     def get_drop_off_date(self, instance, **kwargs):
         return instance.drop_off_date.strftime("%x")
@@ -59,17 +54,6 @@ class DeliveryAdmin(admin.ModelAdmin):
     @admin.display(description=_("Contact person at drop off"))
     def get_drop_off_contact_person(self, instance, **kwargs):
         return instance.drop_off_address.contact_person
-
-
-    def has_add_permission(self, request, obj=None):
-        return False
-
-    def has_change_permission(self, request, obj=None):
-        return False
-
-    def has_delete_permission(self, request, obj=None):
-        return False
-
 
     fieldsets = (
         (_("Delivery details"), {"fields": (
@@ -91,3 +75,15 @@ class DeliveryAdmin(admin.ModelAdmin):
             "drop_off_instructions"
         )}),
     )
+
+    # Allow superusers to add, change, and delete instances
+    def has_add_permission(self, request):
+        return request.user.is_superuser
+
+    def has_change_permission(self, request, obj=None):
+        return request.user.is_superuser
+
+    def has_delete_permission(self, request, obj=None):
+        return request.user.is_superuser
+
+    inlines = [DeliveryPhotoInline]
