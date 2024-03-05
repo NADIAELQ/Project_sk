@@ -54,6 +54,7 @@
         </p>
         {{ cl.formset.non_form_errors }}
     {% endif %}
+    <button id="showhide"  style="position: absolute; top: 0px;left: 215px;z-index: 9999;">&gt;</button>
     <div class="module{% if cl.has_filters %} filtered{% endif %}" id="changelist">
       <div class="changelist-form-container">
         {% block search %}{% search_form cl %}{% endblock %}
@@ -85,4 +86,27 @@
       {% endblock %}
     </div>
   </div>
+<script>
+document.querySelector('#showhide').addEventListener('click', function() {
+    if (document.querySelector('#changelist-filter').style.display === 'block') {
+        document.querySelector('#changelist-filter').style.display = 'none';
+        document.querySelector('#showhide').innerHTML = '&gt;'; // Changement du contenu du bouton
+        document.querySelector('#showhide').style.left = '-15px';
+    } else {
+        document.querySelector('#changelist-filter').style.display = 'block';
+        document.querySelector('#showhide').innerHTML = '&lt;'; // Changement du contenu du bouton
+        document.querySelector('#showhide').style.left = '215px';
+    }
+});
+
+var showhideButton = document.querySelector('#showhide');
+// Modifiez le style du bouton
+showhideButton.style.backgroundColor = '#19212b'; // Changer la couleur de fond en bleu
+showhideButton.style.color = 'white'; // Changer la couleur du texte en blanc
+showhideButton.style.border = '2px solid black'; // Ajouter une bordure noire de 2px
+showhideButton.style.padding = '8px 12px'; // Ajouter un rembourrage de 8px en haut/bas et 12px à gauche/droite
+
+</script>
+
 {% endblock %}
+

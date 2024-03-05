@@ -144,7 +144,7 @@ class Delivery(models.Model):
 
     class Meta:
         ordering = ["-date_created"]
-        default_permissions = ['view', 'delete']
+        default_permissions = ['view', 'change', 'delete']
         verbose_name = _("Delivery")
         verbose_name_plural = _("Deliveries")
 
@@ -160,6 +160,14 @@ class Delivery(models.Model):
     @admin.display(description=_("Delivery ID"))
     def reference(self):
         return "D%s" % self.number
+
+
+class DeliveryPhoto(models.Model):
+    delivery = models.ForeignKey(
+        Delivery, on_delete=models.CASCADE, related_name="photos"
+    )
+    photo = models.ImageField()
+
 
 
 

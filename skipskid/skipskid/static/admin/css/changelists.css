@@ -7,8 +7,15 @@
 }
 
 #changelist .changelist-form-container {
+    /* flex: 1 1 auto;
+    min-width: 0; */
+    position: absolute;
+    right: 0;
+    width : calc(100% - 240px);
     flex: 1 1 auto;
     min-width: 0;
+    margin: 0;
+
 }
 
 #changelist table {
@@ -71,6 +78,7 @@
     color: var(--body-quiet-color);
 }
 
+
 /* TOOLBAR */
 
 #toolbar {
@@ -130,14 +138,68 @@
 }
 
 /* FILTER COLUMN */
+/* Styles pour l'icône de fermeture de la sidebar */
+#changelist-filter .sidebar-close-icon {
+    display: inline-block;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: -40px; /* ajustez la valeur en fonction de vos besoins */
+    cursor: pointer;
+  }
+  
+  #changelist-filter .sidebar-close-icon .icon-bar {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background-color: #ab2222;
+    margin: 6px 0;
+    transition: 0.4s;
+  }
+  
+  #changelist-filter .sidebar-close-icon.closed .icon-bar:nth-child(1) {
+    transform: rotate(-45deg) translate(-5px, 6px);
+  }
+  
+  #changelist-filter .sidebar-close-icon.closed .icon-bar:nth-child(2) {
+    opacity: 0;
+  }
+  
+  #changelist-filter .sidebar-close-icon.closed .icon-bar:nth-child(3) {
+    transform: rotate(45deg) translate(-5px, -6px);
+  }
+  
+  
+
+
 
 #changelist-filter {
-    flex: 0 0 240px;
+    /* flex: 0 0 240px;
     order: 1;
     background: var(--darkened-bg);
     border-left: none;
-    margin: 0 0 0 30px;
+    margin: 0 0 0 30px; */
+    width: 240px;
+    position: fixed;
+    top: 7%;
+    left: 0;
+    background: #19212b;
+    border-left: 0;
+    margin: 0;
+    padding: 0; 
+    overflow-y: auto; 
+    height: 100vh;
 }
+#changelist-filter::-webkit-scrollbar {
+    width: 10px; /* Largeur de la barre de défilement */
+    background-color: #19212b; /* Couleur de fond de la barre de défilement */
+}
+
+#changelist-filter::-webkit-scrollbar-thumb {
+    background-color: #6c757d; /* Couleur de la poignée de défilement */
+    border-radius: 5px; /* Bordure arrondie de la poignée de défilement */
+}
+
 
 #changelist-filter h2 {
     font-size: 0.875rem;
@@ -145,14 +207,25 @@
     letter-spacing: 0.5px;
     padding: 5px 15px;
     margin-bottom: 12px;
-    border-bottom: none;
+    border-bottom: none; 
 }
+
+
 
 #changelist-filter h3,
 #changelist-filter details summary {
+    /* font-weight: 400;
+    padding: 0 15px;
+    margin-bottom: 10px; */
     font-weight: 400;
     padding: 0 15px;
     margin-bottom: 10px;
+    cursor: pointer;
+    border-bottom: 1px solid #ffa000; /* Ajoute une bordure rouge en dessous de chaque titre de filtre */
+    padding-bottom: 5px; /* Ajoute un espace entre la bordure et le contenu suivant */
+    margin-bottom: 10px; /* Ajoute un espace entre chaque titre de filtre */
+    background-color: #2e4051;
+
 }
 
 #changelist-filter details summary > * {
@@ -160,6 +233,7 @@
 }
 
 #changelist-filter details > summary {
+    color: #f1f1f1;
     list-style-type: none;
 }
 
@@ -170,7 +244,8 @@
 #changelist-filter details > summary::before {
     content: '→';
     font-weight: bold;
-    color: var(--link-hover-color);
+    /* color: var(--link-hover-color); */
+    color: #ffa000;
 }
 
 #changelist-filter details[open] > summary::before {
@@ -195,30 +270,35 @@
 
 #changelist-filter a {
     display: block;
-    color: var(--body-quiet-color);
+    /* color: var(--body-quiet-color); */
+    color: #a0a8b1;
     word-break: break-word;
 }
 
 #changelist-filter li.selected {
-    border-left: 5px solid var(--hairline-color);
+    /* border-left: 5px solid var(--hairline-color); */
+    border-left: 5px solid #ffa000;
     padding-left: 10px;
     margin-left: -15px;
 }
 
 #changelist-filter li.selected a {
-    color: var(--link-selected-fg);
+    /* color: var(--link-selected-fg); */
+    color: #ffa000;
 }
 
 #changelist-filter a:focus, #changelist-filter a:hover,
 #changelist-filter li.selected a:focus,
 #changelist-filter li.selected a:hover {
-    color: var(--link-hover-color);
+    /* color: var(--link-hover-color); */
+    color: #ffcf82;
 }
 
 #changelist-filter #changelist-filter-clear a {
     font-size: 0.8125rem;
     padding-bottom: 10px;
-    border-bottom: 1px solid var(--hairline-color);
+    /* border-bottom: 1px solid var(--hairline-color); */
+    border-bottom: 1px solid #ffa000;
 }
 
 /* DATE DRILLDOWN */
@@ -264,6 +344,16 @@
 #changelist table tbody tr:has(input[type=checkbox]:checked) {
     background-color: var(--selected-row);
 }
+
+@media (forced-colors: active) {
+    #changelist tbody tr.selected {
+        background-color: SelectedItem;
+    }
+    #changelist tbody tr:has(.action-select:checked) {
+        background-color: SelectedItem;
+    }
+}
+
 
 #changelist .actions {
     padding: 10px;
