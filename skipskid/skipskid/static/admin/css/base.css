@@ -932,8 +932,11 @@ a.deletelink:focus, a.deletelink:hover {
 
 #content {
     /* padding: 20px 40px; */
-    position: sticky;
-    top: 64px; 
+    padding: 57px 561px;
+    position: fixed;
+    top: 48px;
+    margin-right: 0%;
+    margin-left: 41px;
 }
 
 .dashboard #content {
@@ -1055,6 +1058,14 @@ a.deletelink:focus, a.deletelink:hover {
     font-size: 0.6875rem;
     letter-spacing: 0.5px;
     text-transform: uppercase;
+    position: relative;
+    display: block;
+    height: 40px;
+    font-size: 14px;
+    line-height: 40px;
+    padding: 0 46px;
+    transition: background .2s;
+    color: #000;
 }
 
 #user-tools a, #logout-form button {
