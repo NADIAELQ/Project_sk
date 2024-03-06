@@ -54,7 +54,8 @@
         </p>
         {{ cl.formset.non_form_errors }}
     {% endif %}
-    <button id="showhide"  style="position: absolute; top: 0px;left: 215px;z-index: 9999;">&gt;</button>
+    <!-- <button id="showhide"  style="position: absolute; cursor: pointer; top: 0px;left: 215px;z-index: 9999;">&gt;</button> -->
+    <button id="showhide" style="position: fixed; cursor: pointer; top: 120px; left: 215px; z-index: 9999;">></button>
     <div class="module{% if cl.has_filters %} filtered{% endif %}" id="changelist">
       <div class="changelist-form-container">
         {% block search %}{% search_form cl %}{% endblock %}
@@ -86,26 +87,37 @@
       {% endblock %}
     </div>
   </div>
-<script>
-document.querySelector('#showhide').addEventListener('click', function() {
-    if (document.querySelector('#changelist-filter').style.display === 'block') {
-        document.querySelector('#changelist-filter').style.display = 'none';
-        document.querySelector('#showhide').innerHTML = '&gt;'; // Changement du contenu du bouton
-        document.querySelector('#showhide').style.left = '-15px';
-    } else {
-        document.querySelector('#changelist-filter').style.display = 'block';
-        document.querySelector('#showhide').innerHTML = '&lt;'; // Changement du contenu du bouton
-        document.querySelector('#showhide').style.left = '215px';
-    }
-});
+  <script>
+    // Ajout d'un écouteur d'événements pour le clic sur le bouton
+    document.querySelector('#showhide').addEventListener('click', function() {
+        // Récupération de l'élément de la barre latérale
+        var sidebar = document.querySelector('#changelist-filter');
 
-var showhideButton = document.querySelector('#showhide');
-// Modifiez le style du bouton
-showhideButton.style.backgroundColor = '#19212b'; // Changer la couleur de fond en bleu
-showhideButton.style.color = 'white'; // Changer la couleur du texte en blanc
-showhideButton.style.border = '2px solid black'; // Ajouter une bordure noire de 2px
-showhideButton.style.padding = '8px 12px'; // Ajouter un rembourrage de 8px en haut/bas et 12px à gauche/droite
+        // Vérification de l'état actuel de la barre latérale
+        if (sidebar.style.display === 'block') {
+            // Masquer la barre latérale
+            sidebar.style.display = 'none';
+            // Modifier le contenu du bouton pour indiquer l'état actuel
+            document.querySelector('#showhide').innerHTML = '>';
+            // Déplacer le bouton vers la gauche pour libérer de l'espace
+            document.querySelector('#showhide').style.left = '-15px';
+        } else {
+            // Afficher la barre latérale
+            sidebar.style.display = 'block';
+            // Modifier le contenu du bouton pour indiquer l'état actuel
+            document.querySelector('#showhide').innerHTML = '<';
+            // Replacer le bouton à sa position initiale
+            document.querySelector('#showhide').style.left = '215px';
+        }
+    });
 
+    // Récupération de l'élément du bouton
+    var showhideButton = document.querySelector('#showhide');
+    // Amélioration du style du bouton
+    showhideButton.style.backgroundColor = '#19212b'; // Changer la couleur de fond en bleu foncé
+    showhideButton.style.color = 'white'; // Changer la couleur du texte en blanc
+    showhideButton.style.border = '2px solid black'; // Ajouter une bordure noire de 2px
+    showhideButton.style.padding = '8px 12px'; // Ajouter un rembourrage de 8px en haut/bas et 12px à gauche/droite
 </script>
 
 {% endblock %}
