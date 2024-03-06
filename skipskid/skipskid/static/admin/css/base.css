@@ -931,7 +931,9 @@ a.deletelink:focus, a.deletelink:hover {
 }
 
 #content {
-    padding: 20px 40px;
+    /* padding: 20px 40px; */
+    position: sticky;
+    top: 64px; 
 }
 
 .dashboard #content {
@@ -1283,7 +1285,18 @@ img,svg,video,canvas,audio,iframe,embed,object {
 
 .select-none {
     -webkit-user-select: none;
-    user-select: none
+    user-select: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    box-sizing: content-box;
+    min-width: 0;
+    height: 32px;
+    width: 32px;
+    padding: 4px;
+    border-radius: 50%;
+    transition: background .2s,color .2s
 }
 
 .user-menu-dialog {

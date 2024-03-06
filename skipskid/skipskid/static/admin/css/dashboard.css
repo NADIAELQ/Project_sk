@@ -19,10 +19,11 @@
 }
 
 h2 {
-    font-weight: 300;
-    padding: 0;
-    margin: 1em 0 7px 5px;
-    font-size: 17px;
+	font-weight: 300;
+	padding: 0;
+	margin: 1em 0 7px 5px;
+	font-size: 24px;
+	padding: 10px;
 }
 .models {
 	display: flex;
@@ -43,7 +44,7 @@ h2 {
 	transition: transform .2s ease-in;
 }
 .app:nth-of-type(6n+1) .model {background-color: #00849a}
-.app:nth-of-type(6n+2) .model {background-color: #ef4c35}
+.app:nth-of-type(6n+2) .model {background-color: #f24d37}
 .app:nth-of-type(6n+3) .model {background-color: #088}
 .app:nth-of-type(6n+4) .model {background-color: #9a00a2}
 
@@ -127,3 +128,4 @@ h2 {
 		height: 52px;
 	}
 }
+
