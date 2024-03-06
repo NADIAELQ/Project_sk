@@ -932,11 +932,8 @@ a.deletelink:focus, a.deletelink:hover {
 
 #content {
     /* padding: 20px 40px; */
-    padding: 57px 561px;
-    position: fixed;
-    top: 48px;
-    margin-right: 0%;
-    margin-left: 41px;
+    position: sticky;
+    top: 64px; 
 }
 
 .dashboard #content {
