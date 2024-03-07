@@ -3,7 +3,7 @@
 
 {% block extrastyle %}{{ block.super }}
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-<link rel="stylesheet" href="{% static "admin/css/login.css" %}">
+<link rel="stylesheet" href="{% static 'admin/css/login.css' %}">
 {{ form.media }}
 {% endblock %}
 
@@ -35,6 +35,7 @@
 {% endif %}
 
 <div id="content-main">
+  <p id="form-title">LOGIN</p>
 
 {% if user.is_authenticated %}
 <p class="errornote">

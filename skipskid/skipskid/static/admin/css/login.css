@@ -46,6 +46,18 @@ body {
     border: 1px solid var(--hairline-color);
     border-radius: 4px;
     overflow: hidden;
+    background-color: #e3e1e1;
+}
+
+#form-title{
+    font-size: 40px;
+    text-transform: uppercase;
+    color: #716969;
+    font-weight: 500;
+    text-shadow: 1px 1px 1px #42A5F5;
+    text-align: center;
+    letter-spacing: 10px;
+    font-family: cursive;
 }
 
 .login .form-row {
@@ -120,13 +132,14 @@ body {
 
 .submit-row input[type="submit"] {
     display: block;
-    padding: 10px 20px;
-    border-radius: 5px;
+    padding: 15px 150px;
+    border-radius: 76px;
     background-color: #ff6347;
     color: #fff;
     border: none;
     font-size: 16px;
     cursor: pointer;
+    background: -webkit-linear-gradient(right, #00dbde, #FF9800, #ffa311, #e19188);
 }
 
 .submit-row input[type="submit"]:hover {
