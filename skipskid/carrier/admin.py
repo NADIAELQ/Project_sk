@@ -13,8 +13,8 @@ class CarrierAddressInline(admin.StackedInline):
     verbose_name = "Address"
     icon = "location_on"
     fields = (
-        "line1", "line2",
-        "city", "state", "postcode"
+        ("line1", "line2"),
+        ("city", "state"), "postcode"
     )
     '''
     no need for has_add_permission because of default_permissions set to False

@@ -908,12 +908,13 @@ a.deletelink:focus, a.deletelink:hover {
     display: flex;
     flex: 1 0 auto;
     position: relative;
-    top: 20%;
+    top: 55px;
 }
 
 .main > .content {
     flex:  1 0;
     max-width: 100%;
+    margin: 65px;
 }
 
 .skip-to-content-link {
@@ -1455,5 +1456,11 @@ ol,ul,menu {
 }
 
 
-
+p.form-title{
+    font-size: 120%;
+    text-transform: uppercase;
+    color: black;
+    font-weight: bold;
+    text-shadow: 1px 1px 1px orangered;
+}
 
