@@ -4,7 +4,9 @@ from django.utils.translation import gettext_lazy as _
 
 from address.models import AbstractAddress
 from equipment.models import VehicleType
-from shipper.models import Shipper
+from Business.models import Business
+from Individual.models import Individual
+from django.shortcuts import get_object_or_404
 
 from . import exceptions
 from .managers import ActiveDeliveryManager
@@ -12,7 +14,15 @@ from .signals import delivery_status_changed
 
 
 # Create your models here.
+Shipper=[
+    ('Individual','Individual'),
+    ('Business','Business')
+]
 
+class Shipper(models.Model):
+    name = models.CharField(max_length=256, null=False, blank=False)
+
+    user_type = models.CharField(max_length=32, choices=Shipper)
 
 class DeliveryAddress(AbstractAddress):
 
@@ -29,6 +39,12 @@ class DeliveryAddress(AbstractAddress):
 
     contact_person = models.CharField(_("Contact person"), max_length=100, db_index=True)
     phone_number = models.CharField(_("Phone number"), max_length=30, null=True, blank=True)
+
+    def save(self, *args, **kwargs):
+        Shipper = get_object_or_404(Shipper, id=self.Shipper.id)
+        if Shipper.user_type != 'Shipper':
+            raise ValueError('selected user must be Shipper')
+        super().save(*args, **kwargs)
 
 
     class Meta:
