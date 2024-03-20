@@ -29,7 +29,7 @@ class IndividualAddressInline(admin.StackedInline):
 class PreferredCarrierInline(admin.StackedInline):
     model = IndividualPreferredCarrier
     verbose_name = "PreferredCarrier"
-    icon = "PreferredCarrier"
+    icon = "local_shipping"
     extra = 0
     """
     no need for has_add_permission because of default_permissions set to False
@@ -60,18 +60,22 @@ class IndividualDeliveryInline(admin.StackedInline):
 
 
 
-# @admin.register(Individual)
+@admin.register(Individual)
 class IndividualAdmin(admin.ModelAdmin):
 
     search_fields = ('first_name', 'email', 'phone')
     list_filter = ("address__postcode", "address__state", "preferred_carriers__carrier")
 
-    list_display = ("first_name", "email", "phone", "zip_code", "get_address", "reference", "easy_access_to_loading", "parking_available")
+    # list_display = ("first_name", "email", "phone", "zip_code", "get_address", "reference", "easy_access_to_loading", "parking_available")
+    list_display = ("first_name", "email", "phone", "reference", "easy_access_to_loading", "parking_available")
+
     fieldsets = [
         (
             None,
             {
-                "fields": [("first_name", "email"), ("phone", "zip_code"), "get_address"],
+                # "fields": [("first_name", "email"), ("phone", "zip_code"), "get_address"],
+                "fields": [("first_name", "email"), ("phone")],
+
             },
         ),
     ]
@@ -98,5 +102,5 @@ class IndividualAdmin(admin.ModelAdmin):
 
 
 
-admin.site.register(Individual)
+# admin.site.register(Individual)
 
