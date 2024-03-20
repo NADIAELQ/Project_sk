@@ -45,9 +45,12 @@ INSTALLED_APPS = [
     "equipment",
     "address",
     "carrier",
-    "shipper",
+    # "shipper",
+    "Business",
+    "Individual",
     "delivery",
     "communication",
+    # "shipperType",
 
     "ckeditor",
     "debug_toolbar",
@@ -84,10 +87,13 @@ ADMIN_REORDER = (
         )
     },
 	{
-		'app': 'shipper',
+		'app': 'Business',
+        'app': 'Individual',
+
 		'label': "Shippers",
 		'models': (
-            'shipper.Shipper',
+            'Business.Business',
+            'Individual.Individual'
         )
     },
 	{
@@ -129,8 +135,8 @@ DATABASES = {
     'default': {
 		'ENGINE': 'django.db.backends.postgresql_psycopg2',
 		'NAME': 'skipskid3',
-		'USER': 'noura',
-		'PASSWORD': 'noura12',
+		'USER': 'nadia',
+		'PASSWORD': 'nadia',
 		'HOST': 'localhost',
 		'PORT': '5432',
     }
@@ -200,3 +206,6 @@ environ.Env.read_env()
 
 #Security Warning: keep the secret key used in production secret
 SECRET_KEY = env('SECRET_KEY')
+
+
+# AUTH_USER_MODEL = "carrier.carrier"
