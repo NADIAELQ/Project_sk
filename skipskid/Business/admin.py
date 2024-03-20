@@ -61,7 +61,7 @@ class ShipperEquipmentInline(admin.StackedInline):
         return request.user.is_superuser
 
 
-# @admin.register(Business)
+@admin.register(Business)
 class BusinessAdmin(admin.ModelAdmin):
 
     search_fields = ('business_name', 'contact_person', 'business_phone')
@@ -105,6 +105,6 @@ class BusinessAdmin(admin.ModelAdmin):
 
 
 
-admin.site.register(Business)
+# admin.site.register(Business)
 
 

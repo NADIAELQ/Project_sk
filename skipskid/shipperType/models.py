@@ -2,9 +2,22 @@ from django.db import models
 from django.contrib import admin
 from django.core.validators import EMPTY_VALUES, MinValueValidator
 from django.utils.translation import gettext_lazy as _
+from shipper.models import Shipper
 
 from address.models import AbstractAddress
 from carrier.models import Carrier
+
+
+class BusinessShipper(Shipper):
+    class Meta:
+        verbose_name = "Business Shipper"
+        verbose_name_plural = "Business Shippers"
+
+class IndividualShipper(Shipper):
+    class Meta:
+        verbose_name = "Individual Shipper"
+        verbose_name_plural = "Individual Shippers"
+
 
 class Business(models.Model):
     business_name = models.CharField(_("Business Name"), max_length=255, db_index=True)
@@ -15,6 +28,8 @@ class Business(models.Model):
     website = models.URLField(_("Website"), blank=True, null=True)
     image = models.ImageField(upload_to='images/', null=True, blank=True)
     sequence = models.PositiveSmallIntegerField(unique=True, editable=False, db_index=True)
+    
+    shipper_type = models.ForeignKey(BusinessShipper, on_delete=models.CASCADE)
 
     def save(self, **kwargs):
         if self.sequence in EMPTY_VALUES:
@@ -81,7 +96,7 @@ class BusinessTypeOfIndustry(models.Model):
 
 
 
-class Individual(models.Model):
+class Individual(Shipper):
     first_name = models.CharField(_("First Name"), max_length=255)
     # a revoirr
     # home_zip_code = models.CharField(_("Home Zip Code"), max_length=10)
@@ -171,20 +186,3 @@ class ShipperEquipment(models.Model):
         verbose_name = "Shipper Equipment"
         verbose_name_plural = "Shipper Equipments"
 
-
-
-# from django.db import models
-
-
-# # Create your models here.
-
-
-# class Shipper(models.Model):
-
-#     name = models.CharField(max_length=200)
-
-#     def __str__(self):
-#         return self.name
-    
-#     class Meta:
-#         abstract = True

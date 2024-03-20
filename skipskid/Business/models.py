@@ -38,8 +38,6 @@ class Business(AbstractUser):
     is_admin = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
 
-    # last_login = models.DateTimeField(_('last login'), default=timezone.now, column_name='last_login_date')
-
     objects = UserManager()
 
     USERNAME_FIELD = 'business_email'
