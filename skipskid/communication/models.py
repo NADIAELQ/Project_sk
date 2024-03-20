@@ -5,6 +5,7 @@ from django.utils import timezone
 from django.contrib.auth.models import User
 from django.utils.translation import gettext_lazy as _
 
+from django.conf import settings
 
 def custom_email_validator(value):
     if not value.endswith('@example.com'):
@@ -12,7 +13,7 @@ def custom_email_validator(value):
 
 
 class EmailConfirmation(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name=_("User"))
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name=_("User"))
     token = models.CharField(_("Token"), max_length=100, unique=True)
     created_at = models.DateTimeField(_("Created At"), default=timezone.now)
     is_confirmed = models.BooleanField(_("Is Confirmed"), default=False)
@@ -34,7 +35,7 @@ class EmailConfirmation(models.Model):
         super().save(*args, **kwargs)
 
 class PasswordReset(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name=_("User"))
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name=_("User"))
     token = models.CharField(_("Token"), max_length=100, unique=True)
     created_at = models.DateTimeField(_("Created At"), default=timezone.now)
     is_used = models.BooleanField(_("Is Used"), default=False)
@@ -48,7 +49,7 @@ class PasswordReset(models.Model):
 
 
 class EmailHistory(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     subject = models.CharField(max_length=255)
     message = models.TextField()
     sent_at = models.DateTimeField(auto_now_add=True)

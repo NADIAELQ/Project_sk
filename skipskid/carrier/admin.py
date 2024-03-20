@@ -1,7 +1,16 @@
+from django import forms
 from django.contrib import admin
+from django.contrib.auth.models import Group
+from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
+from django.contrib.auth.forms import ReadOnlyPasswordHashField
+from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
 
 from .models import Carrier, CarrierAddress, CarrierVehicle, CarrierEquipment, Certification, CarrierCertification
+
+
+
+
 
 
 # Register your models here.
@@ -87,13 +96,15 @@ class CarrierAdmin(admin.ModelAdmin):
 
     search_fields = ("name", "contact_person")
     list_filter = ("address__postcode", "address__state", "vehicles__type", "equipments__type", "pounds_plus", "miles_plus")
-    list_display = ("name", "contact_person", "phone_number", "email", "get_address", "num_vehicles", "reference")
+    list_display = ("name", "contact_person", "phone_number", "email","password", "get_address", "num_vehicles", "reference",'is_staff', 'is_active','is_superuser')
     fields = (
         ("name", "about"),
         ("contact_person", "reference"),
-        ("email", "phone_number"),
+        ("email", "password"),
+        "phone_number",
         "miles_plus",
         "pounds_plus",
+        "is_staff", "is_active", "is_superuser"
     )
     radio_fields = {'pounds_plus': admin.HORIZONTAL, 'miles_plus': admin.HORIZONTAL}
     readonly_fields = ("reference",)
