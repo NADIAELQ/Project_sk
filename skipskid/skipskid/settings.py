@@ -209,3 +209,9 @@ SECRET_KEY = env('SECRET_KEY')
 
 
 # AUTH_USER_MODEL = "carrier.carrier"
+
+
+AUTHENTICATION_BACKENDS = [
+    'carrier.auth_backend.CustomAuthBackend', 
+    'django.contrib.auth.backends.ModelBackend',  # Default Django authentication backend
+]

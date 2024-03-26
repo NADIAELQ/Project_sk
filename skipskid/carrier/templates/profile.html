@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrier Profile</title>
+</head>
+<body>
+    <h1>Carrier Profile</h1>
+    <p><strong>Name:</strong> {{ user.name }}</p>
+    <p><strong>About:</strong> {{ user.about }}</p>
+    <p><strong>Contact Person:</strong> {{ user.contact_person }}</p>
+    <p><strong>Email:</strong> {{ user.email }}</p>
+    <p><strong>Phone Number:</strong> {{ user.phone_number }}</p>
+    <p><strong>Website:</strong> <a href="{{ user.website }}">{{ user.website }}</a></p>
+    <p><strong>Can Load/Unload 150+ Pounds:</strong> {% if user.pounds_plus %}Yes{% else %}No{% endif %}</p>
+    <p><strong>Can Travel Over 150 Miles:</strong> {% if user.miles_plus %}Yes{% else %}No{% endif %}</p>
+
+
+
+
+</body>
+</html>
