@@ -1,0 +1,79 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container home">
+        <h2>Bienvenue, {{ user.username }}!</h2>
+        <button><a href="{% url 'deconnexion' %}">Déconnexion</a></button>
+    </div>
+    <style>
+       /* CSS */
+/* Import de la police Google - Open Sans */
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Open Sans', sans-serif;
+}
+
+h2 {
+    margin: 20px 0;
+    text-align: center;
+    color: #333; /* Couleur du titre */
+}
+
+body {
+    min-height: 100vh;
+    width: 100%;
+    background: #f4f4f4; /* Couleur de fond */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    width: 400px;
+    background: #fff;
+    border-radius: 10px; /* Rayon de la bordure */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); /* Ombre */
+    padding: 30px;
+    text-align: center; /* Centrage du contenu */
+}
+
+a {
+    color: #ffffff; /* Couleur du lien */
+    text-decoration: none;
+}
+
+a:hover {
+    color: #ffffff; /* Couleur du lien au survol */
+}
+
+button {
+    color: #fff;
+    background: #009688; /* Couleur du bouton */
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    margin-top: 20px; /* Augmentation de l'espacement par rapport au titre */
+    border: none;
+    border-radius: 5px;
+    outline: none;
+    cursor: pointer;
+    transition: background 0.3s; /* Transition fluide */
+}
+
+button:hover {
+    background: #00796b; /* Couleur du bouton au survol */
+}
+
+    </style>
+</body>
+</html>
