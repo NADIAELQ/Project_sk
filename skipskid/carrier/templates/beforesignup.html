@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Type Selection</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .options {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .option {
+            margin: 0 10px;
+        }
+
+        .option label {
+            display: block;
+            text-align: center;
+        }
+
+        .option input {
+            display: none;
+        }
+
+        .option label {
+            cursor: pointer;
+            padding: 10px 20px;
+            border: 2px solid #007bff;
+            border-radius: 5px;
+            color: #007bff;
+            transition: all 0.3s ease;
+        }
+
+        .option input:checked + label {
+            background-color: #007bff;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Choose Your User Type</h1>
+        <div class="options">
+            <button class="option" id="carrierButton" onclick="redirectToSignup('{% url 'signup' %}')">Carrier</button>
+            <button class="option" id="businessButton" onclick="redirectToSignup('')">Business</button>
+            <button class="option" id="individualButton" onclick="redirectToSignup('')">Individual</button>
+        </div>
+    </div>
+    
+    <!-- Container pour afficher le bouton avec le lien -->
+    <div class="button-container" id="buttonContainer" style="display: none;">
+        <button id="signupButton">Sign Up</button>
+    </div>
+    
+    <script>
+        // Sélectionnez les éléments nécessaires
+        var buttonContainer = document.getElementById("buttonContainer");
+        var signupButton = document.getElementById("signupButton");
+    
+        // Fonction pour rediriger vers la page d'inscription
+        function redirectToSignup(link) {
+            // Vérifiez si le lien est non vide
+            if (link !== "") {
+                // Redirigez vers la page d'inscription
+                window.location.href = link;
+            }
+        }
+    </script>
+    
+    </body>
+    </html>

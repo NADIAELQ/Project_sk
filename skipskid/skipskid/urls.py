@@ -14,9 +14,6 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-
-from atexit import register
-import profile
 from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
@@ -30,10 +27,13 @@ admin.site.enable_nav_sidebar = False
 urlpatterns = [
     path('admin/', admin.site.urls),
 
-    path('', views.inscription, name='inscription'),
-    path('connexion/', views.connexion, name='connexion'),
-    path('acceuil/', views.acceuil, name='acceuil'),
-    path('deconnexion/', views.deconnexion, name='deconnexion'),
+    path('', views.beforesignup, name='beforesignup'),
+    path('carrier/signup/', views.signup, name='signup'),
+    path('carrier/login/', views.login, name='login'),
+    path('carrier/home/', views.home, name='home'),
+    path('carrier/logout/', views.logout, name='logout'),
+
+    path('beforesignup/',views.beforesignup, name="beforesignup"),
 
     path('reset_password', auth_views.PasswordResetView.as_view(), name= 'reset_password'),
     path('reset_password_done', auth_views.PasswordResetDoneView.as_view(template_name="registration/password_reset_done.html"), name='password_reset_done'),
