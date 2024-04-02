@@ -6,32 +6,35 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
 # Create your views here.
-def inscription(request):
+def signup(request):
     if request.method == 'POST':
         form = CustomUserCreationForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('connexion')
+            return redirect('login')
     else:
         form = CustomUserCreationForm()
-    return render(request, 'inscription.html', {'form': form})
+    return render(request, 'signup.html', {'form': form})
 
-def connexion(request):
+def login(request):
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            return redirect('acceuil')
+            return redirect('home')
         else:
             messages.error(request, 'Nom d\'utilisateur ou mot de passe incorrect.')
-    return render(request, 'connexion.html')
+    return render(request, 'login.html')
 
 @login_required
-def acceuil(request):
-    return render(request, 'acceuil.html')
+def home(request):
+    return render(request, 'home.html')
 
-def deconnexion(request):
+def logout(request):
     logout(request)
-    return redirect('connexion')
+    return redirect('login')
+
+def beforesignup(request):
+    return render(request, 'beforesignup.html')
