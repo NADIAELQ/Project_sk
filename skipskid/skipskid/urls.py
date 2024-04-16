@@ -32,7 +32,7 @@ urlpatterns = [
     path('carrier/login/', views.Carrierlogin, name='login'),
     path('carrier/home/', views.home, name='home'),
     path('carrier/logout/', views.logout, name='logout'),
-
+    path('carrier/accountsettings/', views.accountsettings, name='accountsettings'),
     path('beforesignup/',views.beforesignup, name="beforesignup"),
 
     path('reset_password', auth_views.PasswordResetView.as_view(), name= 'reset_password'),

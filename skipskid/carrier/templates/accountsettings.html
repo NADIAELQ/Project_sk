@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>User Account Settings</title>
+<style>
+  /* Style général */
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+  }
+  
+  .container {
+    max-width: 800px;
+    margin: 20px auto;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .section {
+    padding: 20px;
+    border-bottom: 1px solid #ccc;
+  }
+
+  /* Style du titre de section */
+  .section-title {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 10px;
+  }
+
+  /* Style des descriptions */
+  .section-description {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 20px;
+  }
+
+  /* Style des formulaires */
+  form {
+    margin-bottom: 20px;
+  }
+
+  label {
+    font-weight: bold;
+    color: #333;
+  }
+
+  input[type="text"],
+  input[type="password"] {
+    width: calc(100% - 10px);
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+  }
+
+  button {
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+  }
+
+  button[disabled] {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+
+  button.secondary {
+    background-color: #6c757d;
+  }
+
+  button.danger {
+    background-color: #dc3545;
+  }
+
+  /* Style des liens */
+  a {
+    color: #007bff;
+    text-decoration: none;
+  }
+
+  /* Style des sections de danger */
+  .danger {
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+  }
+
+  /* Style du texte de danger */
+  .danger-text {
+    color: #721c24;
+  }
+
+</style>
+</head>
+<body>
+  <div class="container">
+    <!-- Profile Section -->
+    <div class="section">
+      <div class="section-title">Profile</div>
+      <div class="section-description">Your email address is your identity on Heroku and is used to log in.</div>
+      <form>
+        <label for="new-email">Email Address</label>
+        <input id="new-email" type="text" placeholder="Your email address" value="{{ user.email }}">
+
+        <div>
+          <button disabled>Save</button>
+          <button class="secondary">Cancel</button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Password Section -->
+    <div class="section">
+      <div class="section-title">Password</div>
+      <div class="section-description">Changing your password will also reset your API key.</div>
+      <form>
+        <div class="form-group">
+          <label for="current-password">Current Password</label>
+          <input id="current-password" type="password" placeholder="Enter your current password">
+        </div>
+        <div class="form-group">
+          <label for="new-password">New Password</label>
+          <input id="new-password" type="password" placeholder="Enter a new password">
+          <p class="f5 dark-gray pt2">Password must be 8 or more characters.</p>
+        </div>
+        <div class="form-group">
+          <label for="confirm-new-password">Confirm New Password</label>
+          <input id="confirm-new-password" type="password" placeholder="Enter the password again">
+        </div>
+        <button disabled>Update Password</button>
+      </form>
+    </div>
+
+    <!-- Close Account Section -->
+    <div class="section danger">
+      <div class="section-title">Close Account</div>
+      <div class="section-description danger-text">You must delete all apps on this account first. <br><strong>Warning:</strong> Closing your account is irreversible.</div>
+      <button class="danger">Close this account...</button>
+    </div>
+  </div>
+</body>
+</html>
