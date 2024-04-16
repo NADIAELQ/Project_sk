@@ -7,17 +7,43 @@
 </head>
 <body>
     <div class="container">
-        <div class="container">
-            <div class="form">
-                <form method="post" action="{% url 'signup' %}">
-                    {% csrf_token %}
-                    <h1>Registration</h1>
-                    {{ form.as_p }}    
-                    <button type="submit">Sign Up</button>
-                </form>
-                <p class="link">Already registered? <a href="{% url 'login' %}">Log In</a></p>
-            </div>
-        </div>      
+        <form method="post" action="{% url 'signup' %}">
+            {% csrf_token %}
+            <h1>Registration</h1>
+
+            <!-- User Information Section -->
+            <fieldset class="section">
+                <legend>User Information</legend>
+                <div class="form-row">
+                    {% for field in user_form %}
+                        <div class="fieldWrapper">
+                            {{ field.errors }}
+                            <label>{{ field.label_tag }}</label>
+                            {{ field }}
+                        </div>
+                        <!-- Split into two columns after every second field -->
+                        {% if forloop.counter|divisibleby:2 and not forloop.last %}
+                            </div><div class="form-row">
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </fieldset>
+
+            <!-- Address Section -->
+            <fieldset class="section">
+                <legend>Address</legend>
+                {% for field in address_form %}
+                    <div class="fieldWrapper">
+                        {{ field.errors }}
+                        <label>{{ field.label_tag }}</label>
+                        {{ field }}
+                    </div>
+                {% endfor %}
+            </fieldset>
+
+            <button type="submit">Sign Up</button>
+        </form>
+        <p class="link">Already registered? <a href="{% url 'login' %}">Log In</a></p>
     </div>
     <style>
 /* Import Google Font - Open Sans */
@@ -40,12 +66,15 @@ body {
 }
 
 .container {
-    width: 400px;
-    background: #fff;
-    border-radius: 10px; /* Increased border radius */
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); /* Shadow improvement */
-    overflow: hidden; /* Prevent rounded corners from being cut off */
-}
+            max-width: 95%; /* Maximum width */
+            width: 90%; /* Active width */
+            margin: auto; /* Center the container */
+            background: #fff; /* Background color */
+            border-radius: 10px; /* Border radius */
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); /* Shadow */
+            overflow: hidden; /* Prevent overflow */
+            padding: 30px; /* Padding */
+        }
 
 .container .form {
     padding: 30px;
@@ -121,6 +150,62 @@ button:hover {
     color: #00796b; /* Link color within the paragraph on hover */
 }
 
+.section {
+            background: #f9f9f9;
+            border-radius: 5px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .section:nth-child(even) {
+            background: #e9ecef;
+        }
+
+        .section legend {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+
+        .form button {
+            display: block;
+            width: calc(100% - 40px); /* Adjust width to account for padding */
+            margin: 20px auto; /* Center the button */
+        }
+
+        .container {
+            max-width: 100%; /* Set a max-width for larger screens */
+        }
+
+        .fieldWrapper {
+            margin-bottom: 15px;
+        }
+
+        .form-row {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .form-row .fieldWrapper {
+            flex-basis: 48%; /* Adjust the percentage based on your needs */
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .form-row {
+                flex-direction: column;
+            }
+
+            .form-row .fieldWrapper {
+                flex-basis: 100%;
+                margin-bottom: 10px;
+            }
+        }
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .container {
+                width: calc(100% - 40px);
+            }
+        }
     </style>
 </body>
 </html>

@@ -1,22 +1,32 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm
+from .models import Carrier, CarrierAddress
 
-class CustomUserCreationForm(UserCreationForm):
-
-    password1 = forms.CharField(
+class CarrierForm(forms.ModelForm):
+    password = forms.CharField(
         label="Password",
         strip=False,
         widget=forms.PasswordInput(attrs={'autocomplete': 'new-password'}),
     )
-    password2 = forms.CharField(
-        label="Password confirmation",
+    confirm_password = forms.CharField(
+        label="Confirm Password",
         widget=forms.PasswordInput(attrs={'autocomplete': 'new-password'}),
         strip=False,
     )
 
-    class Meta(UserCreationForm.Meta):
-        fields = UserCreationForm.Meta.fields + ("email","password1", "password2")
-        labels={
-           "username": "custom label for username"
-       }
-    
+    class Meta:
+        model = Carrier
+        fields = ['name', 'about', 'contact_person', 'email', 'phone_number', 'website', 'pounds_plus', 'miles_plus']
+
+    def clean(self):
+        cleaned_data = super().clean()
+        password = cleaned_data.get("password")
+        confirm_password = cleaned_data.get("confirm_password")
+        if password != confirm_password:
+            raise forms.ValidationError("Passwords do not match. Please enter matching passwords.")
+
+        return cleaned_data
+
+class CarrierAddressForm(forms.ModelForm):
+    class Meta:
+        model = CarrierAddress
+        fields = ['line1', 'line2', 'city', 'state', 'postcode']

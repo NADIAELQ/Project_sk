@@ -54,7 +54,7 @@ class Carrier(AbstractUser):
         return super().save(**kwargs)
 
     def _get_next_sequence(self):
-        last_sequence = self._class.objects.aggregate(models.Max('sequence'))['sequence_max'] or 1000
+        last_sequence = self.__class__.objects.aggregate(models.Max('sequence'))['sequence__max'] or 1000
         return last_sequence + 1
 
     def _str_(self):
