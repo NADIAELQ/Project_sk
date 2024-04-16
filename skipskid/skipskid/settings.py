@@ -135,8 +135,8 @@ DATABASES = {
     'default': {
 		'ENGINE': 'django.db.backends.postgresql_psycopg2',
 		'NAME': 'skipskid3',
-		'USER': 'nadia',
-		'PASSWORD': 'nadia',
+		'USER': 'noura',
+		'PASSWORD': 'noura12',
 		'HOST': 'localhost',
 		'PORT': '5432',
     }
@@ -209,3 +209,8 @@ SECRET_KEY = env('SECRET_KEY')
 
 
 # AUTH_USER_MODEL = "carrier.carrier"
+
+AUTHENTICATION_BACKENDS = [
+    'carrier.auth_backend.CustomAuthBackend', 
+    'django.contrib.auth.backends.ModelBackend',  # Default Django authentication backend
+]

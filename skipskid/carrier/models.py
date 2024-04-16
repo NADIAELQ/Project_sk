@@ -54,10 +54,10 @@ class Carrier(AbstractUser):
         return super().save(**kwargs)
 
     def _get_next_sequence(self):
-        last_sequence = self._class.objects.aggregate(models.Max('sequence'))['sequence_max'] or 1000
+        last_sequence = self.__class__.objects.aggregate(models.Max('sequence'))['sequence__max'] or 1000
         return last_sequence + 1
 
-    def _str_(self):
+    def __str__(self):
         return self.email
 
     @property
@@ -104,7 +104,7 @@ class CarrierVehicle(models.Model):
     type = models.ForeignKey(VehicleType, on_delete=models.CASCADE, verbose_name=_("Type of Vehicle"))
     number = models.PositiveSmallIntegerField(_("Number"), default=1, validators=[MinValueValidator(1)])
 
-    def _str_(self):
+    def __str__(self):
         return "%s (%s)" % (self.type, self.number)
 
     class Meta:
@@ -120,7 +120,7 @@ class CarrierEquipment(models.Model):
     type = models.ForeignKey(EquipmentType, on_delete=models.CASCADE, verbose_name=_("Type of equipment"))
     number = models.PositiveSmallIntegerField(_("Number"), default=1, validators=[MinValueValidator(1)])
 
-    def _str_(self):
+    def __str__(self):
         return self.type.name
 
     class Meta:
@@ -136,7 +136,7 @@ class Certification(models.Model):
     description = models.TextField(_("Description"), blank=True, null=True)
     url = models.URLField(null=True, blank=True)
 
-    def _str_(self):
+    def __str__(self):
         return self.name
 
     class Meta:
@@ -153,3 +153,9 @@ class CarrierCertification(models.Model):
         unique_together = ['carrier', 'certification']
         verbose_name = _("Carrier certification")
         verbose_name = _("Carrier certifications")
+
+
+
+
+
+
