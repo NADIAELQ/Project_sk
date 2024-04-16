@@ -18,7 +18,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-from  carrier import views
+from carrier import views
 
 from django.contrib.auth import views as auth_views
 
@@ -29,7 +29,7 @@ urlpatterns = [
 
     path('', views.beforesignup, name='beforesignup'),
     path('carrier/signup/', views.signup, name='signup'),
-    path('carrier/login/', views.login, name='login'),
+    path('carrier/login/', views.Carrierlogin, name='login'),
     path('carrier/home/', views.home, name='home'),
     path('carrier/logout/', views.logout, name='logout'),
 
