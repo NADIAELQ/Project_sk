@@ -4,12 +4,12 @@ from .models import Carrier
 
 
 class CustomAuthBackend(BaseBackend):
-    def authenticate(self, request, username=None, password=None):
-
+    def authenticate(self, request, email=None, password=None):
+        
         user_models = [Carrier]  # Assuming Carrier, Shipper, and Business are your custom user models
         for UserModel in user_models:
             try:
-                user = UserModel.objects.get(email=username)
+                user = UserModel.objects.get(email__iexac=email)
                 if user.check_password(password):
                     return user
             except UserModel.DoesNotExist:
