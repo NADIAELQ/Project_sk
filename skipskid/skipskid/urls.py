@@ -27,13 +27,14 @@ admin.site.enable_nav_sidebar = False
 urlpatterns = [
     path('admin/', admin.site.urls),
 
-    path('', views.beforesignup, name='beforesignup'),
+    path('',views.homepage, name="homepage"),
     path('carrier/signup/', views.signup, name='signup'),
     path('carrier/login/', views.login, name='login'),
     path('carrier/home/', views.home, name='home'),
     path('carrier/logout/', views.logout, name='logout'),
     path('carrier/accountsettings/', views.accountsettings, name='accountsettings'),
-    path('beforesignup/',views.beforesignup, name="beforesignup"),
+    path('carrier/beforesignup/',views.beforesignup, name="beforesignup"),
+    path('carrier/homepage/',views.homepage, name="homepage"),
 
     path('reset_password', auth_views.PasswordResetView.as_view(), name= 'reset_password'),
     path('reset_password_done', auth_views.PasswordResetDoneView.as_view(template_name="registration/password_reset_done.html"), name='password_reset_done'),
