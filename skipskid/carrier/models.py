@@ -153,9 +153,3 @@ class CarrierCertification(models.Model):
         unique_together = ['carrier', 'certification']
         verbose_name = _("Carrier certification")
         verbose_name = _("Carrier certifications")
-
-
-
-
-
-
