@@ -54,5 +54,7 @@ def accountsettings(request):
     context = {
         'email': email
     }
+
     return render(request, 'accountsettings.html', context)
+
 
