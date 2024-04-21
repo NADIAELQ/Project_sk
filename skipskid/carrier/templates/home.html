@@ -3,107 +3,132 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Profile</title>
+    <title>Get Your Business Moving With the Right Account</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+        /* Styles for the link cards section */
+        #content-block-7 {
             padding: 20px;
         }
 
         .container {
-            max-width: 800px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             margin: 0 auto;
             background-color: #fff;
-            padding: 20px;
             border-radius: 5px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
         }
 
-        h1, h2 {
+        h1 {
             text-align: center;
             margin-bottom: 20px;
         }
 
-        .info-item {
-            margin-bottom: 10px;
-        }
-
-        .info-item strong {
-            font-weight: bold;
-        }
-
-        .info-item a {
-            color: #007bff;
-            text-decoration: none;
-        }
-
-        .info-item a:hover {
-            text-decoration: underline;
-        }
-
-        .welcome-container {
-            width: 400px;
-            background: #fff;
-            border-radius: 10px;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-            padding: 30px;
+        .align-center {
             text-align: center;
-            margin: 20px auto;
         }
 
-        .logout-button {
-            color: #fff;
-            background: #009688;
-            width: 100%;
-            padding: 10px;
-            font-size: 16px;
-            margin-top: 20px;
-            border: none;
+        .link-cards {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            margin-top: 30px;
+            gap: 20px;
+        }
+
+        .card {
+            flex: 1;
+            max-width: 300px;
+            background-color: #fff;
             border-radius: 5px;
-            outline: none;
-            cursor: pointer;
-            transition: background 0.3s;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+            padding: 20px;
+            text-align: center;
         }
 
-        .logout-button:hover {
-            background: #00796b;
+        .card h3 {
+            margin-top: 0;
+            color: #333;
+        }
+
+        .card p {
+            color: #666;
+        }
+
+        .card-icon {
+            margin-bottom: 20px;
+        }
+
+        .link-wrap {
+            margin-top: 20px;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .button:hover {
+            background-color: #0056b3;
         }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <h1>User Profile</h1>
-    <div class="info-item">
-        <strong>Name:</strong> {{ user.username }}    </div>
-    <div class="info-item">
-        <strong>About:</strong> {{ user.about }}
-    </div>
-    <div class="info-item">
-        <strong>Contact Person:</strong> {{ user.contact_person }}
-    </div>
-    <div class="info-item">
-        <strong>Email:</strong> {{ user.email }}
-    </div>
-    <div class="info-item">
-        <strong>Phone Number:</strong> {{ user.phone_number }}
-    </div>
-    <div class="info-item">
-        <strong>Website:</strong> <a href="{{ user.website }}">{{ user.website }}</a>
-    </div>
-    <div class="info-item">
-        <strong>Can Load/Unload 150+ Pounds:</strong> {% if user.pounds_plus %}Yes{% else %}No{% endif %}
-    </div>
-    <div class="info-item">
-        <strong>Can Travel Over 150 Miles:</strong> {% if user.miles_plus %}Yes{% else %}No{% endif %}
-    </div>
-</div>
-
-<div class="welcome-container">
-    <h2>Welcome, {{ user.username }}!</h2>
-    <button class="logout-button"><a href="{% url 'logout' %}">Logout</a></button>
-</div>
+    <section id="content-block-7" class="content type-link-cards-with-icon bg-type- bg-color-white split-none normal-top-padding normal-bottom-padding"> 
+        <a id="section-7" class="anchor"></a>
+        <div class="container lazyloaded">
+            <header class="align-center">
+                <h1>Choose Your User Type</h1>
+            </header>
+            <div class="link-cards col-3 link-cards--equal lazyloaded">
+                <div class="card teal lazyloaded">
+                    <div class="card-icon lazyloaded">
+                        <img src="https://www.roadie.com/wp-content/uploads/2024/04/Truck_Box_Teal.svg" class="attachment-thumbnail size-thumbnail lazyloaded" alt="" decoding="async" data-ll-status="loaded">
+                    </div>
+                    <h3>Carrier</h3>
+                    <p style="height: 121px;">Simplifying Deliveries for You!</p>
+                    <div class="link-wrap lazyloaded"> 
+                        <a class="button ub-123-home-3" href="{% url 'signup' %}">Sign up for Carrier</a>
+                    </div>
+                </div>
+                <div class="card teal lazyloaded">
+                    <div class="card-icon lazyloaded">
+                        <img src="https://www.roadie.com/wp-content/uploads/2024/04/Route.svg" class="attachment-thumbnail size-thumbnail lazyloaded" alt="" decoding="async" data-ll-status="loaded">
+                        <noscript>
+                            <img src="https://www.roadie.com/wp-content/uploads/2024/04/Route.svg" class="attachment-thumbnail size-thumbnail" alt="" decoding="async" />
+                        </noscript>
+                    </div>
+                    <h3>Shipper Business</h3>
+                    <p style="height: 121px;">Streamlining Your Business Deliveries!</p>
+                    <div class="link-wrap lazyloaded"> 
+                        <a class="button ub-123-home-4" href="#lien">Sign up for Business</a>
+                    </div>
+                </div>
+                <div class="card teal lazyloaded">
+                    <div class="card-icon lazyloaded">
+                        <img src="https://www.roadie.com/wp-content/uploads/2024/04/Truck_Box_Teal.svg" class="attachment-thumbnail size-thumbnail lazyloaded" alt="" decoding="async" data-ll-status="loaded">
+                        <noscript>
+                            <img src="https://www.roadie.com/wp-content/uploads/2024/04/Truck_Box_Teal.svg" class="attachment-thumbnail size-thumbnail" alt="" decoding="async" />
+                        </noscript>
+                    </div>
+                    <h3>Shipper Individual</h3>
+                    <p style="height: 121px;">Effortless Deliveries for Individuals!</p>
+                    <div class="link-wrap lazyloaded"> 
+                        <a class="button ub-123-home-5" href="#lien">Sign up for Business</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
 </body>
 </html>
