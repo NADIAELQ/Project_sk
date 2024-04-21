@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout as auth_logout
 from django.contrib.auth.forms import UserCreationForm 
-from .form import CarrierForm
 from .auth_backend import CustomAuthBackend
+from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .form import CarrierForm, CarrierAddressForm
@@ -55,6 +55,7 @@ def accountsettings(request):
     context = {
         'email': email
     }
+
     return render(request, 'accountsettings.html', context)
 
 
