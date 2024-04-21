@@ -1,0 +1,332 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Your Shipping Platform</title>
+<style>
+    /* General resets */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body, html {
+  height: 100%;
+  font-family: 'Open Sans', sans-serif;
+}
+
+/* Header and Navigation */
+.header-container {
+  background-color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0,0,0,.1);
+}
+
+.top-navbar {
+  background-color: rgb(172, 170, 170);
+}
+
+.navbar a {
+  text-decoration: none;
+  color: #333;
+  margin: 0 1rem;
+  font-weight: bold;
+}
+
+.top-navbar a {
+  color: green; 
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+}
+
+.navbar a {
+  text-decoration: none;
+  color: #333;
+  margin: 0 1rem;
+  font-weight: bold;
+}
+
+.navbar a:hover {
+  color: #007bff;
+}
+
+.logo img {
+  max-height: 50px; /* Adjust as needed */
+  width: auto;
+  margin-right: 2rem;
+}
+
+.nav-links, .auth-links {
+  display: flex;
+  align-items: center;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.get-quotes, .become-provider {
+  background-color: #FF8A65;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  margin: 0 0.5rem;
+  border-radius: 50px;
+  text-transform: uppercase;
+}
+
+.get-quotes:hover, .become-provider:hover {
+  background-color: #0056b3;
+  text-decoration: none;
+}
+
+/* Main content and hero section */
+.main-content {
+  background: url('path_to_your_background_image.jpg') center center no-repeat;
+  background-size: cover;
+  color: #fff;
+  text-align: center;
+  padding: 4rem 0;
+}
+
+/* Search box styling */
+.search-box {
+  display: flex;
+  justify-content: center;
+  margin-top: -3rem; /* To pull the search box up into the hero image */
+}
+
+.search-box input[type="text"] {
+  border: none;
+  padding: 0.5rem 1rem;
+  margin-right: -1px; /* Align borders */
+}
+
+.search-box button {
+  border: none;
+  background-color: #007bff;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+}
+
+/* Category list styling */
+.category-list {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+}
+
+.category-list .category {
+  width: calc(25% - 1rem);
+  margin: 0.5rem;
+  text-align: center;
+}
+
+.category-list img {
+  max-width: 100%;
+  border-radius: 5px;
+  transition: transform .3s ease;
+}
+
+.category-list img:hover {
+  transform: scale(1.05);
+}
+
+.category-list .category-name {
+  font-size: 1rem;
+  margin-top: 0.5rem;
+}
+
+
+
+.delivery-table-container {
+  padding: 20px;
+  background: #fff;
+  margin: 20px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.search-delivery {
+  margin-bottom: 20px;
+  text-align: right;
+}
+
+.search-delivery input {
+  padding: 5px 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.delivery-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.delivery-table th, .delivery-table td {
+  text-align: left;
+  padding: 8px;
+  border-bottom: 1px solid #ddd;
+}
+
+.delivery-table th {
+  background-color: #f8764de0;
+}
+
+.delivery-table td a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.delivery-table tbody tr:hover {
+  background-color: #f2f2f2;
+}
+
+.pagination {
+  text-align: center;
+  padding: 20px 0;
+}
+
+/* Footer styling */
+.footer {
+  background-color: #f4f4f4;
+  padding: 2rem;
+  text-align: center;
+}
+
+
+
+/* Responsive design adjustments */
+@media (max-width: 768px) {
+  .category-list .category {
+    width: calc(50% - 1rem);
+  }
+}
+
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<header class="header-container">
+  <!-- First Navbar -->
+  <nav class="navbar top-navbar">
+    <a href="#">For Customers</a>
+    <a href="#">For Transport Providers</a>
+    <!-- Add more navigation items as needed -->
+  </nav>
+  
+  <!-- Second Navbar -->
+  <nav class="navbar main-navbar">
+    <!-- Your website logo -->
+    <a href="#" class="logo">
+      <img src="{% static 'admin/img/site-header-logo.png' %} alt='' " 
+      />
+</a>
+<!-- Navigation Links -->
+<div class="nav-links">
+<a href="#" class="get-quotes">Get quotes</a>
+<a href="#">How it works</a>
+<a href="#">Business shipping</a>
+<a href="#">Search deliveries</a>
+</div>
+<!-- Auth Links -->
+<div class="auth-links">
+<a href="{% url 'beforesignup' %}">Sign up / Get Started
+  <!-- <form action="{% url 'beforesignup' %}" method="post">
+    {% csrf_token %}
+    <button type="submit"></button>
+</form> -->
+
+</a>
+<a href="#" class="become-provider">Become a Transport Provider</a>
+</div>
+
+  </nav>
+</header>
+
+<!-- Main Content -->
+<main class="main-content">
+  <div class="hero-section">
+
+
+    <div class="delivery-table-container">
+      <div class="search-delivery">
+          <label for="search-zip">Search Local Deliveries:</label>
+          <input type="text" id="search-zip" placeholder="Your Zip Code" />
+      </div>
+      <table class="delivery-table">
+          <thead>
+              <tr>
+                  <th>From</th>
+                  <th>To</th>
+                  <th>PU/Date</th>
+                  <th>P/U Time</th>
+                  <th>D/OFF Date</th>
+                  <th>ETA</th>
+                  <th>Equipment</th>
+                  <th>View more</th>
+              </tr>
+          </thead>
+          <tbody>
+              {% for delivery in deliveries %}
+              <tr>
+                  <td>{{ delivery.pick_up_address }}</td>
+                  <td>{{ delivery.drop_off_address }}</td>
+                  <td>{{ delivery.pick_up_date|date:"m/d/Y" }}</td>
+                  <td>{{ delivery.pick_up_date|date:"H:i" }}</td>
+                  <td>{{ delivery.drop_off_date|date:"m/d/Y" }}</td>
+                  <td>{{ delivery.eta|date:"H:i" }}</td>
+                  <td>{{ delivery.equipment }}</td>
+                  <td><a href="{% url 'delivery_detail' delivery.id %}">View</a></td>
+              </tr>
+              {% endfor %}
+          </tbody>
+      </table>
+      <div class="pagination">
+          <!-- Add pagination if necessary -->
+      </div>
+  </div>
+
+
+
+    <h1>Making business shipping simple</h1>
+    <p>Effectively order transport throughout Europe.</p>
+    <!-- Search Box -->
+    <div class="search-box">
+      <input type="text" placeholder="What do you want to ship?" />
+      <input type="text" placeholder="From?" />
+      <input type="text" placeholder="To?" />
+      <button>Get quotes</button>
+    </div>
+  </div>
+
+  <!-- Category List -->
+  <section class="category-list">
+    <!-- Repeat this block for each category -->
+    <div class="category">
+      <img src="path_to_furniture_image.jpg" alt="Furniture">
+      <div class="category-name">Furniture</div>
+    </div>
+    <!-- ... other categories ... -->
+  </section>
+</main>
+
+<!-- Footer -->
+<footer class="footer">
+  &copy; 2024 Your Shipping Platform. All rights reserved.
+</footer>
+
+</body>
+</html>
