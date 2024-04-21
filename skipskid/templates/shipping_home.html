@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -147,6 +148,56 @@ body, html {
   margin-top: 0.5rem;
 }
 
+
+
+.delivery-table-container {
+  padding: 20px;
+  background: #fff;
+  margin: 20px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.search-delivery {
+  margin-bottom: 20px;
+  text-align: right;
+}
+
+.search-delivery input {
+  padding: 5px 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.delivery-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.delivery-table th, .delivery-table td {
+  text-align: left;
+  padding: 8px;
+  border-bottom: 1px solid #ddd;
+}
+
+.delivery-table th {
+  background-color: #f8764de0;
+}
+
+.delivery-table td a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.delivery-table tbody tr:hover {
+  background-color: #f2f2f2;
+}
+
+.pagination {
+  text-align: center;
+  padding: 20px 0;
+}
+
 /* Footer styling */
 .footer {
   background-color: #f4f4f4;
@@ -180,8 +231,8 @@ body, html {
   <nav class="navbar main-navbar">
     <!-- Your website logo -->
     <a href="#" class="logo">
-      <img src="path_to_your_logo
-_image.jpg" alt="Logo" />
+      <img src="{% static 'admin/img/site-header-logo.png' %} alt='' " 
+      />
 </a>
 <!-- Navigation Links -->
 <div class="nav-links">
@@ -192,7 +243,13 @@ _image.jpg" alt="Logo" />
 </div>
 <!-- Auth Links -->
 <div class="auth-links">
-<a href="#">Log in</a>
+<a href="{% url 'beforesignup' %}">Sign up / Get Started
+  <!-- <form action="{% url 'beforesignup' %}" method="post">
+    {% csrf_token %}
+    <button type="submit"></button>
+</form> -->
+
+</a>
 <a href="#" class="become-provider">Become a Transport Provider</a>
 </div>
 
@@ -202,6 +259,48 @@ _image.jpg" alt="Logo" />
 <!-- Main Content -->
 <main class="main-content">
   <div class="hero-section">
+
+
+    <div class="delivery-table-container">
+      <div class="search-delivery">
+          <label for="search-zip">Search Local Deliveries:</label>
+          <input type="text" id="search-zip" placeholder="Your Zip Code" />
+      </div>
+      <table class="delivery-table">
+          <thead>
+              <tr>
+                  <th>From</th>
+                  <th>To</th>
+                  <th>PU/Date</th>
+                  <th>P/U Time</th>
+                  <th>D/OFF Date</th>
+                  <th>ETA</th>
+                  <th>Equipment</th>
+                  <th>View more</th>
+              </tr>
+          </thead>
+          <tbody>
+              {% for delivery in deliveries %}
+              <tr>
+                  <td>{{ delivery.pick_up_address }}</td>
+                  <td>{{ delivery.drop_off_address }}</td>
+                  <td>{{ delivery.pick_up_date|date:"m/d/Y" }}</td>
+                  <td>{{ delivery.pick_up_date|date:"H:i" }}</td>
+                  <td>{{ delivery.drop_off_date|date:"m/d/Y" }}</td>
+                  <td>{{ delivery.eta|date:"H:i" }}</td>
+                  <td>{{ delivery.equipment }}</td>
+                  <td><a href="{% url 'delivery_detail' delivery.id %}">View</a></td>
+              </tr>
+              {% endfor %}
+          </tbody>
+      </table>
+      <div class="pagination">
+          <!-- Add pagination if necessary -->
+      </div>
+  </div>
+
+
+
     <h1>Making business shipping simple</h1>
     <p>Effectively order transport throughout Europe.</p>
     <!-- Search Box -->
