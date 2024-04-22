@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-# SECRET_KEY = 'django-insecure-mn!+oe32xgv*)3*4$tr&vhltgzwvpl_uzy750d=6h-)n-ix058'
+SECRET_KEY = 'django-insecure-mn!+oe32xgv*)3*4$tr&vhltgzwvpl_uzy750d=6h-)n-ix058'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -177,6 +177,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
 STATIC_URL = '/static/'
 STATIC_ROOT = 'static/'
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
@@ -203,7 +205,7 @@ env = environ.Env()
 environ.Env.read_env()
 
 #Security Warning: keep the secret key used in production secret
-SECRET_KEY = env('SECRET_KEY')
+# SECRET_KEY = env('SECRET_KEY')
 
 
 # AUTH_USER_MODEL = "carrier.carrier"

@@ -22,18 +22,21 @@ from carrier import views
 
 from django.contrib.auth import views as auth_views
 
+from skipskid.views import shipping_home
+
 admin.site.enable_nav_sidebar = False
 
 urlpatterns = [
     path('admin/', admin.site.urls),
 
-    path('', views.beforesignup, name='beforesignup'),
+    path('', shipping_home, name='shipping_home'),
     path('carrier/signup/', views.signup, name='signup'),
     path('carrier/login/', views.Carrierlogin, name='login'),
     path('carrier/home/', views.home, name='home'),
     path('carrier/logout/', views.logout, name='logout'),
     path('carrier/accountsettings/', views.accountsettings, name='accountsettings'),
-    path('beforesignup/',views.beforesignup, name="beforesignup"),
+    path('carrier/beforesignup/',views.beforesignup, name="beforesignup"),
+    path('carrier/shipping/', shipping_home, name='shipping_home'),
 
     path('reset_password', auth_views.PasswordResetView.as_view(), name= 'reset_password'),
     path('reset_password_done', auth_views.PasswordResetDoneView.as_view(template_name="registration/password_reset_done.html"), name='password_reset_done'),
