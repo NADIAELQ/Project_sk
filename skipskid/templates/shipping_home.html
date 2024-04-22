@@ -508,7 +508,25 @@ body, html {
 </div>
 
 
-
+<div class="map-section" style="
+    position: relative;
+    width: 100%;
+    height: 900px; /* Adjust as needed */
+    background: url('{% static 'admin/img/map.jpg' %}') center center no-repeat;
+    background-size: cover;">
+    <div class="map-animation" style="
+        position: absolute;
+        top: 50%; /* Adjust based on actual map image */
+        left: 50%; /* Adjust based on actual map image */
+        transform: translate(-50%, -50%);
+        height: 100%;
+        width: 100%;
+        background: url('{% static 'admin/img/path_with_pins.png' %}') no-repeat;
+        background-size: cover;
+        animation: travelPath 10s linear infinite;
+    ">
+    </div>
+</div>
 
 
 
