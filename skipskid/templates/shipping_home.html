@@ -54,7 +54,7 @@ body, html {
 }
 
 .navbar a:hover {
-  color: #007bff;
+  color: #f89d1e;
 }
 
 .logo img {
@@ -91,7 +91,7 @@ body, html {
 
 /* Main content and hero section */
 .main-content {
-  background: url('path_to_your_background_image.jpg') center center no-repeat;
+  /* background: url('/static/admin/img/background_shipp.jpg') center center no-repeat; */
   background-size: cover;
   color: #fff;
   text-align: center;
@@ -161,6 +161,7 @@ body, html {
 .search-delivery {
   margin-bottom: 20px;
   text-align: right;
+  position: relative; 
 }
 
 .search-delivery input {
@@ -198,6 +199,238 @@ body, html {
   padding: 20px 0;
 }
 
+.main-content {
+  text-align: center;
+  color: #333;
+}
+
+/* Hero section styling with background image */
+.hero-section {
+  background: url('{% static "admin/img/BG.png" %}') center center no-repeat;
+  background-size: cover;
+  padding: 0;
+  margin-top: -4rem; /* Adjust the margin as per your design */
+  position: relative;
+  height: 750px; /* Height might need to be adjusted */
+  position: relative;
+}
+.hero-section .container .text{
+  float: left; 
+  width: 50%;
+  padding: 0 15px;
+  box-sizing: border-box;
+  margin-top: 50px;
+  text-align: left;
+}
+
+.hero-section .container .text h3 {
+  color: #333;
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  color: #FFA726;
+
+}
+
+.hero-section .container .text h1 {
+  font-size: 3.2rem;
+  margin-bottom: 2rem;
+  color: #333;
+  font-weight: 600;
+  letter-spacing: .12px
+  
+}
+.hero-section .container .text p {
+  color: #666;
+  font-size: 1.2rem;
+  line-height: 1.5;
+  margin-bottom: 2rem;
+}
+/* Ensures that the text does not overlap with the image */
+@media (max-width: 1200px) {
+  .hero-section .container .text {
+    width: 100%;
+    padding: 0 15px;
+    box-sizing: border-box;
+  }
+  .hero-section .container .image {
+    display: none; /* Hide image on smaller screens */
+  }
+}
+
+.hero-section .container {
+  position: relative;
+  height: 100%;
+  max-width: 1100px;
+  margin: auto;
+  padding-top: 50px;
+}
+
+.hero-section .container:after {
+  content: '';
+  display: block;
+  clear: both;
+}
+.features-section {
+  display: flex;
+  justify-content: space-around;
+  padding: 4rem 0;
+}
+
+.features-section .feature {
+  text-align: center;
+  width: 30%;
+}
+
+.features-section h3 {
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+.features-section p {
+  color: #666;
+  line-height: 1.5;
+}
+
+/* Footer Styling */
+.footer {
+  background-color: #333;
+  color: white;
+  text-align: center;
+  padding: 1rem 0;
+}
+
+.footer .footer-content a {
+  color: white;
+  margin: 0 1rem;
+}
+
+.footer .social-media-links {
+  margin-top: 1rem;
+}
+.teal{
+  text-decoration: none;
+  color: white;
+  padding: 13px 37px;
+  border-radius: 10px;
+  margin-top: 20px;
+  display: inline-block;
+  background-color: rgb(68, 157, 245);
+  border: 2px solid #0bb;
+  color: #fff;
+  font-weight: bold;
+  text-transform: uppercase;
+  transition: all 0.3s;
+}
+.teal:hover{
+  background-color: #0bb;
+  color: white;
+  border: 2px solid #0bb;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+
+.hero-section .container .image {
+  float: right;
+  width: 50%;
+  text-align: right;
+}
+.hero-section .section-color {
+  padding: 1rem 2rem;
+  text-align: center;
+  background-color: #004A7C;
+  color: white;
+  position: absolute;
+  bottom: 0; 
+  width: 100%;     
+  height: 200px;
+}
+.hero-section .section-color img {
+  width: 100px;
+  height: 100px;
+  display: inline-block;
+  margin-top: 50px;
+  vertical-align: middle;
+}
+.hero-section .section-color p {
+  display: inline-block;
+  margin-top: 50px;
+  vertical-align: middle;
+  width: 60%;
+}
+
+/* Responsive styling */
+@media (max-width: 768px) {
+  .features-section {
+    flex-direction: column;
+  }
+
+  .features-section .feature {
+    width: 100%;
+    margin-bottom: 2rem;
+  }
+}
+
+.ship-anywhere-section {
+    width: 100%;
+    height: auto;
+    padding: 160px 0;
+    background-color: #fff; /* Or any other color you prefer */
+    text-align: center; /* Center the text horizontally */
+}
+
+.ship-anywhere-section h2 {
+    font-size: 48px; /* Adjust the size as necessary */
+    color: #000; /* Color of the text */
+    font-weight: bold; /* Make the font bold */
+    margin: 0;
+    padding: 0;
+    display: inline-block; /* To allow the span to change line height */
+    line-height: 1.2; /* Adjust line height to match your design */
+}
+
+.ship-anywhere-section h2 span {
+    color: #ff4500; /* The color of the second part of the phrase */
+}
+
+.header{
+  background-color: #f4f4f4;
+  padding: 2rem;
+  text-align: center;
+  align-items: center;
+                color: var(--content-primary);
+                display: flex;
+                flex-direction: column;
+                text-align: center;
+                width: 100%
+}
+
+@keyframes travelPath {
+  0% {
+    background-position: 0% 0%;
+  }
+  25% {
+    background-position: 100% 0%;
+  }
+  50% {
+    background-position: 100% 100%;
+  }
+  75% {
+    background-position: 0% 100%;
+  }
+  100% {
+    background-position: 0% 0%;
+  }
+}
+
+.map-animation {
+  /* Given styles */
+  animation: travelPath 10s linear infinite;
+}
+
+.map-section {
+  /* Given styles */
+}
+
 /* Footer styling */
 .footer {
   background-color: #f4f4f4;
@@ -221,6 +454,12 @@ body, html {
 <!-- Header -->
 <header class="header-container">
   <!-- First Navbar -->
+
+  <nav class="navbar main-navbar">
+    <!-- Your website logo -->
+    <a href="#" class="logo">
+      <img src="{% static 'admin/img/site-header-logo.png' %}" alt='' 
+=======
   <nav class="navbar top-navbar">
     <a href="#">For Customers</a>
     <a href="#">For Transport Providers</a>
@@ -236,6 +475,18 @@ body, html {
 </a>
 <!-- Navigation Links -->
 <div class="nav-links">
+<a href="#">Why SilyaTrans</a>
+<a href="#">How it works</a>
+<a href="#">Shipper</a>
+<a href="#">Carrier</a>
+
+</div>
+<!-- Auth Links -->
+<div class="auth-links">
+<a href="{% url 'beforesignup' %}" class="become-provider">Sign up</a>
+</a>
+<a href="#" class="become-provider">Log in </a>
+=======
 <a href="#" class="get-quotes">Get quotes</a>
 <a href="#">How it works</a>
 <a href="#">Business shipping</a>
@@ -251,6 +502,7 @@ body, html {
 
 </a>
 <a href="#" class="become-provider">Become a Transport Provider</a>
+
 </div>
 
   </nav>
@@ -258,6 +510,35 @@ body, html {
 
 <!-- Main Content -->
 <main class="main-content">
+<div class="hero-section" >
+  <div class="container">
+    <div class="text" >
+      <h3>DELIVER WITH SILYATRANS</h3>
+      <h1>Deliver happiness with just a few clicks</h1>
+      <p>Silyatrans is a delivery platform that ensures your packages reach their destination smoothly anywhere in the U.S.A</p>
+      <a href="https://www.roadie.com/sign-up-log-in" class="button teal">Get Started</a>
+    </div>
+    <!-- Placeholder for the right-side image -->
+    <div class="image">
+      <img src="{% static 'admin/img/delivery-man.png' %}" alt="Delivery Person" style="width: auto; height: 500px;">
+    </div>
+  </div>
+  <!-- Colored section at the bottom -->
+  <div class="section-color">
+    <img src="{% static 'admin/img/models/delivery.svg' %}" alt="UPS Logo">
+    <p>A UPS Company since 2021, bringing you same-day delivery with all the reliability and excellence you've come to expect from Big Brown.</p>
+  </div>
+</div>
+
+<div class="ship-anywhere-section">
+  <h2>Ship anything <br><span>anywhere</span></h2>
+</div>
+
+
+
+
+
+=======
   <div class="hero-section">
 
 
@@ -321,6 +602,23 @@ body, html {
     </div>
     <!-- ... other categories ... -->
   </section>
+
+  <section class="features-section">
+    <div class="feature">
+      <h3>Feature Title 1</h3>
+      <p>Description of the feature 1.</p>
+    </div>
+    <div class="feature">
+      <h3>Feature Title 2</h3>
+      <p>Description of the feature 2.</p>
+    </div>
+    <div class="feature">
+      <h3>Feature Title 3</h3>
+      <p>Description of the feature 3.</p>
+    </div>
+    <!-- Add more features as needed -->
+  </section>
+
 </main>
 
 <!-- Footer -->
