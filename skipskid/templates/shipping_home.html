@@ -5,6 +5,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Your Shipping Platform</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 <style>
     /* General resets */
 * {
@@ -22,6 +23,9 @@ body, html {
 .header-container {
   background-color: #ffffff;
   box-shadow: 0 2px 4px rgba(0,0,0,.1);
+  position: fixed;
+  width: 100%;
+  z-index: 1000;
 }
 
 .top-navbar {
@@ -209,7 +213,7 @@ body, html {
   background: url('{% static "admin/img/BG.png" %}') center center no-repeat;
   background-size: cover;
   padding: 0;
-  margin-top: -4rem; /* Adjust the margin as per your design */
+  margin-top: 1rem; /* Adjust the margin as per your design */
   position: relative;
   height: 750px; /* Height might need to be adjusted */
   position: relative;
@@ -372,8 +376,8 @@ body, html {
 
 .ship-anywhere-section {
     width: 100%;
-    height: auto;
-    padding: 160px 0;
+    height: 750px;
+    padding: 100px 0;
     background-color: #fff; /* Or any other color you prefer */
     text-align: center; /* Center the text horizontally */
 }
@@ -422,13 +426,108 @@ body, html {
   }
 }
 
-.map-animation {
-  /* Given styles */
-  animation: travelPath 10s linear infinite;
+
+.delivery-network-section {
+  position: relative;
+  padding: 4rem;
+  text-align: center;
+  margin-top: 200px;
+  margin-bottom: 200px;
 }
 
-.map-section {
-  /* Given styles */
+.delivery-network-section:after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #f67a68;
+  z-index: -1;
+}
+
+.delivery-network-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  border-left: 10px solid #ff4500;
+  border-right: 10px solid #ff4500;
+  border-top: 10px solid #ff4500;
+  border-bottom: 10px solid #ff4500;
+  background-color: white;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.delivery-network-content h2 {
+  color: #333;
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+}
+
+.delivery-features {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.feature-item {
+  width: calc(33.333% - 2rem);
+  margin: 1rem;
+  padding: 1rem;
+  background-color: #ffebee;
+}
+
+.feature-item h3 {
+  color: #ff4500;
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.feature-item p {
+  color: #666;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.delivery-network-cta {
+  margin-top: 2rem;
+}
+
+.get-started-button {
+  padding: 1rem 2rem;
+  background-color: #ff4500;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+.get-started-button:hover {
+  background-color: #e64a19;
+}
+
+@media (max-width: 768px) {
+  .delivery-features {
+    flex-direction: column;
+}
+
+.feature-item {
+width: 100%;
+margin-bottom: 1rem;
+}
+
+.delivery-network-content {
+border-left: 5px solid #ff4500;
+border-right: 5px solid #ff4500;
+}
+}
+
+.material-symbols-outlined.location-symbol {
+    position: absolute;
+    font-size: 48px; /* Change size as needed */
+    color: red; /* Change color as needed */
+    transform: translate(-50%, -50%); /* Center the icon on its position */
 }
 
 /* Footer styling */
@@ -458,19 +557,7 @@ body, html {
   <nav class="navbar main-navbar">
     <!-- Your website logo -->
     <a href="#" class="logo">
-      <img src="{% static 'admin/img/site-header-logo.png' %}" alt='' 
-=======
-  <nav class="navbar top-navbar">
-    <a href="#">For Customers</a>
-    <a href="#">For Transport Providers</a>
-    <!-- Add more navigation items as needed -->
-  </nav>
-  
-  <!-- Second Navbar -->
-  <nav class="navbar main-navbar">
-    <!-- Your website logo -->
-    <a href="#" class="logo">
-      <img src="{% static 'admin/img/site-header-logo.png' %} alt='' " 
+      <img src="{% static 'admin/img/site-header-logo.png' %}" alt=''  
       />
 </a>
 <!-- Navigation Links -->
@@ -480,17 +567,6 @@ body, html {
 <a href="#">Shipper</a>
 <a href="#">Carrier</a>
 
-</div>
-<!-- Auth Links -->
-<div class="auth-links">
-<a href="{% url 'beforesignup' %}" class="become-provider">Sign up</a>
-</a>
-<a href="#" class="become-provider">Log in </a>
-=======
-<a href="#" class="get-quotes">Get quotes</a>
-<a href="#">How it works</a>
-<a href="#">Business shipping</a>
-<a href="#">Search deliveries</a>
 </div>
 <!-- Auth Links -->
 <div class="auth-links">
@@ -531,67 +607,60 @@ body, html {
 </div>
 
 <div class="ship-anywhere-section">
+  <img src="{% static 'admin/img/custom.png' %}" alt="Ship Anywhere" style="width: 550px; height: 550px;">
   <h2>Ship anything <br><span>anywhere</span></h2>
 </div>
 
 
+<div class="map-section" style="
+    position: relative;
+    width: 100%;
+    height: 900px; /* Adjust as needed */
+    background: url('{% static 'admin/img/map.jpg' %}') center center no-repeat;
+    background-size: cover;">
+ <span class="material-symbols-outlined location-symbol" style="top: 26%; left: 32%;">location_on</span>
+ <span class="material-symbols-outlined location-symbol" style="top: 50%; left: 60%;">location_on</span>
+ <span class="material-symbols-outlined location-symbol" style="top: 56%; left: 40%;">location_on</span>
+ <span class="material-symbols-outlined location-symbol" style="top: 40%; left: 50%;">location_on</span>
+  <span class="material-symbols-outlined location-symbol" style="top: 30%; left: 81%;">location_on</span>
 
+</div>
 
-
-=======
-  <div class="hero-section">
-
-
-    <div class="delivery-table-container">
-      <div class="search-delivery">
-          <label for="search-zip">Search Local Deliveries:</label>
-          <input type="text" id="search-zip" placeholder="Your Zip Code" />
+<div class="delivery-network-section">
+  <div class="delivery-network-content">
+    <h2>Revolutionizing Delivery Services</h2>
+    <div class="delivery-features">
+      <div class="feature-item">
+        <h3>Transparent Pricing</h3>
+        <p>With clear and competitive pricing, you'll always know exactly what you're paying for, with no hidden fees or surprises.</p>
       </div>
-      <table class="delivery-table">
-          <thead>
-              <tr>
-                  <th>From</th>
-                  <th>To</th>
-                  <th>PU/Date</th>
-                  <th>P/U Time</th>
-                  <th>D/OFF Date</th>
-                  <th>ETA</th>
-                  <th>Equipment</th>
-                  <th>View more</th>
-              </tr>
-          </thead>
-          <tbody>
-              {% for delivery in deliveries %}
-              <tr>
-                  <td>{{ delivery.pick_up_address }}</td>
-                  <td>{{ delivery.drop_off_address }}</td>
-                  <td>{{ delivery.pick_up_date|date:"m/d/Y" }}</td>
-                  <td>{{ delivery.pick_up_date|date:"H:i" }}</td>
-                  <td>{{ delivery.drop_off_date|date:"m/d/Y" }}</td>
-                  <td>{{ delivery.eta|date:"H:i" }}</td>
-                  <td>{{ delivery.equipment }}</td>
-                  <td><a href="{% url 'delivery_detail' delivery.id %}">View</a></td>
-              </tr>
-              {% endfor %}
-          </tbody>
-      </table>
-      <div class="pagination">
-          <!-- Add pagination if necessary -->
+      <div class="feature-item">
+        <h3>24/7/365 Availability</h3>
+        <p>Offer round-the-clock delivery to keep your supply chain running smoothly, without being limited by strict pickup schedules or cutoffs found in other solutions.</p>
       </div>
-  </div>
-
-
-
-    <h1>Making business shipping simple</h1>
-    <p>Effectively order transport throughout Europe.</p>
-    <!-- Search Box -->
-    <div class="search-box">
-      <input type="text" placeholder="What do you want to ship?" />
-      <input type="text" placeholder="From?" />
-      <input type="text" placeholder="To?" />
-      <button>Get quotes</button>
+      <div class="feature-item">
+        <h3>Customer Satisfaction Guaranteed        </h3>
+        <p>Our focus on customer satisfaction ensures that every delivery meets your expectations, every time.</p>
+      </div>
+      <div class="feature-item">
+        <h3>Customized Solutions</h3>
+        <p>Tailor our delivery services to meet your specific requirements, whether you're an enterprise or an individual.Our delivery platform is designed to grow with your needs.</p>
+      </div>
+      <div class="feature-item">
+        <h3>Delivery Protection</h3>
+        <p>You’ll have peace of mind knowing with delivery protection from pickup to dropoff and every step in between.</p>
+      </div>
+      <div class="feature-item">
+        <h3>Real-time Communication</h3>
+        <p>Stay informed every step of the way with real-time updates and notifications on the status of your deliveries.</p>
+      </div>
+    </div>
+    <div class="delivery-network-cta">
+      <a href="#" class="get-started-button">Get Started</a>
     </div>
   </div>
+</div>
+
 
   <!-- Category List -->
   <section class="category-list">
