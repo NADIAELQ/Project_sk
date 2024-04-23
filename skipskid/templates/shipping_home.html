@@ -530,8 +530,6 @@ border-right: 5px solid #ff4500;
     transform: translate(-50%, -50%); /* Center the icon on its position */
 }
 
-
-
 /* Footer styling */
 .footer {
   background-color: #f4f4f4;
@@ -560,6 +558,18 @@ border-right: 5px solid #ff4500;
     <!-- Your website logo -->
     <a href="#" class="logo">
       <img src="{% static 'admin/img/site-header-logo.png' %}" alt='' 
+=======
+  <nav class="navbar top-navbar">
+    <a href="#">For Customers</a>
+    <a href="#">For Transport Providers</a>
+    <!-- Add more navigation items as needed -->
+  </nav>
+  
+  <!-- Second Navbar -->
+  <nav class="navbar main-navbar">
+    <!-- Your website logo -->
+    <a href="#" class="logo">
+      <img src="{% static 'admin/img/site-header-logo.png' %} alt='' " 
       />
 </a>
 <!-- Navigation Links -->
@@ -575,6 +585,23 @@ border-right: 5px solid #ff4500;
 <a href="{% url 'beforesignup' %}" class="become-provider">Sign up</a>
 </a>
 <a href="#" class="become-provider">Log in </a>
+=======
+<a href="#" class="get-quotes">Get quotes</a>
+<a href="#">How it works</a>
+<a href="#">Business shipping</a>
+<a href="#">Search deliveries</a>
+</div>
+<!-- Auth Links -->
+<div class="auth-links">
+<a href="{% url 'beforesignup' %}">Sign up / Get Started
+  <!-- <form action="{% url 'beforesignup' %}" method="post">
+    {% csrf_token %}
+    <button type="submit"></button>
+</form> -->
+
+</a>
+<a href="#" class="become-provider">Become a Transport Provider</a>
+
 </div>
 
   </nav>
@@ -657,6 +684,60 @@ border-right: 5px solid #ff4500;
   </div>
 </div>
 
+=======
+  <div class="hero-section">
+
+
+    <div class="delivery-table-container">
+      <div class="search-delivery">
+          <label for="search-zip">Search Local Deliveries:</label>
+          <input type="text" id="search-zip" placeholder="Your Zip Code" />
+      </div>
+      <table class="delivery-table">
+          <thead>
+              <tr>
+                  <th>From</th>
+                  <th>To</th>
+                  <th>PU/Date</th>
+                  <th>P/U Time</th>
+                  <th>D/OFF Date</th>
+                  <th>ETA</th>
+                  <th>Equipment</th>
+                  <th>View more</th>
+              </tr>
+          </thead>
+          <tbody>
+              {% for delivery in deliveries %}
+              <tr>
+                  <td>{{ delivery.pick_up_address }}</td>
+                  <td>{{ delivery.drop_off_address }}</td>
+                  <td>{{ delivery.pick_up_date|date:"m/d/Y" }}</td>
+                  <td>{{ delivery.pick_up_date|date:"H:i" }}</td>
+                  <td>{{ delivery.drop_off_date|date:"m/d/Y" }}</td>
+                  <td>{{ delivery.eta|date:"H:i" }}</td>
+                  <td>{{ delivery.equipment }}</td>
+                  <td><a href="{% url 'delivery_detail' delivery.id %}">View</a></td>
+              </tr>
+              {% endfor %}
+          </tbody>
+      </table>
+      <div class="pagination">
+          <!-- Add pagination if necessary -->
+      </div>
+  </div>
+
+
+
+    <h1>Making business shipping simple</h1>
+    <p>Effectively order transport throughout Europe.</p>
+    <!-- Search Box -->
+    <div class="search-box">
+      <input type="text" placeholder="What do you want to ship?" />
+      <input type="text" placeholder="From?" />
+      <input type="text" placeholder="To?" />
+      <button>Get quotes</button>
+    </div>
+  </div>
 
   <!-- Category List -->
   <section class="category-list">

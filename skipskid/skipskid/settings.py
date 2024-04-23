@@ -205,7 +205,7 @@ env = environ.Env()
 environ.Env.read_env()
 
 #Security Warning: keep the secret key used in production secret
-SECRET_KEY = env('SECRET_KEY')
+# SECRET_KEY = env('SECRET_KEY')
 
 
 # AUTH_USER_MODEL = "carrier.carrier"
@@ -214,5 +214,9 @@ SECRET_KEY = env('SECRET_KEY')
 AUTHENTICATION_BACKENDS = [
     'carrier.auth_backend.CustomAuthBackend', 
     'django.contrib.auth.backends.ModelBackend',  # Default Django authentication backend
+<<<<<<< HEAD
 ]
 
+=======
+]
+>>>>>>> ee3abda921934edd894898b2f3ad997678bbd274
