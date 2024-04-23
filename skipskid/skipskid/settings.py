@@ -135,8 +135,8 @@ DATABASES = {
     'default': {
 		'ENGINE': 'django.db.backends.postgresql_psycopg2',
 		'NAME': 'skipskid3',
-		'USER': 'noura',
-		'PASSWORD': 'noura12',
+		'USER': 'nadia',
+		'PASSWORD': 'nadia',
 		'HOST': 'localhost',
 		'PORT': '5432',
     }
@@ -214,4 +214,9 @@ environ.Env.read_env()
 AUTHENTICATION_BACKENDS = [
     'carrier.auth_backend.CustomAuthBackend', 
     'django.contrib.auth.backends.ModelBackend',  # Default Django authentication backend
+<<<<<<< HEAD
 ]
+
+=======
+]
+>>>>>>> ee3abda921934edd894898b2f3ad997678bbd274

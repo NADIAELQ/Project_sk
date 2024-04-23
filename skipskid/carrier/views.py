@@ -1,8 +1,13 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout as auth_logout
 from django.contrib.auth.forms import UserCreationForm 
+<<<<<<< HEAD
+from .form import CarrierForm
+from .auth_backend import CustomAuthBackend
+=======
 from .auth_backend import CustomAuthBackend
 from django.contrib.auth import login, authenticate, logout
+>>>>>>> ee3abda921934edd894898b2f3ad997678bbd274
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .form import CarrierForm, CarrierAddressForm

@@ -9,7 +9,7 @@ class CustomAuthBackend(BaseBackend):
         user_models = [Carrier]  # Assuming Carrier, Shipper, and Business are your custom user models
         for UserModel in user_models:
             try:
-                user = UserModel.objects.get(email__iexac=email)
+                user = UserModel.objects.get(email__iexact=email)
                 if user.check_password(password):
                     return user
             except UserModel.DoesNotExist:
