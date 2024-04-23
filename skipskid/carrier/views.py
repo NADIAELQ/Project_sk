@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout as auth_logout
 from django.contrib.auth.forms import UserCreationForm 
 from .form import CarrierForm
-from django.contrib.auth import login, authenticate, logout
+from .auth_backend import CustomAuthBackend
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .form import CarrierForm, CarrierAddressForm
@@ -27,9 +27,10 @@ def signup(request):
 
 def Carrierlogin(request):
     if request.method == 'POST':
-        username = request.POST['username']
+        email = request.POST['email']
         password = request.POST['password']
-        user = authenticate(request, username=username, password=password)
+        # user = authenticate(request, username=username, password=password)
+        user = authenticate(request, email=email, password=password)
         if user is not None:
             login(request, user)
             return redirect('home')
