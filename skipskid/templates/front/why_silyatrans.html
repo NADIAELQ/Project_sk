@@ -1,0 +1,713 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Your Shipping Platform</title>
+
+<!-- {% load bootstrap5 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %} -->
+
+<style>
+   /* General resets */
+   * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body, html {
+  height: 100%;
+  font-family: 'Open Sans', sans-serif;
+}
+
+/* Header and Navigation */
+.header-container {
+  background-color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0,0,0,.1);
+  position: fixed;
+  width: 100%;
+  z-index: 1000;
+}
+
+.top-navbar {
+  background-color: rgb(172, 170, 170);
+}
+
+.navbar a {
+  text-decoration: none;
+  color: #333;
+  margin: 0 1rem;
+  font-weight: bold;
+}
+
+.top-navbar a {
+  color: green; 
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+}
+
+.navbar a {
+  text-decoration: none;
+  color: #333;
+  margin: 0 1rem;
+  font-weight: bold;
+}
+
+.navbar a:hover {
+  color: #f89d1e;
+}
+
+.logo img {
+  max-height: 50px; /* Adjust as needed */
+  width: auto;
+  margin-right: 2rem;
+}
+
+.nav-links, .auth-links {
+  display: flex;
+  align-items: center;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.get-quotes, .become-provider {
+  background-color: #FF8A65;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  margin: 0 0.5rem;
+  border-radius: 50px;
+  text-transform: uppercase;
+}
+
+.get-quotes:hover, .become-provider:hover {
+  background-color: #0056b3;
+  text-decoration: none;
+}
+
+/* Main content and hero section */
+.main-content {
+  /* background: url('/static/admin/img/background_shipp.jpg') center center no-repeat; */
+  background-size: cover;
+  color: #fff;
+  text-align: center;
+  padding: 4rem 0;
+}
+
+/* Search box styling */
+.search-box {
+  display: flex;
+  justify-content: center;
+  margin-top: -3rem; /* To pull the search box up into the hero image */
+}
+
+.search-box input[type="text"] {
+  border: none;
+  padding: 0.5rem 1rem;
+  margin-right: -1px; /* Align borders */
+}
+
+.search-box button {
+  border: none;
+  background-color: #007bff;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+}
+
+/* Category list styling */
+.category-list {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+}
+
+.category-list .category {
+  width: calc(25% - 1rem);
+  margin: 0.5rem;
+  text-align: center;
+}
+
+.category-list img {
+  max-width: 100%;
+  border-radius: 5px;
+  transition: transform .3s ease;
+}
+
+.category-list img:hover {
+  transform: scale(1.05);
+}
+
+.category-list .category-name {
+  font-size: 1rem;
+  margin-top: 0.5rem;
+}
+
+
+
+.delivery-table-container {
+  padding: 20px;
+  background: #fff;
+  margin: 20px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.search-delivery {
+  margin-bottom: 20px;
+  text-align: right;
+  position: relative; 
+}
+
+.search-delivery input {
+  padding: 5px 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.delivery-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.delivery-table th, .delivery-table td {
+  text-align: left;
+  padding: 8px;
+  border-bottom: 1px solid #ddd;
+}
+
+.delivery-table th {
+  background-color: #f8764de0;
+}
+
+.delivery-table td a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.delivery-table tbody tr:hover {
+  background-color: #f2f2f2;
+}
+
+.pagination {
+  text-align: center;
+  padding: 20px 0;
+}
+
+.main-content {
+  text-align: center;
+  color: #333;
+}
+
+/* Hero section styling with background image */
+.hero-section {
+  /* background: url('{% static "admin/img/BG.png" %}') center center no-repeat; */
+  background-size: cover;
+  padding: 0;
+  margin-top: 1rem; /* Adjust the margin as per your design */
+  position: relative;
+  height: 750px; /* Height might need to be adjusted */
+  position: relative;
+}
+.hero-section .container .text{
+  float: left; 
+  width: 50%;
+  padding: 0 15px;
+  box-sizing: border-box;
+  margin-top: 50px;
+  text-align: left;
+}
+
+.hero-section .container .text h3 {
+  color: #333;
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  color: #FFA726;
+
+}
+
+.hero-section .container .text h1 {
+  font-size: 3.2rem;
+  margin-bottom: 2rem;
+  color: #333;
+  font-weight: 600;
+  letter-spacing: .12px
+  
+}
+.hero-section .container .text p {
+  color: #666;
+  font-size: 1.2rem;
+  line-height: 1.5;
+  margin-bottom: 2rem;
+}
+/* Ensures that the text does not overlap with the image */
+@media (max-width: 1200px) {
+  .hero-section .container .text {
+    width: 100%;
+    padding: 0 15px;
+    box-sizing: border-box;
+  }
+  .hero-section .container .image {
+    display: none; /* Hide image on smaller screens */
+  }
+}
+
+.hero-section .container {
+  position: relative;
+  height: 100%;
+  max-width: 1100px;
+  margin: auto;
+  padding-top: 50px;
+}
+
+.hero-section .container:after {
+  content: '';
+  display: block;
+  clear: both;
+}
+.features-section {
+  display: flex;
+  justify-content: space-around;
+  padding: 4rem 0;
+}
+
+.features-section .feature {
+  text-align: center;
+  width: 30%;
+}
+
+.features-section h3 {
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+.features-section p {
+  color: #666;
+  line-height: 1.5;
+}
+
+/* Footer Styling */
+.footer {
+  background-color: #333;
+  color: white;
+  text-align: center;
+  padding: 1rem 0;
+}
+
+.footer .footer-content a {
+  color: white;
+  margin: 0 1rem;
+}
+
+.footer .social-media-links {
+  margin-top: 1rem;
+}
+.teal{
+  text-decoration: none;
+  color: white;
+  padding: 13px 37px;
+  border-radius: 10px;
+  margin-top: 20px;
+  display: inline-block;
+  background-color: rgb(68, 157, 245);
+  border: 2px solid #0bb;
+  color: #fff;
+  font-weight: bold;
+  text-transform: uppercase;
+  transition: all 0.3s;
+}
+.teal:hover{
+  background-color: #0bb;
+  color: white;
+  border: 2px solid #0bb;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+
+.hero-section .container .image {
+  float: right;
+  width: 50%;
+  text-align: right;
+}
+.hero-section .section-color {
+  padding: 1rem 2rem;
+  text-align: center;
+  background-color: #004A7C;
+  color: white;
+  position: absolute;
+  bottom: 0; 
+  width: 100%;     
+  height: 200px;
+}
+.hero-section .section-color img {
+  width: 100px;
+  height: 100px;
+  display: inline-block;
+  margin-top: 50px;
+  vertical-align: middle;
+}
+.hero-section .section-color p {
+  display: inline-block;
+  margin-top: 50px;
+  vertical-align: middle;
+  width: 60%;
+}
+
+/* Responsive styling */
+@media (max-width: 768px) {
+  .features-section {
+    flex-direction: column;
+  }
+
+  .features-section .feature {
+    width: 100%;
+    margin-bottom: 2rem;
+  }
+}
+
+.ship-anywhere-section {
+    width: 100%;
+    height: 750px;
+    padding: 100px 0;
+    background-color: #e15f2d; /* Or any other color you prefer */
+    text-align: center; /* Center the text horizontally */
+}
+
+.ship-anywhere-section h2 {
+    font-size: 48px; /* Adjust the size as necessary */
+    color: #000; /* Color of the text */
+    font-weight: bold; /* Make the font bold */
+    margin: 0;
+    padding: 0;
+    display: inline-block; /* To allow the span to change line height */
+    line-height: 1.2; /* Adjust line height to match your design */
+}
+
+.ship-anywhere-section h2 span {
+    color: #333; /* The color of the second part of the phrase */
+}
+
+.header{
+  background-color: #f4f4f4;
+  padding: 2rem;
+  text-align: center;
+  align-items: center;
+                color: var(--content-primary);
+                display: flex;
+                flex-direction: column;
+                text-align: center;
+                width: 100%
+}
+
+@keyframes travelPath {
+  0% {
+    background-position: 0% 0%;
+  }
+  25% {
+    background-position: 100% 0%;
+  }
+  50% {
+    background-position: 100% 100%;
+  }
+  75% {
+    background-position: 0% 100%;
+  }
+  100% {
+    background-position: 0% 0%;
+  }
+}
+
+
+.delivery-network-section {
+  position: relative;
+  padding: 4rem;
+  text-align: center;
+  margin-top: 200px;
+  margin-bottom: 200px;
+}
+
+.delivery-network-section:after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #f67a68;
+  z-index: -1;
+}
+
+.delivery-network-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  border-left: 10px solid #ff4500;
+  border-right: 10px solid #ff4500;
+  border-top: 10px solid #ff4500;
+  border-bottom: 10px solid #ff4500;
+  background-color: white;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.delivery-network-content h2 {
+  color: #333;
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+}
+
+.delivery-features {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.feature-item {
+  width: calc(33.333% - 2rem);
+  margin: 1rem;
+  padding: 1rem;
+  background-color: #ffebee;
+}
+
+.feature-item h3 {
+  color: #ff4500;
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.feature-item p {
+  color: #666;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.delivery-network-cta {
+  margin-top: 2rem;
+}
+
+.get-started-button {
+  padding: 1rem 2rem;
+  background-color: #ff4500;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+.get-started-button:hover {
+  background-color: #e64a19;
+}
+
+@media (max-width: 768px) {
+  .delivery-features {
+    flex-direction: column;
+}
+
+.feature-item {
+width: 100%;
+margin-bottom: 1rem;
+}
+
+.delivery-network-content {
+border-left: 5px solid #ff4500;
+border-right: 5px solid #ff4500;
+}
+}
+
+.material-symbols-outlined.location-symbol {
+    position: absolute;
+    font-size: 48px; /* Change size as needed */
+    color: red; /* Change color as needed */
+    transform: translate(-50%, -50%); /* Center the icon on its position */
+}
+
+/* Footer styling */
+.footer {
+  background-color: #f4f4f4;
+  padding: 2rem;
+  text-align: center;
+}
+/* Style for the Reasons to Choose SiyaTrans Section */
+/* Style for the Reasons to Choose SiyaTrans Section */
+.reasons-section {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+/* Style for Individual Reason */
+.reason {
+  flex: 1;
+  margin-right: 20px;
+  background-color: var(--dx-g-indigo-vibrant-15);
+  color: white;
+  padding: 20px;
+  border-radius: var(--dx-g-card-border-radius);
+  box-shadow: var(--dx-g-box-shadow-sm);
+}
+
+/* Style for Reason Title */
+.reason h3 {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+/* Style for Reason Description */
+.reason p {
+  font-size: 16px;
+  line-height: 1.5;
+  color: white;
+}
+
+
+
+/* Responsive design adjustments */
+@media (max-width: 768px) {
+  .category-list .category {
+    width: calc(50% - 1rem);
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<header class="header-container">
+  <!-- First Navbar -->
+
+  <nav class="navbar main-navbar">
+    <!-- Your website logo -->
+    <a href="#" class="logo">
+      <img src="{% static 'admin/img/site-header-logo.png' %}" alt='' 
+      />
+</a>
+<!-- Navigation Links -->
+<div class="nav-links">
+<a href="C:\Users\Noura\Desktop\skipskid_20-04\skipskid\templates\why_silyatrans.html">Why SilyaTrans</a>
+<a href="#">How it works</a>
+<a href="#">Shipper</a>
+<a href="#">Carrier</a>
+
+</div>
+<!-- Auth Links -->
+<div class="auth-links">
+<a href="{% url 'beforesignup' %}" class="become-provider">Sign up</a>
+</a>
+<a href="#" class="become-provider">Log in </a>
+</div>
+
+  </nav>
+</header>
+<!-- Main Content -->
+<main class="main-content">
+  <!-- Hero Section -->
+  <div class="hero-section">
+    <div class="container">
+      <div class="text">
+        <h3>WHY SILYATRANS?</h3>
+        <h1>Optimize Your Logistics Management Process</h1>
+        <p>SiyaTrans offers a comprehensive web platform for integrated transport and inventory management, providing seamless logistics solutions.</p>
+        <a href="https://www.silyatrans.com/sign-up-log-in" class="button teal">Get Started</a>
+      </div>
+      <!-- Placeholder for the right-side image -->
+      <div class="image">
+        <img src="{% static 'C:\Users\Noura\Desktop\skipskid_20-04\skipskid\skipskid\static\why.jpg' %}" alt="Delivery Person" style="width: auto; height: 500px;">
+      </div>
+    </div>
+    <!-- Colored section at the bottom
+    <div class="section-color">
+      <img src="{% static 'admin/img/models/delivery.svg' %}" alt="UPS Logo">
+      <p>A UPS Company since 2021, bringing you same-day delivery with all the reliability and excellence you've come to expect from Big Brown.</p>
+    </div> -->
+  </div>
+
+  <!-- Ship Anywhere Section -->
+  <div class="ship-anywhere-section">
+    <h2>Why SiyaTrans <br><span>Anywhere</span></h2>
+    
+  <!-- Reasons to Choose SiyaTrans Section -->
+  <section class="reasons-section">
+    <div class="reason">
+      <h3>Seamless Transport Optimization</h3>
+      <p>SiyaTrans revolutionizes transport management, seamlessly optimizing operations for swift deliveries and efficient route planning.</p>
+    </div>
+    <div class="reason">
+      <h3>Comprehensive Inventory Integration</h3>
+      <p>Experience unparalleled control over your inventory with SiyaTrans, integrating seamlessly across diverse locations to prevent shortages and excess stock.</p>
+    </div>
+    <div class="reason">
+      <h3>Unmatched Real-time Insights</h3>
+      <p>Unlock unparalleled visibility into your logistics with SiyaTrans, providing real-time tracking and reporting tools for informed, strategic decision-making.</p>
+    </div>
+    <!-- Add more reasons as needed -->
+  </section>
+  
+  </div>
+
+  <!-- Map Section -->
+  <div class="map-section" style="
+      position: relative;
+      width: 100%;
+      height: 900px; /* Adjust as needed */
+      background: url('{% static 'admin/img/map.jpg' %}') center center no-repeat;
+      background-size: cover;">
+    <div class="map-animation" style="
+        position: absolute;
+        top: 50%; /* Adjust based on actual map image */
+        left: 50%; /* Adjust based on actual map image */
+        transform: translate(-50%, -50%);
+        height: 100%;
+        width: 100%;
+        background: url('{% static 'C:\Users\Noura\Desktop\skipskid_20-04\skipskid\skipskid\static\why2.png' %}') no-repeat;
+        background-size: cover;
+        /* animation: travelPath 10s linear infinite; */
+      ">
+    </div>
+  </div>
+  <div class="delivery-network-section">
+    <div class="delivery-network-content">
+      <h2>Transforming Delivery Solutions</h2>
+      <div class="delivery-features">
+        <div class="feature-item">
+          <h3>Transparent Pricing Structure</h3>
+          <p>SiyaTrans offers transparent and competitive pricing, ensuring clarity and reliability in every transaction, without any hidden charges or surprises.</p>
+        </div>
+        <div class="feature-item">
+          <h3>24/7 Availability, 365 Days a Year</h3>
+          <p>Enjoy uninterrupted delivery services with SiyaTrans, available round-the-clock throughout the year. Say goodbye to restrictive pickup schedules and cutoffs encountered elsewhere.</p>
+        </div>
+        <div class="feature-item">
+          <h3>Unwavering Commitment to Customer Satisfaction</h3>
+          <p>At SiyaTrans, customer satisfaction is our top priority. We guarantee that each delivery meets and exceeds your expectations, ensuring your complete peace of mind.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+</div>
+
+
+
+<!-- Footer -->
+<footer class="footer">
+&copy; 2024 Your Shipping Platform. All rights reserved.
+</footer>
+
+
+</body>
+</html>
