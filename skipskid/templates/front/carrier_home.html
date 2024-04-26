@@ -1,0 +1,530 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carrier - Your Shipping Platform</title>
+    <style>
+
+/* Header and Navigation */
+.header-container {
+  background-color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0,0,0,.1);
+  position: fixed;
+  width: 100%;
+  z-index: 1000;
+  top: 0%;
+}
+
+.top-navbar {
+  background-color: rgb(172, 170, 170);
+}
+
+.navbar a {
+  text-decoration: none;
+  color: #333;
+  margin: 0 1rem;
+  font-weight: bold;
+}
+
+.top-navbar a {
+  color: green; 
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+}
+
+.navbar a {
+  text-decoration: none;
+  color: #333;
+  margin: 0 1rem;
+  font-weight: bold;
+}
+
+.navbar a:hover {
+  color: #f89d1e;
+}
+
+.logo img {
+  max-height: 50px; /* Adjust as needed */
+  width: auto;
+  margin-right: 2rem;
+}
+
+.nav-links, .auth-links {
+  display: flex;
+  align-items: center;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.get-quotes, .become-provider {
+  background-color: #FF8A65;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  margin: 0 0.5rem;
+  border-radius: 50px;
+  text-transform: uppercase;
+}
+
+.get-quotes:hover, .become-provider:hover {
+  background-color: #0056b3;
+  text-decoration: none;
+}
+
+.carrier-homepage {
+  padding: 2rem 0;
+  background: #f4f4f4;
+  text-align: center;
+}
+
+.carrier-homepage .container {
+  max-width: 1100px;
+  margin: auto;
+}
+
+.carrier-homepage h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.carrier-homepage .intro {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  color: #555;
+}
+
+
+.call-to-action h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.call-to-action p {
+  font-size: 1rem;
+  margin-bottom: 2rem;
+  color: #555;
+}
+
+.call-to-action button {
+  background-color: #00A4A6;
+  color: #FFFFFF;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 1rem;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.call-to-action button:hover {
+  background-color: #007B7D;
+}
+
+
+/* Carrier Section */
+.carrier-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #004A7C;
+    color: white;
+    padding: 90px;
+    margin-top: 90px;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    border: 1px solid black; 
+    border-radius: 50px;
+}
+
+.carrier-section .text-area {
+    width: 50%;
+}
+
+.text-area h1 {
+    margin-bottom: 20px;
+    font-size: 5rem;
+    font-weight: 900;
+    letter-spacing: 2px;
+    line-height: 98%;
+}
+
+.text-area p {
+  font-size: 24px;
+  margin-bottom: 40px;
+}
+
+.actions {
+  margin-bottom: 20px;
+  text-align: center;
+
+}
+
+.signup-btn {
+  background-color: #FF8A65;
+  color: white;
+  text-decoration: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  margin-right: 10px;
+  font-size: 2.0rem;
+}
+
+.signup-btn:hover, .search-btn:hover {
+  background-color: #f86235;
+}
+
+.image-area img {
+    margin-left: 62px;
+  max-width: 90%;
+}
+.image-area {
+    width: 750px;
+}
+
+/* Responsive design adjustments */
+@media (max-width: 768px) {
+  .carrier-section {
+    flex-direction: column;
+  }
+
+  .image-area img {
+    max-width: 100%;
+    margin-top: 30px;
+  }
+}
+
+.first-section {
+    width: 100%;
+    height: 750px;
+    padding: 100px 0;
+    background-color: #fff; /* Or any other color you prefer */
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    background-color: #FFF; /* Or any other color you prefer */
+    text-align: left;
+    color: #333;
+    padding: 4rem;
+    margin-top: 1rem;  
+}
+
+.first-section img {
+    object-fit: cover;
+    flex-shrink: 0; /* Prevents the image from shrinking */
+    width: auto; /* Adjust width as needed */
+    height: 100%; /* Full height of the section */
+    margin-right: 50px; 
+    border-radius: 50px;
+}
+
+.first-section-text {
+    flex-grow: 1;
+}
+
+.first-section .first-section-text h2 {
+    font-size: 4rem; /* Adjust the size as necessary */
+    color: #000; /* Color of the text */
+    margin-bottom: 0.5rem;
+    font-weight: bold; /* Make the font bold */
+    margin: 0;
+    padding: 0;
+    display: inline-block; /* To allow the span to change line height */
+    line-height: 1.2; /* Adjust line height to match your design */
+}
+
+.first-section-text p {
+    font-size: 1.4rem; /* Readable font size for the text */
+    line-height: 1.5; /* Adjust line height to match your design */
+    color: #333; /* Color of the text */
+    margin-bottom: 2rem; /* Adjust spacing as needed */
+    margin-top: 2rem;
+    
+}
+
+.first-section .first-section-text h2 span {
+    color: #ff4500; /* The color of the second part of the phrase */
+}
+
+.carrier-benefits {
+    display: grid;
+    justify-content: space-around;
+    align-items: flex-end;
+    position: relative;
+    gap: 40px;
+    margin: 236px 0;
+    
+}
+
+.carrier-benefits article {
+  width: 30%;
+  padding: 20px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  border-radius: 8px;
+  position: absolute;
+}
+
+.carrier-benefits article:nth-child(1) {
+  background-color: #ffadad;
+  left: 0;
+}
+
+.carrier-benefits article:nth-child(2) {
+  background-color: #ffd6a5;
+  top: -50px; /* Adjust as needed to overlap */
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2; /* Brings the middle box above the others */
+}
+
+.carrier-benefits article:nth-child(3) {
+  background-color: #caffbf;
+  right: 0;
+  top: 0; /* Align with the top edge of the second box */
+}
+
+.carrier-benefits h2 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.carrier-benefits p {
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+@media (max-width: 768px) {
+  .carrier-benefits {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .carrier-benefits article {
+    position: static;
+    transform: none;
+    margin-bottom: 30px;
+  }
+}
+
+/* Choice container styling */
+
+.choice-container {
+  text-align: center;
+  margin: 40px 0;
+  margin-bottom: 0px;
+  background-color: #f4f4f4;
+}
+
+.choice-container h1 {
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.choices {
+  display: flex;
+  justify-content: center;
+  gap: 50px;
+  margin-top: 4rem;
+  margin-left: 15%;
+  margin-right: 15%;
+
+}
+
+.choice {
+  flex-basis: calc(50% - 10px);
+  background: #FFFFFF;
+  border: 5px solid #00A4A6;
+  border-radius: 5px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease-in-out;
+  margin-bottom: 100px;
+  &:hover {
+    transform: scale(1.05);
+  }
+
+}
+
+.choice img {
+  width: 150px;
+  height: auto;
+  margin-bottom: 0px;
+}
+
+.choice h2 {
+  font-size: 2.0rem;
+  color: #333;
+  margin-bottom: 35px;
+}
+
+.choice p {
+  font-size: 1.2rem;
+  color: #666;
+  margin-bottom: 60px;
+  padding: 28px;
+}
+
+.choice button {
+  background-color: #00A4A6;
+  color: #FFFFFF;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 1rem;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.choice button:hover {
+  background-color: #007B7D;
+}
+
+@media (max-width: 768px) {
+  .choices {
+    flex-direction: column;
+  }
+
+  .choice {
+    flex-basis: 100%;
+  }
+}
+
+
+
+/* Footer styling */
+.footer {
+  background-color: #ACA9A8;
+  padding: 2rem;
+  text-align: center;
+}
+
+
+
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+<header class="header-container">
+    <!-- First Navbar -->
+  
+    <nav class="navbar main-navbar">
+      <!-- Your website logo -->
+      <a href="#" class="logo">
+        <img src="{% static 'C:\Users\Noura\Desktop\skipskid_20-04\skipskid\skipskid\static\front\img\site-header-logo.png' %}" alt=''  
+        />
+  </a>
+  <!-- Navigation Links -->
+  <div class="nav-links">
+  <a href="#">Why SilyaTrans</a>
+  <a href="#">How it works</a>
+  <a href="#">Shipper</a>
+  <a href="carrier_home.html">Carrier</a>
+  
+  </div>
+  <!-- Auth Links -->
+  <!-- <div class="auth-links">
+  <a href="{% url 'beforesignup' %}" >Sign up / Get Started -->
+    <!-- <form action="{% url 'beforesignup' %}" method="post">
+      {% csrf_token %}
+      <button type="submit"></button>
+  </form> -->
+  
+  </a>
+  <a href="#" class="become-provider">Sign up / Get Started</a>
+  
+  </div>
+  
+    </nav>
+  </header>
+
+    <div class="carrier-section">
+        <div class="text-area">
+          <h1>Making looking for transport jobs simple</h1>
+          <p>Get new transport jobs from clients across U.S.A.</p>
+          <div class="actions">
+            <a href="#" class="signup-btn">Sign up for free</a>
+          </div>
+        </div>
+        <div class="image-area">
+          <img src=" {% static 'admin/img/carrier_box.jpg' %}" alt="Carrier">
+        </div>
+      </div>
+      
+
+      <div class="first-section">
+        <img src="{% static 'admin/img/delivery-man2.jpg' %}" alt="" style="width: 550px; height: 550px;">
+        <div class="first-section-text">
+          <br>
+          <h2>Join Our Carrier Community</h2>
+          <p>As a dedicated carrier, your expertise is vital. Our platform connects you with a multitude of delivery opportunities across the nation, helping you to grow your business and reach new heights. Experience the difference with seamless technology and a support system dedicated to your success.</p>
+      </div></div>
+
+<!-- Carrier Section -->
+
+    <div class="carrier-benefits">
+      <article>
+        <h2>Reliable Payments</h2>
+        <p>
+          Get paid on time, every time. Our system ensures that your hard work is rewarded with prompt and reliable payments.
+        </p>
+      </article>
+      <article>
+        <h2>Flexible Scheduling</h2>
+        <p>
+          Enjoy the freedom to choose when and where you work. Our platform offers the flexibility you need to balance your professional and personal life.
+        </p>
+      </article>
+      <article>
+        <h2>Expansive Network</h2>
+        <p>
+          Gain access to a vast network of shipping opportunities. From local deliveries to long-haul jobs, find tasks that match your expertise and preferences.
+        </p>
+      </article>
+    </div>
+
+
+<div class="choice-container">
+    <h1>Ready to Drive With Us?</h1>
+    <p>
+        Sign up today and take the first step towards a more rewarding carrier journey. We’re here to support you every mile of the way.
+    </p>
+    <div class="choices">
+      <div class="choice">
+        <img src="{% static 'admin/img/carrier.png' %}" alt="Business">
+        <h2>Carrier</h2>
+        <p>Join our network of professional carriers. Expand your business by connecting with shippers nationwide.</p>
+        <button onclick="location.href='{% url 'beforesignup' %}'">Sign Up For Free</button>
+      </div>
+    </div>
+  </div>
+  
+  
+  </main>
+  
+  <!-- Footer -->
+  <footer class="footer">
+    &copy; 2024 Your Shipping Platform. All rights reserved.
+  </footer>
+  
+
+<!-- Footer -->
+<!-- Your footer here -->
+
+</body>
+</html>

@@ -4,16 +4,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Your Shipping Platform</title>
-
-<!-- {% load bootstrap5 %}
-{% bootstrap_css %}
-{% bootstrap_javascript %} -->
-
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 <style>
-   /* General resets */
-   * {
+    /* General resets */
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -215,7 +210,7 @@ body, html {
 
 /* Hero section styling with background image */
 .hero-section {
-  /* background: url('{% static "admin/img/BG.png" %}') center center no-repeat; */
+  background: url('{% static "admin/img/BG.png" %}') center center no-repeat;
   background-size: cover;
   padding: 0;
   margin-top: 1rem; /* Adjust the margin as per your design */
@@ -383,13 +378,32 @@ body, html {
     width: 100%;
     height: 750px;
     padding: 100px 0;
-    background-color: #e15f2d; /* Or any other color you prefer */
-    text-align: center; /* Center the text horizontally */
+    background-color: #fff; /* Or any other color you prefer */
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    background-color: #FFF; /* Or any other color you prefer */
+    text-align: left;
+    color: #333;
+    padding: 4rem;
+    margin-top: 1rem;    
 }
 
-.ship-anywhere-section h2 {
-    font-size: 48px; /* Adjust the size as necessary */
+.ship-anywhere-section img {
+    flex-shrink: 0; /* Prevents the image from shrinking */
+    width: auto; /* Adjust width as needed */
+    height: 100%; /* Full height of the section */
+    margin-right: 50px; 
+}
+
+.ship-anywhere-text {
+    flex-grow: 1;
+}
+
+.ship-anywhere-section .ship-anywhere-text h2 {
+    font-size: 5rem; /* Adjust the size as necessary */
     color: #000; /* Color of the text */
+    margin-bottom: 0.5rem;
     font-weight: bold; /* Make the font bold */
     margin: 0;
     padding: 0;
@@ -397,8 +411,17 @@ body, html {
     line-height: 1.2; /* Adjust line height to match your design */
 }
 
-.ship-anywhere-section h2 span {
-    color: #333; /* The color of the second part of the phrase */
+.ship-anywhere-text p {
+    font-size: 1.4rem; /* Readable font size for the text */
+    line-height: 1.5; /* Adjust line height to match your design */
+    color: #333; /* Color of the text */
+    margin-bottom: 2rem; /* Adjust spacing as needed */
+    margin-top: 2rem;
+    
+}
+
+.ship-anywhere-section .ship-anywhere-text h2 span {
+    color: #ff4500; /* The color of the second part of the phrase */
 }
 
 .header{
@@ -535,43 +558,119 @@ border-right: 5px solid #ff4500;
     transform: translate(-50%, -50%); /* Center the icon on its position */
 }
 
-/* Footer styling */
-.footer {
-  background-color: #f4f4f4;
-  padding: 2rem;
+
+.box {
+    border: 2px solid #0a0a0a;
+    padding: 28px;
+    width: 305px;
+    background-color: #ffffff6b;
+    margin-left: 10px;
+    top: 10px;
+    position: relative;
+    box-shadow: 0 5px 15px rgb(229 194 136 / 62%);
+}
+
+.box p {
+    color: black; /* Text color */
+    font-size: 31px;
+    font-weight: bold;
+    line-height: 1.2;
+    text-align: left;
+    margin-bottom: 10px;
+
+}
+
+/* Choice container styling */
+
+.choice-container {
+  text-align: center;
+  margin: 40px 0;
+}
+
+.choice-container h1 {
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 1rem;
   text-align: center;
 }
-/* Style for the Reasons to Choose SiyaTrans Section */
-/* Style for the Reasons to Choose SiyaTrans Section */
-.reasons-section {
+
+.choices {
   display: flex;
-  justify-content: space-between;
-  margin-top: 20px;
+  justify-content: center;
+  gap: 50px;
+  margin-top: 4rem;
+  margin-left: 15%;
+  margin-right: 15%;
+
 }
 
-/* Style for Individual Reason */
-.reason {
-  flex: 1;
-  margin-right: 20px;
-  background-color: var(--dx-g-indigo-vibrant-15);
-  color: white;
+.choice {
+  flex-basis: calc(50% - 10px);
+  background: #FFFFFF;
+  border: 5px solid #00A4A6;
+  border-radius: 5px;
   padding: 20px;
-  border-radius: var(--dx-g-card-border-radius);
-  box-shadow: var(--dx-g-box-shadow-sm);
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease-in-out;
+  margin-bottom: 100px;
+  &:hover {
+    transform: scale(1.05);
+  }
+
 }
 
-/* Style for Reason Title */
-.reason h3 {
-  font-size: 18px;
-  font-weight: bold;
-  margin-bottom: 10px;
+.choice img {
+  width: 150px;
+  height: auto;
+  margin-bottom: 0px;
 }
 
-/* Style for Reason Description */
-.reason p {
-  font-size: 16px;
-  line-height: 1.5;
-  color: white;
+.choice h2 {
+  font-size: 2.0rem;
+  color: #333;
+  margin-bottom: 35px;
+}
+
+.choice p {
+  font-size: 1.2rem;
+  color: #666;
+  margin-bottom: 60px;
+  padding: 28px;
+}
+
+.choice button {
+  background-color: #00A4A6;
+  color: #FFFFFF;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 1rem;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.choice button:hover {
+  background-color: #007B7D;
+}
+
+@media (max-width: 768px) {
+  .choices {
+    flex-direction: column;
+  }
+
+  .choice {
+    flex-basis: 100%;
+  }
+}
+
+
+
+/* Footer styling */
+.footer {
+  background-color: #ACA9A8;
+  padding: 2rem;
+  text-align: center;
 }
 
 
@@ -582,6 +681,7 @@ border-right: 5px solid #ff4500;
     width: calc(50% - 1rem);
   }
 }
+
 </style>
 </head>
 <body>
@@ -593,121 +693,142 @@ border-right: 5px solid #ff4500;
   <nav class="navbar main-navbar">
     <!-- Your website logo -->
     <a href="#" class="logo">
-      <img src="{% static 'admin/img/site-header-logo.png' %}" alt='' 
+      <img src="{% static 'C:\Users\Noura\Desktop\skipskid_20-04\skipskid\skipskid\static\front\img\site-header-logo.png' %}" alt=''  
       />
 </a>
 <!-- Navigation Links -->
 <div class="nav-links">
-<a href="C:\Users\Noura\Desktop\skipskid_20-04\skipskid\templates\why_silyatrans.html">Why SilyaTrans</a>
+<a href="#">Why SilyaTrans</a>
 <a href="#">How it works</a>
 <a href="#">Shipper</a>
-<a href="#">Carrier</a>
+<a href="carrier_home.html">Carrier</a>
 
 </div>
 <!-- Auth Links -->
 <div class="auth-links">
-<a href="{% url 'beforesignup' %}" class="become-provider">Sign up</a>
+<a href="{% url 'beforesignup' %}">Sign up / Get Started
+  <!-- <form action="{% url 'beforesignup' %}" method="post">
+    {% csrf_token %}
+    <button type="submit"></button>
+</form> -->
+
 </a>
-<a href="#" class="become-provider">Log in </a>
+<a href="#" class="become-provider">Become a Transport Provider</a>
+
 </div>
 
   </nav>
 </header>
+
 <!-- Main Content -->
 <main class="main-content">
-  <!-- Hero Section -->
-  <div class="hero-section">
-    <div class="container">
-      <div class="text">
-        <h3>WHY SILYATRANS?</h3>
-        <h1>Optimize Your Logistics Management Process</h1>
-        <p>SiyaTrans offers a comprehensive web platform for integrated transport and inventory management, providing seamless logistics solutions.</p>
-        <a href="https://www.silyatrans.com/sign-up-log-in" class="button teal">Get Started</a>
-      </div>
-      <!-- Placeholder for the right-side image -->
-      <div class="image">
-        <img src="{% static 'C:\Users\Noura\Desktop\skipskid_20-04\skipskid\skipskid\static\front\img\why.jpg' %}" alt="Delivery Person" style="width: auto; height: 500px;">
-      </div>
+<div class="hero-section" >
+  <div class="container">
+    <div class="text" >
+      <h3>DELIVER WITH SILYATRANS</h3>
+      <h1>Deliver happiness with just a few clicks</h1>
+      <p>Silyatrans is a delivery platform that ensures your packages reach their destination smoothly anywhere in the U.S.A</p>
+      <a href="https://www.roadie.com/sign-up-log-in" class="button teal">Get Started</a>
     </div>
-    <!-- Colored section at the bottom
-    <div class="section-color">
-      <img src="{% static 'admin/img/models/delivery.svg' %}" alt="UPS Logo">
-      <p>A UPS Company since 2021, bringing you same-day delivery with all the reliability and excellence you've come to expect from Big Brown.</p>
-    </div> -->
+    <!-- Placeholder for the right-side image -->
+    <div class="image">
+      <img src="{% static 'admin/img/delivery-man.png' %}" alt="Delivery Person" style="width: auto; height: 500px;">
+    </div>
   </div>
+  <!-- Colored section at the bottom -->
+  <div class="section-color">
+    <img src="{% static 'admin/img/models/delivery.svg' %}" alt="UPS Logo">
+    <p>A UPS Company since 2021, bringing you same-day delivery with all the reliability and excellence you've come to expect from Big Brown.</p>
+  </div>
+</div>
 
-  <!-- Ship Anywhere Section -->
-  <div class="ship-anywhere-section">
-    <h2>Why SiyaTrans <br><span>Anywhere</span></h2>
-    
-  <!-- Reasons to Choose SiyaTrans Section -->
-  <section class="reasons-section">
-    <div class="reason">
-      <h3>Seamless Transport Optimization</h3>
-      <p>SiyaTrans revolutionizes transport management, seamlessly optimizing operations for swift deliveries and efficient route planning.</p>
-    </div>
-    <div class="reason">
-      <h3>Comprehensive Inventory Integration</h3>
-      <p>Experience unparalleled control over your inventory with SiyaTrans, integrating seamlessly across diverse locations to prevent shortages and excess stock.</p>
-    </div>
-    <div class="reason">
-      <h3>Unmatched Real-time Insights</h3>
-      <p>Unlock unparalleled visibility into your logistics with SiyaTrans, providing real-time tracking and reporting tools for informed, strategic decision-making.</p>
-    </div>
-    <!-- Add more reasons as needed -->
-  </section>
-  
-  </div>
+<div class="ship-anywhere-section">
+  <img src="{% static 'admin/img/custom.png' %}" alt="Ship Anywhere" style="width: 550px; height: 550px;">
+  <div class="ship-anywhere-text">
+    <br>
+    <h2>Ship anything <br><span>anywhere</span></h2>
+    <p>Whether you're sending a care package or distributing products nationwide, our network ensures your items get where they need to go. Our seamless platform empowers you to move items across cities or states with ease and confidence. Experience the future of shipping today with SilyaTrans.</p>
+</div></div>
 
-  <!-- Map Section -->
-  <div class="map-section" style="
-      position: relative;
-      width: 100%;
-      height: 900px; /* Adjust as needed */
-      background: url('{% static 'admin/img/map.jpg' %}') center center no-repeat;
-      background-size: cover;">
-    <div class="map-animation" style="
-        position: absolute;
-        top: 50%; /* Adjust based on actual map image */
-        left: 50%; /* Adjust based on actual map image */
-        transform: translate(-50%, -50%);
-        height: 100%;
-        width: 100%;
-        background: url('{% static 'C:\Users\Noura\Desktop\skipskid_20-04\skipskid\skipskid\static\why2.png' %}') no-repeat;
-        background-size: cover;
-        /* animation: travelPath 10s linear infinite; */
-      ">
-    </div>
-  </div>
-  <div class="delivery-network-section">
-    <div class="delivery-network-content">
-      <h2>Transforming Delivery Solutions</h2>
-      <div class="delivery-features">
-        <div class="feature-item">
-          <h3>Transparent Pricing Structure</h3>
-          <p>SiyaTrans offers transparent and competitive pricing, ensuring clarity and reliability in every transaction, without any hidden charges or surprises.</p>
-        </div>
-        <div class="feature-item">
-          <h3>24/7 Availability, 365 Days a Year</h3>
-          <p>Enjoy uninterrupted delivery services with SiyaTrans, available round-the-clock throughout the year. Say goodbye to restrictive pickup schedules and cutoffs encountered elsewhere.</p>
-        </div>
-        <div class="feature-item">
-          <h3>Unwavering Commitment to Customer Satisfaction</h3>
-          <p>At SiyaTrans, customer satisfaction is our top priority. We guarantee that each delivery meets and exceeds your expectations, ensuring your complete peace of mind.</p>
-        </div>
+
+<div class="map-section" style="
+    position: relative;
+    width: 100%;
+    height: 900px; /* Adjust as needed */
+    background: url('{% static 'admin/img/map.jpg' %}') center center no-repeat;
+    background-size: cover;">
+<div class="box">
+  <p>A single delivery solution that serves the entire country</p>
+</div>
+
+ <span class="material-symbols-outlined location-symbol" style="top: 26%; left: 32%;">location_on</span>
+ <span class="material-symbols-outlined location-symbol" style="top: 50%; left: 60%;">location_on</span>
+ <span class="material-symbols-outlined location-symbol" style="top: 56%; left: 40%;">location_on</span>
+ <span class="material-symbols-outlined location-symbol" style="top: 40%; left: 50%;">location_on</span>
+  <span class="material-symbols-outlined location-symbol" style="top: 30%; left: 81%;">location_on</span>
+
+</div>
+
+<div class="delivery-network-section">
+  <div class="delivery-network-content">
+    <h2>Revolutionizing Delivery Services</h2>
+    <div class="delivery-features">
+      <div class="feature-item">
+        <h3>Transparent Pricing</h3>
+        <p>With clear and competitive pricing, you'll always know exactly what you're paying for, with no hidden fees or surprises.</p>
+      </div>
+      <div class="feature-item">
+        <h3>24/7/365 Availability</h3>
+        <p>Offer round-the-clock delivery to keep your supply chain running smoothly, without being limited by strict pickup schedules or cutoffs found in other solutions.</p>
+      </div>
+      <div class="feature-item">
+        <h3>Customer Satisfaction Guaranteed        </h3>
+        <p>Our focus on customer satisfaction ensures that every delivery meets your expectations, every time.</p>
+      </div>
+      <div class="feature-item">
+        <h3>Customized Solutions</h3>
+        <p>Tailor our delivery services to meet your specific requirements, whether you're an enterprise or an individual.Our delivery platform is designed to grow with your needs.</p>
+      </div>
+      <div class="feature-item">
+        <h3>Delivery Protection</h3>
+        <p>You’ll have peace of mind knowing with delivery protection from pickup to dropoff and every step in between.</p>
+      </div>
+      <div class="feature-item">
+        <h3>Real-time Communication</h3>
+        <p>Stay informed every step of the way with real-time updates and notifications on the status of your deliveries.</p>
       </div>
     </div>
+    <div class="delivery-network-cta">
+      <a href="#" class="get-started-button">Get Started</a>
+    </div>
   </div>
-  
+</div>
+
+<div class="choice-container">
+  <h1>Get Your Business Moving With the Right Account</h1>
+  <div class="choices">
+    <div class="choice">
+      <img src="{% static 'admin/img/shipper.png' %}" alt="Ship Now">
+      <h2>Shipper</h2>
+      <p>Designed for those who need reliable shipping solutions. Get your goods to their destination with efficiency and ease.</p>
+      <button onclick="location.href='{% url 'beforesignup' %}'">Sign Up For Free</button>
+    </div>
+    <div class="choice">
+      <img src="{% static 'admin/img/carrier.png' %}" alt="Business">
+      <h2>Carrier</h2>
+      <p>Join our network of professional carriers. Expand your business by connecting with shippers nationwide.</p>
+      <button onclick="location.href='{% url 'beforesignup' %}'">Sign Up For Free</button>
+    </div>
+  </div>
 </div>
 
 
+</main>
 
 <!-- Footer -->
 <footer class="footer">
-&copy; 2024 Your Shipping Platform. All rights reserved.
+  &copy; 2024 Your Shipping Platform. All rights reserved.
 </footer>
-
 
 </body>
 </html>
