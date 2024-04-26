@@ -37,7 +37,7 @@ urlpatterns = [
     path('carrier/logout/', views.logout, name='logout'),
     path('carrier/accountsettings/', views.accountsettings, name='accountsettings'),
     path('carrier/beforesignup/',views.beforesignup, name="beforesignup"),
-    path('carrier/shipping/', shipping_home, name='shipping_home'),
+    path('shipping/', shipping_home, name='shipping_home'),
     path('carrier/silyatrans/', why_silyatrans, name='why_trans'),
 
     path('reset_password', auth_views.PasswordResetView.as_view(), name= 'reset_password'),
@@ -45,7 +45,7 @@ urlpatterns = [
     path('reset_password_confirm/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(),name='password_reset_confirm'),
 
 
-    path('shipping/', shipping_home, name='shipping_home'),
+    
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
