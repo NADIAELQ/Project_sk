@@ -332,7 +332,7 @@ body, html {
                       <span class="user-menu-dialog-toggle-letter">
                         <!-- R -->
                         <!-- <strong>noura</strong> -->
-                        <strong>{{ user.username[0] }}</strong>
+                        <strong>{{ user.username|first|slice:":1" }}</strong>
 
                       </span></div>
                       <div class="text-3 mb-1">
@@ -362,7 +362,7 @@ body, html {
                     <a href="#" class="user-menu-item user-menu-item--signout">
                       <form id="logout-form" method="post" action="/admin/logout/">
                         <input type="hidden" name="csrfmiddlewaretoken" value="iEYJMsYed9vDzIZB4BxBZ8qbe6qTT4B57JExl55X8bdNfjOUjXCbs7rWA6gSqz4k">
-                        <button type="submit"><a href="{% url 'deconnexion' %}">Log out</a></button>
+                        <button type="submit"><a href="{% url 'login' %}">Log out</a></button>
                     </form>
                     </a>
                   </li>
