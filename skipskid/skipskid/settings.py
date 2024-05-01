@@ -113,7 +113,8 @@ ROOT_URLCONF = 'skipskid.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'DIRS': [os.path.join(BASE_DIR, 'templates'),
+                 'C:\\Users\\Noura\\Desktop\\skipskid_20-04\\skipskid\\templates\\front'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -206,7 +207,9 @@ env = environ.Env()
 environ.Env.read_env()
 
 #Security Warning: keep the secret key used in production secret
-# SECRET_KEY = env('SECRET_KEY')
+# SECRET_KEY = env('SECRET_KEY')# Security settings
+# CSRF_COOKIE_SECURE = True
+# CSRF_COOKIE_HTTPONLY = True
 
 
 # AUTH_USER_MODEL = "carrier.carrier"

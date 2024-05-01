@@ -22,7 +22,7 @@ from carrier import views
 
 from django.contrib.auth import views as auth_views
 
-from skipskid.views import shipping_home, carrier_home
+from skipskid.views import shipping_home, carrier_home, why_silyatrans 
 
 admin.site.enable_nav_sidebar = False
 
@@ -36,7 +36,6 @@ urlpatterns = [
     path('carrier/logout/', views.logout, name='logout'),
     path('carrier/accountsettings/', views.accountsettings, name='accountsettings'),
     path('carrier/beforesignup/',views.beforesignup, name="beforesignup"),
-    path('carrier/shipping/', shipping_home, name='shipping_home'),
 
     path('reset_password', auth_views.PasswordResetView.as_view(), name= 'reset_password'),
     path('reset_password_done', auth_views.PasswordResetDoneView.as_view(template_name="registration/password_reset_done.html"), name='password_reset_done'),
@@ -44,7 +43,9 @@ urlpatterns = [
 
 
     path('shipping/', shipping_home, name='shipping_home'),
-    path('shipping/carrier/', carrier_home, name='carrier_home')
+    path('shipping/carrier/', carrier_home, name='carrier_home'),
+    path('carrier/silyatrans/', why_silyatrans, name='why_trans'),
+
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
