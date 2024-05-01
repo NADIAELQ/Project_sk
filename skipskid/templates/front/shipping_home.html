@@ -5,7 +5,17 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Your Shipping Platform</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+  
+{% load bootstrap5 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+<link 
+rel="stylesheet" 
+href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+href="{% static 'customer/css/base.css' %}"
+href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
 <style>
     /* General resets */
 * {
@@ -693,19 +703,19 @@ border-right: 5px solid #ff4500;
   <nav class="navbar main-navbar">
     <!-- Your website logo -->
     <a href="#" class="logo">
-      <img src="{% static 'C:\Users\Noura\Desktop\skipskid_20-04\skipskid\skipskid\static\front\img\site-header-logo.png' %}" alt=''  
-      />
+      <img src="{% static 'admin/img/site-header-logo.png' %}" alt=''   />
 </a>
 <!-- Navigation Links -->
 <div class="nav-links">
 <a href="#">Why SilyaTrans</a>
 <a href="#">How it works</a>
 <a href="#">Shipper</a>
-<a href="carrier_home.html">Carrier</a>
+<a href="{% url 'carrier_home' %}">Carrier</a>
 
 </div>
 <!-- Auth Links -->
 <div class="auth-links">
+
 <a href="{% url 'beforesignup' %}">Sign up / Get Started
   <!-- <form action="{% url 'beforesignup' %}" method="post">
     {% csrf_token %}
@@ -713,7 +723,10 @@ border-right: 5px solid #ff4500;
 </form> -->
 
 </a>
-<a href="#" class="become-provider">Become a Transport Provider</a>
+<!-- <a href="{% url 'beforesignup' %}" class="become-provider">Sign up / Get Started</a> -->
+
+<a href="{% url 'beforesignup' %}" class="btn button-primary">Sign up / Get Started</a>
+
 
 </div>
 
@@ -832,3 +845,4 @@ border-right: 5px solid #ff4500;
 
 </body>
 </html>
+

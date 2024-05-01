@@ -4,8 +4,7 @@ from django.utils.translation import gettext_lazy as _
 
 from address.models import AbstractAddress
 from equipment.models import VehicleType
-from Business.models import Business
-from Individual.models import Individual
+from shipper.models import Shipper, Business, Individual
 from django.shortcuts import get_object_or_404
 
 from . import exceptions
@@ -14,15 +13,15 @@ from .signals import delivery_status_changed
 
 
 # Create your models here.
-Shipper=[
-    ('Individual','Individual'),
-    ('Business','Business')
-]
+# Shipper=[
+#     ('Individual','Individual'),
+#     ('Business','Business')
+# ]
 
-class Shipper(models.Model):
-    name = models.CharField(max_length=256, null=False, blank=False)
+# class Shipper(models.Model):
+#     name = models.CharField(max_length=256, null=False, blank=False)
 
-    user_type = models.CharField(max_length=32, choices=Shipper)
+#     user_type = models.CharField(max_length=32, choices=Shipper)
 
 class DeliveryAddress(AbstractAddress):
 
@@ -88,6 +87,10 @@ class Delivery(models.Model):
     number = models.CharField(_("Delivery ID"), max_length=100, db_index=True, unique=True)
     date_created = models.DateTimeField(auto_now_add=True, db_index=True)
 
+    shipper_business = models.ForeignKey(Business, on_delete=models.SET_NULL, null=True, blank=True, related_name='business_deliveries', verbose_name=_("Business Shipper"))
+    shipper_individual = models.ForeignKey(Individual, on_delete=models.SET_NULL, null=True, blank=True, related_name='individual_deliveries', verbose_name=_("Individual Shipper"))
+
+
     ACTIVE = "Active"
     ASSIGNED = "Assigned"
     ACCEPTED = "Accepted"
@@ -123,6 +126,12 @@ class Delivery(models.Model):
     }
 
     active = ActiveDeliveryManager()
+
+    def get_shipper_type(self):
+        if self.shipper_business:
+            return "Business"
+        elif self.shipper_individual:
+            return "Individual"
 
     @classmethod
     def all_statuses(cls):

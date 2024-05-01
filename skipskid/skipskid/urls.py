@@ -19,11 +19,12 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from carrier import views
-from .views import shipping_home
 
 from django.contrib.auth import views as auth_views
 
-from skipskid.views import shipping_home, why_silyatrans
+
+from skipskid.views import shipping_home, carrier_home, why_silyatrans
+
 
 admin.site.enable_nav_sidebar = False
 
@@ -44,8 +45,9 @@ urlpatterns = [
     path('reset_password_done', auth_views.PasswordResetDoneView.as_view(template_name="registration/password_reset_done.html"), name='password_reset_done'),
     path('reset_password_confirm/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(),name='password_reset_confirm'),
 
+    path('shipping/', shipping_home, name='shipping_home'),
+    path('shipping/carrier/', carrier_home, name='carrier_home')
 
-    
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

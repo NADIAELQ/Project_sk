@@ -45,15 +45,16 @@ INSTALLED_APPS = [
     "equipment",
     "address",
     "carrier",
-    # "shipper",
-    "Business",
-    "Individual",
+    "shipper",
+    # "Business",
+    # "Individual",
     "delivery",
     "communication",
     # "shipperType",
 
     "ckeditor",
     "debug_toolbar",
+    'bootstrap5',
 ]
 
 MIDDLEWARE = [
@@ -87,13 +88,13 @@ ADMIN_REORDER = (
         )
     },
 	{
-		'app': 'Business',
-        'app': 'Individual',
+		'app': 'shipper',
 
 		'label': "Shippers",
 		'models': (
-            'Business.Business',
-            'Individual.Individual'
+            'shipper.Shipper',
+            'shipper.Individual',
+            'shipper.Business',
         )
     },
 	{
