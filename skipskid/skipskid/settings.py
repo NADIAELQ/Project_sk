@@ -206,7 +206,9 @@ env = environ.Env()
 environ.Env.read_env()
 
 #Security Warning: keep the secret key used in production secret
-# SECRET_KEY = env('SECRET_KEY')
+# SECRET_KEY = env('SECRET_KEY')# Security settings
+# CSRF_COOKIE_SECURE = True
+# CSRF_COOKIE_HTTPONLY = True
 
 
 # AUTH_USER_MODEL = "carrier.carrier"
