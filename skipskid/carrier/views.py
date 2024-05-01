@@ -59,6 +59,3 @@ def accountsettings(request):
 
     return render(request, 'accountsettings.html', context)
 
-
-def homepage(request):
-    return render(request, 'homepage.html')

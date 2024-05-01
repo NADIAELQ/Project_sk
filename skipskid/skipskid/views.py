@@ -7,3 +7,7 @@ def shipping_home(request):
 def carrier_home(request):
     context = {}
     return render(request, 'carrier_home.html', context)
+
+def why_silyatrans(request):
+    return render(request, 'why_silyatrans.html')
+
