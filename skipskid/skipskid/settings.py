@@ -136,9 +136,9 @@ WSGI_APPLICATION = 'skipskid.wsgi.application'
 DATABASES = {
     'default': {
 		'ENGINE': 'django.db.backends.postgresql_psycopg2',
-		'NAME': 'skipskid3',
-		'USER': 'noura',
-		'PASSWORD': 'noura12',
+		'NAME': 'skipskid4',
+		'USER': 'nadia',
+		'PASSWORD': 'nadia',
 		'HOST': 'localhost',
 		'PORT': '5432',
     }

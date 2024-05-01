@@ -10,4 +10,3 @@ def carrier_home(request):
 
 def why_silyatrans(request):
     return render(request, 'why_silyatrans.html')
-
