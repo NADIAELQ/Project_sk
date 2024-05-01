@@ -1,5 +1,7 @@
 from django.contrib import admin
-from .models import Business, Individual, BusinessAddress, IndividualAddress, BusinessTypeOfIndustry, IndividualPreferredCarrier, ShipperEquipment, IndividualDelivery
+from django import forms
+from .models import Shipper, Business, Individual, BusinessAddress, IndividualAddress, TypeOfIndustry, TypeOfIndustry
+                #  IndividualPreferredCarrier, ShipperEquipment, IndividualDelivery
 from django.utils.translation import gettext_lazy as _
 
 
@@ -43,8 +45,8 @@ class IndividualAddressInline(admin.StackedInline):
     def has_delete_permission(self, request, obj=None):
         return request.user.is_superuser
 
-class BusinessTypeOfIndustryInline(admin.TabularInline):
-    model = BusinessTypeOfIndustry
+class TypeOfIndustryInline(admin.TabularInline):
+    model = TypeOfIndustry
     verbose_name = "Typeofindustry"
     icon = "factory"
     extra = 0
@@ -60,322 +62,185 @@ class BusinessTypeOfIndustryInline(admin.TabularInline):
     def has_delete_permission(self, request, obj=None):
         return request.user.is_superuser
     
-class PreferredCarrierInline(admin.StackedInline):
-    model = IndividualPreferredCarrier
-    verbose_name = "PreferredCarrier"
-    icon = "PreferredCarrier"
-    extra = 0
-    """
-    no need for has_add_permission because of default_permissions set to False
-    for all users
-    """
-
-    def has_change_permission(self, request, obj=None):
-        return request.user.is_superuser
-
-    def has_delete_permission(self, request, obj=None):
-        return request.user.is_superuser
-    
-class IndividualDeliveryInline(admin.StackedInline):
-    model = IndividualDelivery
-    verbose_name = "IndividualDelivery"
-    icon = "IndividualDelivery"
-    extra = 0
-    """
-    no need for has_add_permission because of default_permissions set to False
-    for all users
-    """
-
-    def has_change_permission(self, request, obj=None):
-        return request.user.is_superuser
-
-    def has_delete_permission(self, request, obj=None):
-        return request.user.is_superuser
-
-class ShipperEquipmentInline(admin.StackedInline):
-    model = ShipperEquipment
-    verbose_name = "ShipperEquipment"
-    icon = "Forklift"
-    extra = 0
-    """
-    no need for has_add_permission because of default_permissions set to False
-    for all users
-    """
-
-    def has_change_permission(self, request, obj=None):
-        return request.user.is_superuser
-
-    def has_delete_permission(self, request, obj=None):
-        return request.user.is_superuser
-
-
-# @admin.register(Business)
-class BusinessAdmin(admin.ModelAdmin):
-
-    search_fields = ('business_name', 'contact_person', 'business_phone')
-    list_filter = ("address__postcode", "address__state", "Type_of_industries__TypeOfIndustry", "equipments__type")
-
-    list_display = ("business_name", "contact_person","business_email", "business_phone", "reference", "website", "has_loading_dock", "has_forklift", "has_ramp", "display_image")
-    fieldsets = [
-        (
-            None,
-            {
-                "fields": [("business_name", "contact_person"),("business_email", "website"), "image"],
-            },
-        ),
-    ]
-    radio_fields = {"has_loading_dock": admin.HORIZONTAL, "has_forklift": admin.HORIZONTAL, "has_ramp": admin.HORIZONTAL}
-    readonly_fields = ("reference",)
-
-    @admin.display(description=_("Address"))
-    def get_address(self, instance, **kwargs):
-        return instance.address.summary if instance.address else ""
-    
-    @admin.display(description=_("Image"))
-    def display_image(self, instance):
-        return instance.image.url if instance.image else "No image"
-    display_image.short_description = "Image"
-
-    def get_queryset(self, request):
-        return super().get_queryset(request).prefetch_related("equipments", "Type_of_industries__TypeOfIndustry", "address")
-
-    def has_add_permission(self, request):
-        return True #False
-
-    def has_change_permission(self, request, obj=None):
-        return request.user.is_superuser
-
-    def has_delete_permission(self, request, obj=None):
-        return request.user.is_superuser
-
-    inlines = [BusinessAddressInline, BusinessTypeOfIndustryInline, ShipperEquipmentInline]
-
-
-# @admin.register(Individual)
-class IndividualAdmin(admin.ModelAdmin):
-
-    search_fields = ('first_name', 'email', 'phone')
-    list_filter = ("address__postcode", "address__state", "preferred_carriers__carrier")
-
-    list_display = ("first_name", "email", "phone", "zip_code", "get_address", "reference", "easy_access_to_loading", "parking_available")
-    fieldsets = [
-        (
-            None,
-            {
-                "fields": [("first_name", "email"), ("phone", "zip_code"), "get_address"],
-            },
-        ),
-    ]
-    radio_fields = {"easy_access_to_loading": admin.HORIZONTAL, "parking_available": admin.HORIZONTAL}
-    readonly_fields = ("reference",)
-
-    @admin.display(description=_("Address"))
-    def get_address(self, instance, **kwargs):
-        return instance.address.summary
-    
-    def get_queryset(self, request):
-        return super().get_queryset(request).prefetch_related("preferred_carriers", "address")
-
-    def has_add_permission(self, request):
-        return True #False
-
-    def has_change_permission(self, request, obj=None):
-        return request.user.is_superuser
-
-    def has_delete_permission(self, request, obj=None):
-        return request.user.is_superuser
-
-    inlines = [IndividualAddressInline, PreferredCarrierInline, IndividualDeliveryInline]
-
-
-
-admin.site.register(Business)
-admin.site.register(Individual)
-
-# admin.site.register(PreferredCarrier, PreferredCarrierAdmin)
-# admin.site.register(IndividualDelivery, IndividualDeliveryAdmin)
-# admin.site.register(Business, BusinessAdmin)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# class PastDeliveryAdmin(admin.ModelAdmin):
-#     list_display = ['get_business_name', 'delivery_date']
-#     search_fields = ['shipper__business_name', 'delivery_date']
-
-#     def get_business_name(self, obj):
-#         return obj.shipper.business_name
-
-#     get_business_name.admin_order_field = 'shipper__business_name'
-
-# class ShipperEquipmentAdmin(admin.ModelAdmin):
-#     list_display = ['business_name', 'type', 'number']
-#     search_fields = ['shipper__business_name', 'type__name']
-
-
-# admin.site.register(PastDelivery, PastDeliveryAdmin)
-#admin.site.register(ShipperEquipmentAdmin, ShipperEquipmentAdmin)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# from django.contrib import admin
-# from shipper.models.individual import Individual, PreferredCarrier, IndividualDelivery
-# from shipper.models.business import Business, PastDelivery
-
-# class IndividualAdmin(admin.ModelAdmin):
-#     list_display = ['first_name', 'home_zip_code', 'email', 'phone', 'parking_available', 'easy_access_to_loading']
-#     search_fields = ['first_name', 'home_zip_code', 'email', 'phone']
-
-# class PreferredCarrierAdmin(admin.ModelAdmin):
-#     list_display = ['individual', 'carrier']
-#     search_fields = ['individual__first_name', 'carrier__name']
-
-# class IndividualDeliveryAdmin(admin.ModelAdmin):
-#     list_display = ['individual', 'origin', 'destination', 'status', 'pickup_date', 'delivery_date', 'assigned_carrier', 'offers']
-#     search_fields = ['individual__first_name', 'origin', 'destination']
-
-# class BusinessAdmin(admin.ModelAdmin):
-#     list_display = ['business_name', 'address', 'type_of_industry', 'contact_person', 'business_email', 'business_phone', 'website']
-#     search_fields = ['business_name',  'contact_person', 'business_email', 'business_phone']
-
-# class PastDeliveryAdmin(admin.ModelAdmin):
-#     list_display = ['get_business_name', 'delivery_date']
-#     search_fields = ['shipper__business_name', 'delivery_date']
-
-#     def get_business_name(self, obj):
-#         return obj.shipper.business_name
-
-#     get_business_name.admin_order_field = 'shipper__business_name'
-
-# #a modifier
-# class ShipperEquipmentAdmin(admin.ModelAdmin):
-#     list_display = ['business_name', 'type', 'number']
-#     search_fields = ['shipper__business_name', 'type__name']
-
-# admin.site.register(Individual, IndividualAdmin)
-# admin.site.register(PreferredCarrier, PreferredCarrierAdmin)
-# admin.site.register(IndividualDelivery, IndividualDeliveryAdmin)
-# admin.site.register(Business, BusinessAdmin)
-# admin.site.register(PastDelivery, PastDeliveryAdmin)
-
-
-
-
-
-
-# admin.site.register(ShipperEquipmentAdmin, ShipperEquipmentAdmin)
-
-
-# from django.contrib import admin
-# from django.utils.translation import gettext_lazy as _
-# from .models import Shipper, PastDelivery
-
-# from .models import Shipper, PastDelivery, ShipperEquipment
-
-# @admin.register(Shipper)
-# class ShipperAdmin(admin.ModelAdmin):
-#     list_display = ["business_name", "type_of_industry", "contact_person", "business_email", "business_phone", "get_equipment_type"]
-#     search_fields = ["business_name", "type_of_industry", "contact_person", "business_email"]
-#     ordering = ["business_name"]
-
-#     @admin.display(description=_("Address"))
-#     def get_address(self, instance, **kwargs):
-#         return instance.address.summary
-
-#     @admin.display(description=_("Equipment Type"))
-#     def get_equipment_type(self, instance):
-#         # Assuming a Shipper can have multiple equipments, you might want to concatenate or format the types
-#         equipment_types = instance.equipments.all().values_list('type__name', flat=True)
-#         return ", ".join(equipment_types)
-
-
-#     def get_queryset(self, request):
-#         return super().get_queryset(request).prefetch_related("equipments")
-
+# class PreferredCarrierInline(admin.StackedInline):
+#     model = IndividualPreferredCarrier
+#     verbose_name = "PreferredCarrier"
+#     icon = "PreferredCarrier"
+#     extra = 0
 #     """
 #     no need for has_add_permission because of default_permissions set to False
 #     for all users
 #     """
 
-#     def has_add_permission(self, request):
-#         return True
-
 #     def has_change_permission(self, request, obj=None):
-#         return True
+#         return request.user.is_superuser
 
 #     def has_delete_permission(self, request, obj=None):
-#         return True
-
-# @admin.register(PastDelivery)
-# class PastDeliveryAdmin(admin.ModelAdmin):
-#     list_display = ["shipper", "delivery_date"]
-#     search_fields = ["shipper__business_name"]
-#     ordering = ["-delivery_date"]
-
-#     def has_add_permission(self, request):
-#         return True
-
-#     def has_change_permission(self, request, obj=None):
-#         return True
-
-#     def has_delete_permission(self, request, obj=None):
-#         return True
-
-
-# class ShipperEquipmentInline(admin.TabularInline):
-#     model = ShipperEquipment
-#     verbose_name = "Equipment"
+#         return request.user.is_superuser
+    
+# class IndividualDeliveryInline(admin.StackedInline):
+#     model = IndividualDelivery
+#     verbose_name = "IndividualDelivery"
+#     icon = "IndividualDelivery"
 #     extra = 0
+#     """
+#     no need for has_add_permission because of default_permissions set to False
+#     for all users
+#     """
+
+#     def has_change_permission(self, request, obj=None):
+#         return request.user.is_superuser
+
+#     def has_delete_permission(self, request, obj=None):
+#         return request.user.is_superuser
+
+# class ShipperEquipmentInline(admin.StackedInline):
+#     model = ShipperEquipment
+#     verbose_name = "ShipperEquipment"
+#     icon = "Forklift"
+#     extra = 0
+#     """
+#     no need for has_add_permission because of default_permissions set to False
+#     for all users
+#     """
+
+#     def has_change_permission(self, request, obj=None):
+#         return request.user.is_superuser
+
+#     def has_delete_permission(self, request, obj=None):
+#         return request.user.is_superuser
+
+
+# @admin.register(Business)
+class BusinessInline(admin.StackedInline):
+# class BusinessAdmin(admin.ModelAdmin):
+    model = Business
+    can_delete = False
+    verbose_name_plural = 'Business'
+    fk_name = 'shipper'
+    fieldsets = (
+        ('Basic Information', {
+            'fields': ('type_of_industry', 'contact_person')
+        }),
+        ('Website and Media', {
+            'fields': ('website', 'image')
+        }),
+        ('Facilities', {
+            'fields': ('has_loading_dock', 'has_forklift', 'has_ramp')
+        }),
+    )
+
+
+class IndividualInline(admin.StackedInline):
+    model = Individual
+    can_delete = False
+    verbose_name_plural = 'Individual'
+    fk_name = 'shipper'
+    fieldsets = (
+        ('Accessibility', {
+            'fields': ('parking_available', 'easy_access_to_loading')
+        }),
+    )
+
+
+
+
+# admin.site.register(PreferredCarrier, PreferredCarrierAdmin)
+# admin.site.register(IndividualDelivery, IndividualDeliveryAdmin)
+# admin.site.register(Business, BusinessAdmin)
+
+class ShipperAdminForm(forms.ModelForm):
+    class Meta:
+        model = Shipper
+        fields = '__all__'  
+
+    # def __init__(self, *args, **kwargs):
+    #     super(ShipperAdminForm, self).__init__(*args, **kwargs)
+    #     instance = kwargs.get('instance')
+    #     if instance:
+    #         if instance.type == Shipper.BUSINESS:
+    #             self.fields['business_specific_field'] = forms.CharField(required=False)
+    #         elif instance.type == Shipper.INDIVIDUAL:
+    #             self.fields['individual_specific_field'] = forms.CharField(required=False)
+
+# @admin.register(Shipper)
+class ShipperAdmin(admin.ModelAdmin):
+    # exclude = ('user',)
+    list_display = ['name', 'email_address', 'phone_number', 'shipper_type_display']
+    search_fields = ['name', 'email_address']
+    list_filter = ['type']
+    # inlines = [BusinessInline, IndividualInline]
+    inlines = []
+    form = ShipperAdminForm
+
+    def shipper_type_display(self, obj):
+        return "Business" if obj.type == 'B' else "Individual"
+    shipper_type_display.short_description = "Type of Shipper"
+
+    # def shipper_type_display(self, obj):
+    #     return "Business" if obj.type == Shipper.BUSINESS else "Individual"
+    # shipper_type_display.short_description = "Type of Shipper"
+
+    # def get_form(self, request, obj=None, **kwargs):
+    #     Form = super(ShipperAdmin, self).get_form(request, obj, **kwargs)
+    #     if obj:
+    #         if obj.type == Shipper.BUSINESS:
+    #             Form.base_fields['business_specific_field'] = forms.CharField(required=False)
+    #         elif obj.type == Shipper.INDIVIDUAL:
+    #             Form.base_fields['individual_specific_field'] = forms.CharField(required=False)
+    #     return Form
+
+    # def get_inline_instances(self, request, obj=None):
+    #     inline_instances = []
+    #     if obj is None:
+    #         return inline_instances
+    #     if obj.type == Shipper.BUSINESS:
+    #         inline_instances.append(BusinessInline(self.model, self.admin_site))
+    #     elif obj.type == Shipper.INDIVIDUAL:
+    #         inline_instances.append(IndividualInline(self.model, self.admin_site))
+    #     return inline_instances
+
+    def get_form(self, request, obj=None, change=False, **kwargs):
+        form = super().get_form(request, obj, change, **kwargs)
+        # if obj:
+        #     if obj.type == 'B':
+        #         self.inlines = [BusinessInline, BusinessAddressInline]
+        #     elif obj.type == 'I':
+        #         self.inlines = [IndividualInline, IndividualAddressInline]
+        self.inlines = [BusinessInline, BusinessAddressInline] if obj and obj.type == 'B' else [IndividualInline, IndividualAddressInline]
+        return form
+
+
+    def get_inline_instances(self, request, obj=None):
+        inline_instances = []
+        if obj:
+            if obj.type == 'B':
+                inline_instances.extend([inline(self.model, self.admin_site) for inline in [BusinessInline, BusinessAddressInline]])
+            elif obj.type == 'I':
+                inline_instances.extend([inline(self.model, self.admin_site) for inline in [IndividualInline, IndividualAddressInline]])
+
+        return inline_instances
     
+    def save_model(self, request, obj, form, change):
+        if not obj.pk:  # If this is a new object, there is no user yet
+            # Create or select a user here
+            # Example: obj.user = User.objects.create(...)
+            pass
+        super().save_model(request, obj, form, change)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+admin.site.register(Shipper, ShipperAdmin)
     
-# from django.contrib import admin
-
-# from .models import Shipper
-
-# # Register your models here.
+admin.site.register(Business)
+admin.site.register(Individual)
 
 
-# # admin.site.register(Shipper)
+
+
+
+
+
+
+
+
+
+

@@ -1,275 +1,189 @@
-# from django.db import models
-# from django.contrib import admin
-# from django.core.validators import EMPTY_VALUES, MinValueValidator
-# from django.utils.translation import gettext_lazy as _
-
-# from SkipSkid.skipskid.address.models import AbstractAddress
-# from carrier.models import CarrierAddress
-
-
-
-# # Create your models here.
-
-
-# class Shipper(models.Model):
-
-#     business_name = models.CharField(_("Business Name"), max_length=255, db_index=True)
-# #     type_of_industry = models.CharField(_("Type of Industry"), max_length=255, null=True, blank=True)
-# #     contact_person = models.CharField(_("Contact Person"), max_length=255, db_index=True)
-# #     business_email = models.EmailField(_("Business Email"), max_length=255, db_index=True)
-# #     business_phone = models.CharField(_("Business Phone"), max_length=30, null=True, blank=True)
-# #     website = models.URLField(_("Website"), blank=True, null=True)
-# #     sequence = models.PositiveSmallIntegerField(unique=True, editable=False, db_index=True)
-
-# #     def save(self, **kwargs):
-# #         if self.sequence in EMPTY_VALUES:
-# #             self.sequence = self._get_next_sequence()
-# #         return super().save(**kwargs)
-
-# #     def _get_next_sequence(self):
-# #         last_sequence = self.__class__.objects.aggregate(models.Max('sequence'))['sequence__max'] or 1000
-# #         return last_sequence + 1
-
-# #     def __str__(self):
-# #         return self.business_name
-    
-# #     @property
-# #     @admin.display(description=_("Reference"))
-# #     def reference(self):
-# #         return "B%s" % (self.sequence or self._get_next_sequence())
-    
-# #      # Checkboxes
-# #     has_loading_dock = models.BooleanField(_("Loading Dock"), choices=((False, _("No")), (True, _("Yes"))), default=False)
-# #     has_forklift = models.BooleanField(_("Forklift"), choices=((False, _("No")), (True, _("Yes"))), default=False)
-# #     has_ramp = models.BooleanField(_("Ramp"), choices=((False, _("No")), (True, _("Yes"))), default=False)
-
-   
-# #     class Meta:
-# #         verbose_name = _("Business (Shipper)")
-# #         verbose_name_plural = _("Businesses (Shippers)")
-
-
-# # class ShipperAddress (AbstractAddress):
-
-# #     business = models.OneToOneField(Shipper, on_delete=models.CASCADE, null=True, blank=True, related_name="address", verbose_name=_("Business"))
-
-# #     class Meta:
-# #         default_permissions = ["view", "change", "delete"]
-# #         verbose_name = _("Business's address")
-
-# # class TypeOfIndustry(models.Model):
-
-# #     name = models.CharField(_("Name"), max_length=200, unique=True)
-
-# #     def __str__(self):
-# #         return self.name
-
-# #     class Meta:
-# #         verbose_name = _("Type of industry")
-# #         # verbose_name_plural = _("Types of")
-
-# # class BusinessTypeOfIndustry(models.Model):
-
-# #     business = models.ForeignKey(Shipper, on_delete=models.CASCADE, related_name="Type_of_industries", verbose_name=_("Business"))
-# #     TypeOfIndustry = models.ForeignKey(TypeOfIndustry, on_delete=models.CASCADE, verbose_name=_("Type of industry"))
-
-# #     class Meta:
-# #         unique_together = ['business', 'TypeOfIndustry']
-# #         verbose_name = _("Business type of industry")
-# #         # verbose_name_plural = _("Business type of industry")
-
 from django.db import models
 from django.contrib import admin
 from django.core.validators import EMPTY_VALUES, MinValueValidator
-from django.utils.translation import gettext_lazy as _
+from django.core.mail import send_mail
+from django.utils import timezone
+from django.template.loader import render_to_string
+from django.utils.html import strip_tags
 
+from django.contrib.auth.models import User
 from address.models import AbstractAddress
 from carrier.models import Carrier
 
-class Business(models.Model):
-    business_name = models.CharField(_("Business Name"), max_length=255, db_index=True)
-    # type_of_industry = models.CharField(_("Type of Industry"), max_length=255, null=True, blank=True)
-    contact_person = models.CharField(_("Contact Person"), max_length=255, db_index=True)
-    business_email = models.EmailField(_("Business Email"), max_length=255, db_index=True)
-    business_phone = models.CharField(_("Business Phone"), max_length=30, null=True, blank=True)
-    website = models.URLField(_("Website"), blank=True, null=True)
-    image = models.ImageField(upload_to='images/', null=True, blank=True)
-    sequence = models.PositiveSmallIntegerField(unique=True, editable=False, db_index=True)
-
-    def save(self, **kwargs):
-        if self.sequence in EMPTY_VALUES:
-            self.sequence = self._get_next_sequence()
-        return super().save(**kwargs)
- 
-    def _get_next_sequence(self):
-        last_sequence = self.__class__.objects.aggregate(models.Max('sequence'))['sequence__max'] or 1000
-        return last_sequence + 1
-
-    def __str__(self):
-        return self.business_name
-
-    @property
-    @admin.display(description=_("Reference"))
-    def reference(self):
-        return "B%s" % (self.sequence or self._get_next_sequence())
-    
-    # Checkboxes
-    has_loading_dock = models.BooleanField(_("Loading Dock"), choices=((False, _("No")), (True, _("Yes"))), default=False)
-    has_forklift = models.BooleanField(_("Forklift"), choices=((False, _("No")), (True, _("Yes"))), default=False)
-    has_ramp = models.BooleanField(_("Ramp"), choices=((False, _("No")), (True, _("Yes"))), default=False)
-
-    # # Unique identifying Account Number
-    # account_number = models.CharField(_("Account Number"), max_length=255, unique=True)
-
-    
-    class Meta:
-        verbose_name = _("Business (Shipper)")
-        verbose_name_plural = _("Businesses (Shippers)")
-
-
-
-class BusinessAddress (AbstractAddress):
-
-    business = models.OneToOneField(Business, on_delete=models.CASCADE, null=True, blank=True, related_name="address", verbose_name=_("Business"))
-
-    class Meta:
-        default_permissions = ["view", "change", "delete"]
-        verbose_name = _("Business's address")
-
-
 class TypeOfIndustry(models.Model):
 
-    name = models.CharField(_("Name"), max_length=200, unique=True)
+	name = models.CharField("Name", max_length=200, unique=True)
 
-<<<<<<< HEAD
-    def _str_(self):
-        return self.name
-=======
-    def __str__(self):
-        return self.name
+	def __str__(self):
+		return self.name
 
-    class Meta:
-        verbose_name = _("Type of industry")
-        # verbose_name_plural = _("Types of")
+	class Meta:
+		verbose_name = "Type of industry"
+		verbose_name_plural = "types of industries"
 
 
-class BusinessTypeOfIndustry(models.Model):
+class ShipperUser(User):
 
-    business = models.ForeignKey(Business, on_delete=models.CASCADE, related_name="Type_of_industries", verbose_name=_("Business"))
-    TypeOfIndustry = models.ForeignKey(TypeOfIndustry, on_delete=models.CASCADE, verbose_name=_("Type of industry"))
+	class Meta:
+		proxy = True
+		verbose_name = "Shipper"
+		verbose_name_plural = "Shippers"
 
-    class Meta:
-        unique_together = ['business', 'TypeOfIndustry']
-        verbose_name = _("Business type of industry")
-        # verbose_name_plural = _("Business type of industry")
 
+class Shipper(models.Model):
+
+	user = models.OneToOneField(ShipperUser, on_delete=models.CASCADE, related_name="shipper_profile")
+
+	BUSINESS, INDIVIDUAL = "B", "V"
+	SHIPPER_TYPES = (
+		(BUSINESS, "Business"),
+		(INDIVIDUAL, "Individual")
+	)
+	type = models.CharField("Type", max_length=20, choices=SHIPPER_TYPES)
+
+	name = models.CharField("Name", max_length=255, db_index=True)
+	email_address = models.EmailField("Business Email", max_length=255, db_index=True)
+	phone_number = models.CharField("Business Phone", max_length=30)
+
+	sequence = models.PositiveSmallIntegerField(unique=True, editable=False, db_index=True)
+	date_created = models.DateTimeField("Date created", auto_now_add=True)
+
+	def _get_next_sequence(self, type):
+		last_sequence = self.__class__.objects.filter(type=type).aggregate(models.Max('sequence'))['sequence__max'] or 1000
+		return last_sequence + 1
+
+	def save(self, **kwargs):
+		if self.sequence in EMPTY_VALUES:
+			self.sequence = self._get_next_sequence(self.type)
+		return super().save(**kwargs)
+
+	def __str__(self):
+		return self.name
+
+	@property
+	@admin.display(description="Reference")
+	def reference(self):
+		if self.pk:
+			return "%s%s" % (self.type, self.sequence)
+		return "%s%s" % (self.type, self._get_next_sequence())
+
+	class Meta:
+		verbose_name = "Shipper"
+		verbose_name_plural = "Shippers"
 
 
 class Individual(models.Model):
-    first_name = models.CharField(_("First Name"), max_length=255)
-    # a revoirr
-    # home_zip_code = models.CharField(_("Home Zip Code"), max_length=10)
-    email = models.EmailField(_("Email"))
-    phone = models.CharField(_("Phone"), max_length=30)
-    parking_available = models.BooleanField(_("Parking available"), max_length=5, choices=(("no", _("No")), ("yes", _("Yes"))), default="no")
-    easy_access_to_loading = models.BooleanField(_("Easy access to loading"),  max_length=5, choices=(("no", _("No")), ("yes", _("Yes"))), default="no")
-    sequence = models.PositiveSmallIntegerField(unique=True, editable=False, db_index=True)
 
-    @property
-    def zip_code(self):
-        if self.address :
-            return self.address.postcode
-        return None
+	shipper = models.OneToOneField(Shipper, on_delete=models.CASCADE, verbose_name="Shipper")
+	parking_available = models.BooleanField("Parking available", choices=((True, "Yes"), (False,"No")))
+	easy_access_to_loading = models.BooleanField("Easy access to loading", choices=((True, "Yes"), (False,"No")))
 
-    def save(self, **kwargs):
-        if self.sequence in EMPTY_VALUES:
-            self.sequence = self._get_next_sequence()
-        return super().save(**kwargs)
- 
-    def _get_next_sequence(self):
-        last_sequence = self.__class__.objects.aggregate(models.Max('sequence'))['sequence__max'] or 1000
-        return last_sequence + 1
+	@property
+	@admin.display(description="Reference")
+	def reference(self):
+		return self.shipper.reference
 
-    def __str__(self):
-        return self.first_name
+	@property
+	@admin.display(description="Full name")
+	def full_name(self):
+		return self.shipper.name
 
-    @property
-    @admin.display(description=_("Reference"))
-    def reference(self):
-        return "V%s" % (self.sequence or self._get_next_sequence())
+	@property
+	@admin.display(description="Email address")
+	def email_address(self):
+		return self.shipper.email_address
 
+	@property
+	@admin.display(description="Phone number")
+	def phone_number(self):
+		return self.shipper.phone_number
+
+	@property
+	def zip_code(self):
+		if self.address:
+		    return self.address.postcode
+		return None
+
+	def __str__(self):
+		return self.name
+
+	class Meta:
+		verbose_name = "Individual"
+		verbose_name_plural = "Individuals"
+
+	def __str__(self):
+		return str(self.shipper.__str__)
+
+	class Meta:
+		verbose_name = "Individual"
+		verbose_name_plural = "Individuals"
+
+
+class Business(models.Model):
+
+	shipper = models.OneToOneField(Shipper, on_delete=models.CASCADE)
+	type_of_industry = models.ForeignKey(TypeOfIndustry, on_delete=models.CASCADE, verbose_name="Type of industry")
+	contact_person = models.CharField("Contact Person", max_length=255, db_index=True)
+	website = models.URLField("Website", blank=True, null=True)
+	image = models.ImageField(upload_to='images/', null=True, blank=True)
+
+	has_loading_dock = models.BooleanField("Loading Dock", choices=((True, "Yes"), (False,"No")))
+	has_forklift = models.BooleanField("Forklift", choices=((True, "Yes"), (False,"No")))
+	has_ramp = models.BooleanField("Ramp", choices=((True, "Yes"), (False,"No")))
+
+	sequence = models.PositiveSmallIntegerField(unique=True, editable=False, db_index=True)
+	date_created = models.DateTimeField("Date created", auto_now_add=True)
+
+	def _get_next_sequence(self):
+		last_sequence = self.__class__.objects.aggregate(models.Max('sequence'))['sequence__max'] or 1000
+		return last_sequence + 1
+
+	def save(self, **kwargs):
+		if self.sequence in EMPTY_VALUES:
+			self.sequence = self._get_next_sequence()
+		return super().save(**kwargs)
+
+	@property
+	@admin.display(description="Reference")
+	def reference(self):
+		return self.shipper.reference
+
+	@property
+	@admin.display(description="Business Name")
+	def business_name(self):
+		return self.shipper.name
+
+	@property
+	@admin.display(description="Business Email")
+	def business_email(self):
+		return self.shipper.email_address
+
+	@property
+	@admin.display(description="Business Phone")
+	def business_phone(self):
+		return self.shipper.phone_number
+
+	def __str__(self):
+		return str(self.shipper.__str__)
+
+	class Meta:
+		verbose_name = "Business"
+		verbose_name_plural = "Businesses"
+
+
+class BusinessAddress(AbstractAddress):
+
+	business = models.OneToOneField(Business, on_delete=models.CASCADE, related_name="address", verbose_name="Business")
+
+	class Meta:
+		verbose_name = "Business address"
+		verbose_name = "Business addresses"
+
+
+class IndividualAddress(AbstractAddress):
+
+    individual = models.OneToOneField(Individual, on_delete=models.CASCADE, related_name="address", verbose_name="Individual")
 
     class Meta:
-        verbose_name = _("Individual Profile")
-        verbose_name_plural = _("Individual Profiles")
-
-
-class IndividualAddress (AbstractAddress):
-
-    individual = models.OneToOneField(Individual, on_delete=models.CASCADE, null=True, blank=True, related_name="address", verbose_name=_("Individual"))
-
-    class Meta:
-        default_permissions = ["view", "change", "delete"]
-        verbose_name = _("Individual's address")
-
-
-class IndividualPreferredCarrier(models.Model):
-    individual = models.ForeignKey(Individual, on_delete=models.CASCADE, related_name="preferred_carriers", verbose_name=_("Individual"))
-    carrier = models.ForeignKey(Carrier, on_delete=models.CASCADE, verbose_name=_("Preferred Carrier"))
-
-    def __str__(self):
-        return f"PreferredCarrier for {self.individual.first_name}"
-
-    class Meta:
-        verbose_name = _("Preferred Carrier")
-        verbose_name_plural = _("Preferred Carriers")
-
-
-class IndividualDelivery(models.Model):
-    individual = models.ForeignKey(Individual, on_delete=models.CASCADE, related_name="deliveries", verbose_name=_("Individual"))
-    origin = models.CharField(_("Origin"), max_length=255)
-    destination = models.CharField(_("Destination"), max_length=255)
-    status = models.CharField(_("Status"), max_length=100)
-    pickup_date = models.DateTimeField(_("Pick Up Date"))
-    delivery_date = models.DateTimeField(_("Delivery Date"))
-    assigned_carrier = models.ForeignKey(Carrier, on_delete=models.SET_NULL, null=True, blank=True, verbose_name=_("Assigned Carrier"))
-    offers = models.IntegerField(_("Offers"), default=0)
-
-
-    def __str__(self):
-        return f"Delivery for {self.individual.first_name} from {self.origin} to {self.destination}"
-
-    class Meta:
-        verbose_name = _("Individual Delivery")
-        verbose_name_plural = _("Individual Deliveries")
-        
-class ShipperEquipment(models.Model):
-    business = models.ForeignKey(Business, on_delete=models.CASCADE, related_name='equipments')
-    type = models.CharField(max_length=100)
-    number = models.IntegerField()
-
-    def __str__(self):
-        return f"{self.business.business_name} - {self.type}"
-
-    class Meta:
-        verbose_name = "Shipper Equipment"
-        verbose_name_plural = "Shipper Equipments"
-
-
-
-# from django.db import models
-
-
-# # Create your models here.
-
-
-# class Shipper(models.Model):
-
-#     name = models.CharField(max_length=200)
-
-#     def __str__(self):
-#         return self.name
-    
-#     class Meta:
-#         abstract = True
->>>>>>> origin/main
+        verbose_name = "Individual Zip Code"
+        verbose_name_plural = "Individual Zip Codes"

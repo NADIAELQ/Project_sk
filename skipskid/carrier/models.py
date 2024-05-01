@@ -19,8 +19,10 @@ from equipment.models import VehicleType, EquipmentType
 
 # Create your models here.
 
-
 class Carrier(AbstractUser):
+    first_name = None
+    last_name = None
+    date_joined = None
 
     name = models.CharField(_("Carrier name"), max_length=100, db_index=True)
     about = models.CharField(_("About the Company"), max_length=200, null=True, blank=True)
@@ -41,7 +43,7 @@ class Carrier(AbstractUser):
     is_admin = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
 
-    # last_login = models.DateTimeField(_('last login'), default=timezone.now, column_name='last_login_date')
+    last_login = models.DateTimeField(_('last login'), default=timezone.now)
 
     objects = UserManager()
 
@@ -96,6 +98,7 @@ class CarrierAddress(AbstractAddress):
     class Meta:
         default_permissions = ["view", "change", "delete"]
         verbose_name = _("Carrier\'s address")
+
 
 
 class CarrierVehicle(models.Model):

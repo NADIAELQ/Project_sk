@@ -34,7 +34,7 @@ def Carrierlogin(request):
         user = authenticate(request, email=email, password=password)
         if user is not None:
             login(request, user)
-            return redirect('/carrier/home')
+            return redirect('home')
         else:
             messages.error(request, 'Nom d\'utilisateur ou mot de passe incorrect.')
     return render(request, 'login.html')
