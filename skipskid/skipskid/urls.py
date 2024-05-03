@@ -23,7 +23,7 @@ from shipper import views as shipperviews
 
 from django.contrib.auth import views as auth_views
 
-from skipskid.views import shipping_home, carrier_home, why_silyatrans 
+from skipskid.views import shipping_home, carrier_home, why_silyatrans, carrier_page
 
 admin.site.enable_nav_sidebar = False
 
@@ -53,6 +53,8 @@ urlpatterns = [
     path('shipping/', shipping_home, name='shipping_home'),
     path('shipping/carrier/', carrier_home, name='carrier_home'),
     path('carrier/silyatrans/', why_silyatrans, name='why_trans'),
+
+    path('carrier/', carrier_page, name = 'carrier_page')
 
 
 
