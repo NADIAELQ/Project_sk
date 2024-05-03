@@ -18,7 +18,7 @@
             </div>
             {% endif %}
 
-            <form method="post" action="{% url 'home' %}">
+            <form method="post" action="{% url 'Carrierhome' %}">
                 {% csrf_token %}
                 <label for="email">Email</label>
                 <input type="email" name="email" required>
@@ -26,7 +26,7 @@
                 <input type="password" name="password" required>
                 <button type="submit">Log In</button>
             </form>
-            <p class="link">Not registered yet? <a href="{% url 'signup' %}">Sign Up</a></p>
+            <p class="link">Not registered yet? <a href="{% url 'Carriersignup' %}">Sign Up</a></p>
         </div>
     </div>
     

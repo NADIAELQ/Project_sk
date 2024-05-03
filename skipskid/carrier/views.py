@@ -8,7 +8,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .form import CarrierForm, CarrierAddressForm
 
-def signup(request):
+def Carriersignup(request):
     if request.method == 'POST':
         user_form = CarrierForm(request.POST)
         address_form = CarrierAddressForm(request.POST)
@@ -20,7 +20,7 @@ def signup(request):
             address.carrier = user
             address.save()
             # Redirect to login page after signup
-            return redirect('login')
+            return redirect('Carrierlogin')
     else:
         user_form = CarrierForm()
         address_form = CarrierAddressForm()
@@ -34,18 +34,18 @@ def Carrierlogin(request):
         user = authenticate(request, email=email, password=password)
         if user is not None:
             login(request, user)
-            return redirect('home')
+            return redirect('Carrierhome')
         else:
             messages.error(request, 'Nom d\'utilisateur ou mot de passe incorrect.')
     return render(request, 'login.html')
 
 @login_required
-def home(request):
+def Carrierhome(request):
     return render(request, 'home.html')
 
-def logout(request):
+def Carrierlogout(request):
     auth_logout(request)  # Utilisez la fonction auth_logout de Django pour éviter le conflit
-    return redirect('login')  # Rediriger vers la page de connexion après la déconnexion
+    return redirect('Carrierlogin')  # Rediriger vers la page de connexion après la déconnexion
 
 def beforesignup(request):
     return render(request, 'beforesignup.html')
