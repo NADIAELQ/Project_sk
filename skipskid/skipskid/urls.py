@@ -31,6 +31,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 
     path('', shipping_home, name='shipping_home'),
+
     path('carrier/signup/', carrierviews.Carriersignup, name='Carriersignup'),
     path('carrier/login/', carrierviews.Carrierlogin, name='Carrierlogin'),
     path('carrier/home/', carrierviews.Carrierhome, name='Carrierhome'),
@@ -44,6 +45,7 @@ urlpatterns = [
     path('shipper/logout/', shipperviews.logout, name='Shipperlogout'),
     path('shipper/accountsettings/', shipperviews.accountsettings, name='accountsettings'),
     path('shipper/beforesignup/',shipperviews.beforesignup, name="beforesignup"),
+
 
     path('reset_password', auth_views.PasswordResetView.as_view(), name= 'reset_password'),
     path('reset_password_done', auth_views.PasswordResetDoneView.as_view(template_name="registration/password_reset_done.html"), name='password_reset_done'),
