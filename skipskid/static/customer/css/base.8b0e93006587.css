@@ -1,0 +1,20 @@
+:root {
+    --primary-color: #ff4500;
+    --secondary-color: #039be6;
+    --accent-color: #ef8354;
+    --text-color: #333333;
+    --black-2: #666;
+    --black-3: #999;
+    --black-4: #ccc;
+    --orange-2: #f5632e;
+    --orange-3: #f78c5a;
+    --blue-background: #004A7C;
+    --blue-background-2: #005A9E;
+
+}
+
+.button-primary {
+    background-color: var(--primary-color);
+    color: var(--text-color--);
+    border-color: var(--primary-color);
+}
