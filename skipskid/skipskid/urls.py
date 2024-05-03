@@ -30,9 +30,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 
     path('', shipping_home, name='shipping_home'),
-    path('carrier/signup/', views.signup, name='signup'),
+    path('carrier/signup/', views.Carriersignup, name='signup'),
     path('carrier/login/', views.Carrierlogin, name='login'),
-    path('carrier/home/', views.home, name='home'),
+    path('carrier/home/', views.Carrierhome, name='home'),
     path('carrier/logout/', views.logout, name='logout'),
     path('carrier/accountsettings/', views.accountsettings, name='accountsettings'),
     path('carrier/beforesignup/',views.beforesignup, name="beforesignup"),
