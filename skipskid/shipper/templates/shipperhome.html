@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Your Shipping Platform</title>
+<style>
+    /* General resets */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body, html {
+  height: 100%;
+  font-family: 'Open Sans', sans-serif;
+}
+
+/* Header and Navigation */
+.header-container {
+  background-color: #584e4e;
+  box-shadow: 0 2px 4px rgba(0,0,0,.1);
+}
+
+.top-navbar {
+  background-color: rgb(172, 170, 170);
+}
+
+.navbar a {
+  text-decoration: none;
+  color: #333;
+  margin: 0 1rem;
+  font-weight: bold;
+}
+
+.top-navbar a {
+  color: green; 
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+}
+
+.navbar a {
+  text-decoration: none;
+  color: #f7f3f3;
+  margin: 0 1rem;
+  font-weight: bold;
+}
+
+.navbar a:hover {
+  color: #FF8A65;
+}
+
+.logo img {
+  max-height: 50px; /* Adjust as needed */
+  width: auto;
+  margin-right: 2rem;
+}
+
+.nav-links, .auth-links {
+  display: flex;
+  align-items: center;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.get-quotes, .become-provider {
+  background-color: #FF8A65;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  margin: 0 0.5rem;
+  border-radius: 50px;
+  text-transform: uppercase;
+}
+
+.get-quotes:hover, .become-provider:hover {
+  background-color: #FA5519;
+  text-decoration: none;
+}
+
+/* Main content and hero section */
+.main-content {
+  background: url('path_to_your_background_image.jpg') center center no-repeat;
+  background-size: cover;
+  color: #fff;
+  text-align: center;
+  padding: 4rem 0;
+}
+
+/* Search box styling */
+.search-box {
+  display: flex;
+  justify-content: center;
+  margin-top: -3rem; /* To pull the search box up into the hero image */
+}
+
+.search-box input[type="text"] {
+  border: none;
+  padding: 0.5rem 1rem;
+  margin-right: -1px; /* Align borders */
+}
+
+.search-box button {
+  border: none;
+  background-color: #007bff;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+}
+
+/* Category list styling */
+.category-list {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+}
+
+.category-list .category {
+  width: calc(25% - 1rem);
+  margin: 0.5rem;
+  text-align: center;
+}
+
+.category-list img {
+  max-width: 100%;
+  border-radius: 5px;
+  transition: transform .3s ease;
+}
+
+.category-list img:hover {
+  transform: scale(1.05);
+}
+
+.category-list .category-name {
+  font-size: 1rem;
+  margin-top: 0.5rem;
+}
+
+/* Footer styling */
+.footer {
+  background-color: #f4f4f4;
+  padding: 2rem;
+  text-align: center;
+}
+
+
+
+/* Responsive design adjustments */
+@media (max-width: 768px) {
+  .category-list .category {
+    width: calc(50% - 1rem);
+  }
+}
+
+.tab {
+  display: flex;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.tab.dropdown {
+  position: relative;
+}
+
+.tab a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.tab a:hover {
+  color: inherit;
+}
+
+.tab .user-menu-dialog-toggle-letter {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #FA5519;
+  color: #fff;
+  text-align: center;
+  line-height: 40px;
+}
+
+.tab .devsite-tabs-dropdown-toggle {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+}
+
+.tab .devsite-tabs-dropdown-content {
+  /* display: none; */
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 999;
+}
+
+/* .tab .devsite-tabs-dropdown:hover .devsite-tabs-dropdown-content {
+  display: block;
+}
+
+.tab .devsite-tabs-dropdown-toggle:hover + .devsite-tabs-dropdown-last .devsite-tabs-dropdown-content {
+  display: block;
+} */
+
+.tab .devsite-tabs-dropdown-section {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.tab .devsite-tabs-dropdown-section li {
+  padding: 10px 20px;
+}
+
+.tab .devsite-tabs-dropdown-section li a {
+  text-decoration: none;
+  color: #000;
+}
+
+.tab .devsite-tabs-dropdown-section li a:hover {
+  color: #FA5519;
+}
+
+.tab .user-menu-details-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.tab .text-3,
+.tab .text-5 {
+  margin: 0;
+}
+
+.tab .user-menu-listitem {
+  border-top: 1px solid #ddd;
+}
+
+.tab .user-menu-item {
+  display: block;
+  padding: 10px 20px;
+}
+
+.tab .user-menu-item--password:hover,
+.tab .user-menu-item--signout:hover {
+  color: #FA5519;
+}
+
+.tab form {
+  margin: 0;
+  padding: 0;
+}
+
+.tab form button {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  color: #000;
+}
+
+.tab form button:hover {
+  color: #FA5519;
+}
+
+.profile-section {
+  border: 1px solid #ccc;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+}
+
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<header class="header-container"> 
+  <!-- Second Navbar -->
+  <nav class="navbar main-navbar">
+    <!-- Your website logo -->
+    <a href="#" class="logo">
+      <img src="C:\Users\Noura\Desktop\skipskid_17-04\skipskid\skipskid\static\admin\img\models\carrier.svg" alt="Logo" />
+</a>
+<!-- Navigation Links -->
+<div class="nav-links">
+<a href="#" class="get-quotes">Get quotes</a>
+<a href="#">Manage Deliveries</a>
+<a href="#">Add Businesses</a>
+<a href="#">Add Individuals</a>
+</div>
+<!-- Auth Links -->
+<div class="auth-links">
+
+<div class="tab" dropdown="">
+  <a href="#" class="devsite-tabs-content">
+      <span class="user-menu-dialog-toggle-letter select-none">
+        <strong>n</strong>
+      </span>
+  </a>
+  <a role="button" class="devsite-tabs-dropdown-toggle material-symbols-outlined devsite-icon-arrow-drop-down"></a>
+  <div class="devsite-tabs-dropdown-last">
+      <div class="devsite-tabs-dropdown-content">
+          <div class="devsite-tabs-dropdown-column">
+              <!-- <ul class="devsite-tabs-dropdown-section">
+                
+              </ul> -->
+              <ul role="list" class="devsite-tabs-dropdown-section">
+                <li role="listitem" class="devsite-nav-item">
+                  <a href="#" class="user-menu-item user-menu-item--account-details">
+                    <div class="user-menu-avatar--container">
+                      <img hidden="" src="C:\Users\Noura\Desktop\skipskid_17-04\skipskid\skipskid\static\admin\img\models\carrier.svg" alt="" loading="lazy" class="user-menu-details-avatar">
+                      <span class="user-menu-dialog-toggle-letter">
+                        <!-- R -->
+                        <!-- <strong>noura</strong> -->
+                        <strong>{{ user.username|first|slice:":1" }}</strong>
+
+                      </span></div>
+                      <div class="text-3 mb-1">
+                        {{ user.username }}
+                      </div>
+                      <div class="text-5 text-text-secondary-color truncate">
+                        
+                      </div>
+                    </a>
+                  </li>
+
+                  
+                  <li role="listitem" class="user-menu-listitem">
+                    
+                    
+                    
+                    
+                  </li>
+                  
+                  <li role="listitem" class="user-menu-listitem">
+                    <a href="C:\Users\Noura\Desktop\skipskid_17-04\skipskid\carrier\templates\accountsettings.html" class="">
+                      Change password
+                    </a>
+                  </li>
+                  
+                  <li role="listitem" class="user-menu-listitem">
+                    <a href="#" class="user-menu-item user-menu-item--signout">
+                      <form id="logout-form" method="post" action="/admin/logout/">
+                        <input type="hidden" name="csrfmiddlewaretoken" value="iEYJMsYed9vDzIZB4BxBZ8qbe6qTT4B57JExl55X8bdNfjOUjXCbs7rWA6gSqz4k">
+                        <button type="submit"><a href="{% url 'Shipperlogin' %}">Log out</a></button>
+                    </form>
+                    </a>
+                  </li>
+                  
+                </ul>
+          </div>
+      </div>
+  </div>
+</div> 
+</div>
+
+  </nav>
+</header>
+<div class="container">
+  <h1>User Profile</h1>
+  <div class="profile-section">
+    <div class="info-item">
+      <strong>Name:</strong> {{ user.username }}
+    </div>
+    <div class="info-item">
+      <strong>About:</strong> {{ user.about }}
+    </div>
+    <div class="info-item">
+      <strong>Contact Person:</strong> {{ user.contact_person }}
+    </div>
+    <div class="info-item">
+      <strong>Email:</strong> {{ user.email }}
+    </div>
+    <div class="info-item">
+      <strong>Phone Number:</strong> {{ user.phone_number }}
+    </div>
+    <div class="info-item">
+      <strong>Website:</strong> <a href="{{ user.website }}">{{ user.website }}</a>
+    </div>
+    <div class="info-item">
+      <strong>Can Load/Unload 150+ Pounds:</strong> {% if user.pounds_plus %}Yes{% else %}No{% endif %}
+    </div>
+    <div class="info-item">
+      <strong>Can Travel Over 150 Miles:</strong> {% if user.miles_plus %}Yes{% else %}No{% endif %}
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
