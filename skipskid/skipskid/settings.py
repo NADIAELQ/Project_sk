@@ -216,7 +216,8 @@ environ.Env.read_env()
 
 
 AUTHENTICATION_BACKENDS = [
-    'carrier.auth_backend.CustomAuthBackend', 
+    'carrier.auth_backend.CustomAuthBackend',
+    'shipper.auth_backend.CustomAuthBackend',
     'django.contrib.auth.backends.ModelBackend',  # Default Django authentication backend
 ]
 
