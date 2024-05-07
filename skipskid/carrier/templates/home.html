@@ -1,11 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Your Shipping Platform</title>
-<style>
-    /* General resets */
+{% extends "front/base_site.html" %}
+{% load i18n static %}
+
+{% block extrastyle %}
+  {{ block.super }}
+  <style>
+
 * {
   margin: 0;
   padding: 0;
@@ -288,10 +287,13 @@ body, html {
   margin-bottom: 20px;
   border-radius: 5px;
 }
-
 </style>
-</head>
+{% endblock extrastyle %}
+
+
 <body>
+
+{% block content %}
 
 <!-- Header -->
 <header class="header-container"> 
@@ -299,7 +301,7 @@ body, html {
   <nav class="navbar main-navbar">
     <!-- Your website logo -->
     <a href="#" class="logo">
-      <img src="C:\Users\Noura\Desktop\skipskid_17-04\skipskid\skipskid\static\admin\img\models\carrier.svg" alt="Logo" />
+      <img src="{% static 'admin/img/models/carrier.svg' %}" alt="Logo" />
 </a>
 <!-- Navigation Links -->
 <div class="nav-links">
@@ -328,7 +330,7 @@ body, html {
                 <li role="listitem" class="devsite-nav-item">
                   <a href="#" class="user-menu-item user-menu-item--account-details">
                     <div class="user-menu-avatar--container">
-                      <img hidden="" src="C:\Users\Noura\Desktop\skipskid_17-04\skipskid\skipskid\static\admin\img\models\carrier.svg" alt="" loading="lazy" class="user-menu-details-avatar">
+                      <img hidden="" src="{% static 'admin/img/models/carrier.svg' %}" alt="" loading="lazy" class="user-menu-details-avatar">
                       <span class="user-menu-dialog-toggle-letter">
                         <!-- R -->
                         <!-- <strong>noura</strong> -->
@@ -336,7 +338,14 @@ body, html {
 
                       </span></div>
                       <div class="text-3 mb-1">
-                        {{ user.username }}
+                      {% block usertools %}
+                        {% if user.is_authenticated %}
+  
+                                <li>{{ user.email }}</li> 
+                          
+                        {% endif %}
+                      {% endblock %}
+
                       </div>
                       <div class="text-5 text-text-secondary-color truncate">
                         
@@ -353,7 +362,7 @@ body, html {
                   </li>
                   
                   <li role="listitem" class="user-menu-listitem">
-                    <a href="C:\Users\Noura\Desktop\skipskid_17-04\skipskid\carrier\templates\accountsettings.html" class="">
+                    <a href="{% url 'accountsettings' %}" class="">
                       Change password
                     </a>
                   </li>
@@ -380,7 +389,7 @@ body, html {
   <h1>User Profile</h1>
   <div class="profile-section">
     <div class="info-item">
-      <strong>Name:</strong> {{ user.username }}
+      <strong>Name:</strong> {{ user.name }}
     </div>
     <div class="info-item">
       <strong>About:</strong> {{ user.about }}
@@ -405,6 +414,7 @@ body, html {
     </div>
   </div>
 </div>
+{% endblock content %}
 
 </body>
 </html>
