@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+        <div class="form">
+            <h1>Connection</h1>
+
+            {% if messages %}
+            <div class="error-messages">
+                {% for message in messages %}
+                <p class="error">{{ message }}</p>
+                {% endfor %}
+            </div>
+            {% endif %}
+
+            <form method="post" action="{% url 'Carrierhome' %}">
+                {% csrf_token %}
+                <label for="email">Email</label>
+                <input type="email" name="email" required>
+                <label for="password">Password</label>
+                <input type="password" name="password" required>
+                <button type="submit">Log In</button>
+            </form>
+            <p class="link">Not registered yet? <a href="{% url 'Carriersignup' %}">Sign Up</a></p>
+        </div>
+    </div>
+    
+    <style>
+       /* CSS */
+/* Import Google Font - Open Sans */
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Open Sans', sans-serif;
+}
+
+h1 {
+    margin: 20px 0;
+    color: #333; /* Title color change */
+    text-align: center; /* Title centering */
+}
+
+body {
+    min-height: 100vh;
+    width: 100%;
+    background: #f4f4f4; /* Background color change */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    width: 400px;
+    background: #fff;
+    border-radius: 10px; /* Increased border radius */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); /* Shadow improvement */
+    overflow: hidden; /* Prevent rounded corners from being cut off */
+}
+
+.container .form {
+    padding: 30px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    color: #666; /* Label text color change */
+}
+
+input {
+    width: calc(100% - 20px); /* Width adjustment to account for padding */
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc; /* Border color change */
+    border-radius: 5px;
+    outline: none;
+    margin: 5px 0 15px;
+    transition: border-color 0.3s; /* Smooth transition added */
+}
+
+input:focus {
+    border-color: #009688; /* Border color on focus */
+}
+
+a {
+    font-size: 16px;
+    color: #009688; /* Link color */
+    text-decoration: none;
+    transition: color 0.3s; /* Smooth transition added */
+}
+
+a:hover {
+    color: #00796b; /* Link color on hover */
+}
+
+button {
+    color: #fff;
+    background: #009688; /* Button color */
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+    cursor: pointer;
+    transition: background 0.3s; /* Smooth transition added */
+}
+
+button:hover {
+    background: #00796b; /* Button color on hover */
+}
+
+.link {
+    text-align: center;
+    margin-top: 20px;
+    color: #666; /* Link text color change */
+}
+
+.link a {
+    color: #009688; /* Link color within the paragraph */
+}
+
+.link a:hover {
+    color: #00796b; /* Link color within the paragraph on hover */
+}
+
+.error-messages {
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.error {
+    background-color: #ffcccc;
+    color: #ff0000;
+    border-radius: 5px;
+    padding: 8px 12px;
+    margin-bottom: 5px;
+    font-size: 14px;
+    text-align: center;
+}
+
+    </style>
+</body>
+</html>
